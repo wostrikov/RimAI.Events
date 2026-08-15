@@ -7,6 +7,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RimWorldDir Condition=" '$(RimWorldDir)' == '' ">$(RIMWORLD_DIR)</RimWorldDir>
     <RimWorldWorkshopDir Condition=" '$(RimWorldWorkshopDir)' == '' ">$(RIMWORLD_WORKSHOP_DIR)</RimWorldWorkshopDir>
+    <RimTalkAssembly Condition=" '$(RimTalkDir)' != '' ">$(RimTalkDir)\1.6\Assemblies\RimTalk.dll</RimTalkAssembly>
+    <RimTalkAssembly Condition=" '$(RimTalkAssembly)' == '' ">$(RimWorldWorkshopDir)\3551203752\1.6\Assemblies\RimTalk.dll</RimTalkAssembly>
     <BaseOutputPath Condition=" '$(BaseOutputPath)' == '' ">$(LOCALAPPDATA)\Ustas\RimWorldSourceBuilds\RimTalkEventPlus\bin\</BaseOutputPath>
     <BaseIntermediateOutputPath Condition=" '$(BaseIntermediateOutputPath)' == '' ">$(LOCALAPPDATA)\Ustas\RimWorldSourceBuilds\RimTalkEventPlus\obj\</BaseIntermediateOutputPath>
     <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
@@ -21,6 +23,6 @@
     <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(RimWorldDir)\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(RimWorldDir)\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="0Harmony"><HintPath>$(RimWorldWorkshopDir)\2009463077\Current\Assemblies\0Harmony.dll</HintPath><Private>false</Private></Reference>
-    <Reference Include="RimTalk"><HintPath>$(RimWorldWorkshopDir)\3551203752\1.6\Assemblies\RimTalk.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="RimTalk"><HintPath>$(RimTalkAssembly)</HintPath><Private>false</Private></Reference>
   </ItemGroup>
 </Project>
