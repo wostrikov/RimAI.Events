@@ -29,7 +29,7 @@ namespace RimTalkEventPlus
         public override string SettingsCategory()
         {
             // Label in Options → Mod Settings
-            return "RimTalkEventPlus_SettingsCategory".Translate();
+            return Content?.Name ?? "RimTalk Event+";
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
