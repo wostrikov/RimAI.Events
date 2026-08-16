@@ -2,7 +2,7 @@ using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Helper class for migrating the old XML-based quest blacklist to the new EventFilterSettings system.
     // Migration happens during mod initialization after defs are loaded.
@@ -71,7 +71,7 @@ namespace RimTalkEventPlus
                 // Log migration results
                 if (validatedDefs.Count > 0 || skippedDefs.Count > 0)
                 {
-                    Log.Message($"[RimTalk Event+] Blacklist migration completed:");
+                    Log.Message($"[RimAI.Events] Blacklist migration completed:");
                     if (validatedDefs.Count > 0)
                     {
                         Log.Message($"  - Migrated {validatedDefs.Count} quest type(s) to new filter system: {string.Join(", ", validatedDefs)}");
@@ -83,13 +83,13 @@ namespace RimTalkEventPlus
                 }
                 else
                 {
-                    Log.Message("[RimTalk Event+] Blacklist migration completed: No blacklist entries found.");
+                    Log.Message("[RimAI.Events] Blacklist migration completed: No blacklist entries found.");
                 }
                 return true; // Migration was performed
             }
             catch (System.Exception ex)
             {
-                Log.Error($"[RimTalk Event+] Error during blacklist migration: {ex.Message}\n{ex.StackTrace}");
+                Log.Error($"[RimAI.Events] Error during blacklist migration: {ex.Message}\n{ex.StackTrace}");
                 // Still mark as migrated to avoid repeated failures
                 settings.questBlacklistMigrated = true;
                 return true;

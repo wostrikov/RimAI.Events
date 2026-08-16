@@ -5,7 +5,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     [StaticConstructorOnStartup]
     public static class RimTalkAPIIntegration
@@ -24,17 +24,17 @@ namespace RimTalkEventPlus
         {
             try
             {
-                var apiType = AccessTools.TypeByName("RimTalk.API.RimTalkPromptAPI");
+                var apiType = AccessTools.TypeByName("Ustas.RimAI.Communication.API.RimTalkPromptAPI");
                 if (apiType == null)
                 {
-                    Log.Message("[RimTalk Event+] RimTalkPromptAPI not found.");
+                    Log.Message("[RimAI.Events] RimTalkPromptAPI not found.");
                     return;
                 }
 
-                var promptContextType = AccessTools.TypeByName("RimTalk.Prompt.PromptContext");
+                var promptContextType = AccessTools.TypeByName("Ustas.RimAI.Communication.Prompt.PromptContext");
                 if (promptContextType == null)
                 {
-                    Log.Warning("[RimTalk Event+] PromptContext type not found.");
+                    Log.Warning("[RimAI.Events] PromptContext type not found.");
                     return;
                 }
 
@@ -49,17 +49,17 @@ namespace RimTalkEventPlus
 
                 if (_registerContextVariableMethod == null)
                 {
-                    Log.Warning("[RimTalk Event+] RegisterContextVariable method not found.");
+                    Log.Warning("[RimAI.Events] RegisterContextVariable method not found.");
                     return;
                 }
 
                 _apiAvailable = true;
                 RegisterVariables();
-                Log.Message("[RimTalk Event+] Advanced Mode API integration successful.");
+                Log.Message("[RimAI.Events] Advanced Mode API integration successful.");
             }
             catch (Exception ex)
             {
-                Log.Warning($"[RimTalk Event+] Failed to integrate with RimTalk API: {ex.Message}");
+                Log.Warning($"[RimAI.Events] Failed to integrate with RimTalk API: {ex.Message}");
             }
         }
 
@@ -72,8 +72,8 @@ namespace RimTalkEventPlus
                     _modeResolved = true;
                     try
                     {
-                        var settingsType = AccessTools.TypeByName("RimTalk.Settings");
-                        var rimTalkSettingsType = AccessTools.TypeByName("RimTalk.RimTalkSettings");
+                        var settingsType = AccessTools.TypeByName("Ustas.RimAI.Communication.Settings");
+                        var rimTalkSettingsType = AccessTools.TypeByName("Ustas.RimAI.Communication.RimTalkSettings");
 
                         if (settingsType != null && rimTalkSettingsType != null)
                         {

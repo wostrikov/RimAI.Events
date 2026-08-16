@@ -3,7 +3,7 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     public static class OngoingEventsUtil
     {

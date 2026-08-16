@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Per-game cache for quest-related lookups:
     // 1. FieldInfo for QuestPart subclass fields (avoids repeated Type.GetField calls)
@@ -127,7 +127,7 @@ namespace RimTalkEventPlus
                 {
                     // Prewarm is optional; never let it interfere with gameplay.
                     if (Prefs.DevMode)
-                        Log.Warning($"[RimTalk Event+] Failed to prewarm quest {quest?.name}: {ex.Message}");
+                        Log.Warning($"[RimAI.Events] Failed to prewarm quest {quest?.name}: {ex.Message}");
                 }
             }
         }

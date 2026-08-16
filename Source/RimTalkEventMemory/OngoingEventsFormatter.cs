@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     public static class OngoingEventsFormatter
     {
@@ -30,8 +30,8 @@ namespace RimTalkEventPlus
                     : e.Body;
 
                 // Optional compression: only if the setting is on and we have a SourceDefName
-                //if (RimTalkEventPlus.Settings != null &&
-                //    RimTalkEventPlus.Settings.enableEventTextCompression &&
+                //if (Ustas.RimAI.Events.Settings != null &&
+                //    Ustas.RimAI.Events.Settings.enableEventTextCompression &&
                 //    !e.SourceDefName.NullOrEmpty())
                 //{
                 //    var compressed = EventTextCompressionUtil.TryGetCompressedBody(e);

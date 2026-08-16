@@ -2,7 +2,7 @@
 using System.Reflection;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     [StaticConstructorOnStartup]
     public static class EnhancedPromptDetector
@@ -52,7 +52,7 @@ namespace RimTalkEventPlus
             if (!IsLoaded)
                 return;
 
-            Log.Message("[RimTalk Event+] Detected RimTalk Enhanced Prompt mod.");
+            Log.Message("[RimAI.Events] Detected RimTalk Enhanced Prompt mod.");
 
             // Cache reflection metadata at startup
             try
@@ -60,21 +60,21 @@ namespace RimTalkEventPlus
                 var modType = AccessTools.TypeByName("RimTalkHealthEnhance.RimTalkHealthEnhanceMod");
                 if (modType == null)
                 {
-                    Log.Warning("[RimTalk Event+] Could not find RimTalkHealthEnhanceMod type for caching.");
+                    Log.Warning("[RimAI.Events] Could not find RimTalkHealthEnhanceMod type for caching.");
                     return;
                 }
 
                 _settingsField = AccessTools.Field(modType, "Settings");
                 if (_settingsField == null)
                 {
-                    Log.Warning("[RimTalk Event+] Could not find Settings field for caching.");
+                    Log.Warning("[RimAI.Events] Could not find Settings field for caching.");
                     return;
                 }
 
                 var settingsInstance = _settingsField.GetValue(null);
                 if (settingsInstance == null)
                 {
-                    Log.Warning("[RimTalk Event+] Settings instance is null at startup; will retry on access.");
+                    Log.Warning("[RimAI.Events] Settings instance is null at startup; will retry on access.");
                     return;
                 }
 
@@ -93,16 +93,16 @@ namespace RimTalkEventPlus
 
                 if (_enableAutoEventCaptureProperty != null || _enableAutoEventCaptureField != null)
                 {
-                    Log.Message("[RimTalk Event+] Successfully cached Enhanced Prompt settings accessor.");
+                    Log.Message("[RimAI.Events] Successfully cached Enhanced Prompt settings accessor.");
                 }
                 else
                 {
-                    Log.Warning("[RimTalk Event+] Could not find EnableAutoEventCapture field; feature detection disabled.");
+                    Log.Warning("[RimAI.Events] Could not find EnableAutoEventCapture field; feature detection disabled.");
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Warning($"[RimTalk Event+] Failed to cache Enhanced Prompt settings: {ex.Message}");
+                Log.Warning($"[RimAI.Events] Failed to cache Enhanced Prompt settings: {ex.Message}");
             }
         }
     }

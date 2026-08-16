@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     /// Represents one "ongoing" situation that the LLM should know about right now.
     public class OngoingEventSnapshot

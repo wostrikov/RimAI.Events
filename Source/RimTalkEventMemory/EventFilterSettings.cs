@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Wrapper class for per-colony disabled instance IDs. 
     // Used as dictionary value for colony-specific instance filtering.

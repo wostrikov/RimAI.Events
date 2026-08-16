@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     [HarmonyPatch(typeof(Map), "FinalizeInit")]
     public static class Map_FinalizeInit_OngoingEventsDump_Patch
@@ -32,13 +32,13 @@ namespace RimTalkEventPlus
                 maxThreatScanBack: 30
             );
 
-            Log.Message($"[RimTalk Event+] Ongoing quests affecting this map at init: {ongoing.Count}");
+            Log.Message($"[RimAI.Events] Ongoing quests affecting this map at init: {ongoing.Count}");
 
             foreach (var e in ongoing)
             {
                 var singleList = new System.Collections.Generic.List<OngoingEventSnapshot> { e };
                 string body = OngoingEventsFormatter.FormatOngoingEventsBlock(singleList, maxChars: 800);
-                Log.Message($"[RimTalk Event+] {(e.IsThreat ? "[THREAT]" : "[EVENT]")} {e.Label}\n{body}");
+                Log.Message($"[RimAI.Events] {(e.IsThreat ? "[THREAT]" : "[EVENT]")} {e.Label}\n{body}");
             }
         }
     }

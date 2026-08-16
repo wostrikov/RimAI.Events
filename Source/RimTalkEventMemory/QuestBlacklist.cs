@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Legacy quest blacklist system.
     [System.Obsolete("This blacklist system is deprecated. Use EventFilterSettings instead. Kept for backward compatibility during migration.")]

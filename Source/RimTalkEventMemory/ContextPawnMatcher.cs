@@ -1,10 +1,10 @@
-﻿using RimTalk.Service;
-using RimTalk.Util;
+﻿using Ustas.RimAI.Communication.Service;
+using Ustas.RimAI.Communication.Util;
 using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Utility for matching ongoing events against conversation context pawns.
     // Used to filter events and save tokens when appending to LLM prompts.
@@ -28,7 +28,7 @@ namespace RimTalkEventPlus
                 }
             }
 
-            // Add nearby pawns using RimTalk's selector
+            // Add nearby pawns using Ustas.RimAI.Communication's selector
             try
             {
                 var nearbyPawns = PawnSelector.GetAllNearByPawns(initiator, recipient);

@@ -7,7 +7,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // UI component for the event filtering system with two-section layout.
     public static class EventFilterUI

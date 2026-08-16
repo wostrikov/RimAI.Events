@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Utility class for accessing Quest data and determining quest-map relationships.
     public static class QuestLinkUtil

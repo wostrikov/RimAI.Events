@@ -1,4 +1,4 @@
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Represents a filterable event with display and identification information.
     public class FilterableEvent

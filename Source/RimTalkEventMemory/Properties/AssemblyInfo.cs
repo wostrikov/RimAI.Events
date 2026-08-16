@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RimTalkEventPlus")]
+[assembly: AssemblyTitle("Ustas.RimAI.Events")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SaltGin")]
-[assembly: AssemblyProduct("RimTalkEventPlus")]
+[assembly: AssemblyProduct("Ustas.RimAI.Events")]
 [assembly: AssemblyCopyright("Copyright © SaltGin 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

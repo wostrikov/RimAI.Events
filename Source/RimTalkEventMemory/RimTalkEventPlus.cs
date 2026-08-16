@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Main mod entry point for RimTalk Event+.
     // Still responsible for applying Harmony patches,
@@ -21,7 +21,7 @@ namespace RimTalkEventPlus
             Settings = GetSettings<EventFilterSettings>();
 
             // Existing behavior: Harmony patches + log
-            var harmony = new Harmony("saltgin.rimtalkeventmemory");
+            var harmony = new Harmony("ustas.rimai.events");
             harmony.PatchAll();
             Ustas.RimAI.Core.Modules.RimAIModuleRegistry.Current.Register(
                 new Ustas.RimAI.Core.Modules.RimAIModuleDescriptor(
@@ -29,7 +29,7 @@ namespace RimTalkEventPlus
                     "RimAI.Events",
                     "RimAI.Events",
                     "Events"));
-            Log.Message("[RimTalk Event+] Loaded.");
+            Log.Message("[RimAI.Events] Loaded.");
         }
 
         public override string SettingsCategory()

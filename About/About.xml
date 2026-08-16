@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>RimAI.Events</name>
-  <packageId>saltgin.rimtalkeventmemory</packageId>
+  <packageId>ustas.rimai.events</packageId>
   <author>SaltGin</author>
   <supportedVersions>
     <li>1.5</li>
@@ -14,13 +14,13 @@
 	  <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</steamWorkshopUrl>
     </li>
     <li>
-      <packageId>cj.rimtalk</packageId>
+      <packageId>ustas.rimai.communication</packageId>
       <displayName>RimAI.Communication</displayName>
 	  <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752</steamWorkshopUrl>
     </li>
   </modDependencies>
   <loadAfter>
-	  <li>cj.rimtalk</li>
+	  <li>ustas.rimai.communication</li>
 	</loadAfter>
   <description>
     RimAI.Events observes world changes and injects ongoing-event context into RimAI communication. Experimental.

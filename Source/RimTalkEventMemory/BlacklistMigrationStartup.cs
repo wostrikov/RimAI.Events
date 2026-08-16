@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     [StaticConstructorOnStartup]
     public static class BlacklistMigrationStartup

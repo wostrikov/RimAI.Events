@@ -2,7 +2,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Ended quests are excluded from prompt collection, but clearing their runtime
     // entries prevents the per-game cache from retaining completed quest data.

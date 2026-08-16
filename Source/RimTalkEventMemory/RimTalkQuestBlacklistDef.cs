@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Verse;
 
-namespace RimTalkEventPlus
+namespace Ustas.RimAI.Events
 {
     // Simple Def so we can maintain the blacklist via XML and patch it.
     public class RimTalkQuestBlacklistDef : Def
