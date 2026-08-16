@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using HarmonyLib;
+using Ustas.RimAI.Communication;
+using Ustas.RimAI.Communication.API;
+using Ustas.RimAI.Communication.Prompt;
 using RimWorld;
 using Verse;
 
@@ -11,95 +12,23 @@ namespace Ustas.RimAI.Events
     public static class RimTalkAPIIntegration
     {
         private const string MOD_ID = "rimtalkeventplus";
-
-        private static readonly MethodInfo _registerContextVariableMethod;
-        private static readonly PropertyInfo _contextMapProperty;
         private static readonly bool _apiAvailable;
-
-        private static bool _modeResolved;
-        private static MethodInfo _getSettingsMethod;
-        private static FieldInfo _useAdvancedModeField;
 
         static RimTalkAPIIntegration()
         {
             try
             {
-                var apiType = AccessTools.TypeByName("Ustas.RimAI.Communication.API.RimTalkPromptAPI");
-                if (apiType == null)
-                {
-                    Log.Message("[RimAI.Events] RimTalkPromptAPI not found.");
-                    return;
-                }
-
-                var promptContextType = AccessTools.TypeByName("Ustas.RimAI.Communication.Prompt.PromptContext");
-                if (promptContextType == null)
-                {
-                    Log.Warning("[RimAI.Events] PromptContext type not found.");
-                    return;
-                }
-
-                _contextMapProperty = promptContextType.GetProperty("Map");
-                var funcType = typeof(Func<,>).MakeGenericType(promptContextType, typeof(string));
-
-                _registerContextVariableMethod = AccessTools.Method(
-                    apiType,
-                    "RegisterContextVariable",
-                    new[] { typeof(string), typeof(string), funcType, typeof(string), typeof(int) }
-                );
-
-                if (_registerContextVariableMethod == null)
-                {
-                    Log.Warning("[RimAI.Events] RegisterContextVariable method not found.");
-                    return;
-                }
-
-                _apiAvailable = true;
                 RegisterVariables();
+                _apiAvailable = true;
                 Log.Message("[RimAI.Events] Advanced Mode API integration successful.");
             }
             catch (Exception ex)
             {
-                Log.Warning($"[RimAI.Events] Failed to integrate with RimTalk API: {ex.Message}");
+                Log.Warning($"[RimAI.Events] Failed to integrate with Communication prompt API: {ex.Message}");
             }
         }
 
-        public static bool IsAdvancedModeEnabled
-        {
-            get
-            {
-                if (!_modeResolved)
-                {
-                    _modeResolved = true;
-                    try
-                    {
-                        var settingsType = AccessTools.TypeByName("Ustas.RimAI.Communication.Settings");
-                        var rimTalkSettingsType = AccessTools.TypeByName("Ustas.RimAI.Communication.CommunicationSettings");
-
-                        if (settingsType != null && rimTalkSettingsType != null)
-                        {
-                            _getSettingsMethod = AccessTools.Method(settingsType, "Get");
-                            _useAdvancedModeField = AccessTools.Field(rimTalkSettingsType, "UseAdvancedPromptMode");
-                        }
-                    }
-                    catch { }
-                }
-
-                if (_getSettingsMethod == null || _useAdvancedModeField == null)
-                    return false;
-
-                try
-                {
-                    var settings = _getSettingsMethod.Invoke(null, null);
-                    return settings != null && (bool)_useAdvancedModeField.GetValue(settings);
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-
-        private static Map GetMap(object ctx) => _contextMapProperty?.GetValue(ctx) as Map;
+        public static bool IsAdvancedModeEnabled => Settings.Get()?.UseAdvancedPromptMode == true;
 
         private static void RegisterVariables()
         {
@@ -107,7 +36,7 @@ namespace Ustas.RimAI.Events
                 "All enabled ongoing events combined",
                 ctx =>
                 {
-                    var map = GetMap(ctx);
+                    var map = ctx?.Map;
                     if (map == null) return string.Empty;
                     bool isInDanger = map.IsPlayerHome && map.dangerWatcher?.DangerRating != StoryDanger.None;
                     return Format(OngoingEventsUtil.GetOngoingEventsNow(map, isInDanger));
@@ -117,7 +46,7 @@ namespace Ustas.RimAI.Events
                 "Active quests on current map",
                 ctx =>
                 {
-                    var map = GetMap(ctx);
+                    var map = ctx?.Map;
                     if (map == null) return string.Empty;
                     var result = new List<OngoingEventSnapshot>();
                     OngoingEventsUtil.TryAddOngoingQuestsForMap(map, result, 5);
@@ -128,7 +57,7 @@ namespace Ustas.RimAI.Events
                 "Active game conditions on current map",
                 ctx =>
                 {
-                    var map = GetMap(ctx);
+                    var map = ctx?.Map;
                     if (map == null) return string.Empty;
                     var result = new List<OngoingEventSnapshot>();
                     OngoingEventsUtil.TryAddActiveGameConditionsForMap(map, result, 5);
@@ -139,7 +68,7 @@ namespace Ustas.RimAI.Events
                 "Ongoing threats on current map",
                 ctx =>
                 {
-                    var map = GetMap(ctx);
+                    var map = ctx?.Map;
                     if (map == null) return string.Empty;
                     var result = new List<OngoingEventSnapshot>();
                     bool isInDanger = map.IsPlayerHome && map.dangerWatcher?.DangerRating != StoryDanger.None;
@@ -152,7 +81,7 @@ namespace Ustas.RimAI.Events
                 "Current location description",
                 ctx =>
                 {
-                    var map = GetMap(ctx);
+                    var map = ctx?.Map;
                     if (map == null) return string.Empty;
                     var result = new List<OngoingEventSnapshot>();
                     if (!map.IsPlayerHome)
@@ -161,11 +90,9 @@ namespace Ustas.RimAI.Events
                 });
         }
 
-        private static void Register(string name, string description, Func<object, string> provider)
+        private static void Register(string name, string description, Func<PromptContext, string> provider)
         {
-            _registerContextVariableMethod.Invoke(null, new object[] {
-                MOD_ID, name, provider, description, 100
-            });
+            RimTalkPromptAPI.RegisterContextVariable(MOD_ID, name, provider, description, 100);
         }
 
         private static string Format(List<OngoingEventSnapshot> events)
