@@ -18,6 +18,7 @@ namespace Ustas.RimAI.Events
 
             var harmony = new Harmony("ustas.rimai.events");
             harmony.PatchAll();
+            PromptService_OngoingEventsPatch.Register();
             RimAIModuleRegistry.Current.Register(
                 new RimAIModuleDescriptor(
                     "events",

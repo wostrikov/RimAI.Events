@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using HarmonyLib;
 using Ustas.RimAI.Communication.Data;
-using Ustas.RimAI.Communication.Service;
 using Ustas.RimAI.Communication.Util;
+using Ustas.RimAI.Core.Communication;
 using RimWorld;
 using Verse;
 
@@ -13,41 +11,22 @@ namespace Ustas.RimAI.Events
     /// <summary>Appends ongoing semantic events to the Communication talk context.</summary>
     public static class PromptService_OngoingEventsPatch
     {
-        // Cached property accessor - resolved once at startup
-        private static PropertyInfo _contextProperty;
-        private static bool _contextPropertyResolved;
+        static bool _registered;
 
-        internal static void ResolveContextProperty()
+        public static void Register()
         {
-            if (_contextPropertyResolved)
+            if (_registered)
                 return;
-
-            _contextPropertyResolved = true;
-
-            try
-            {
-                _contextProperty = AccessTools.Property(typeof(TalkRequest), "Context");
-                if (Prefs.DevMode)
-                {
-                    Log.Message(_contextProperty != null
-                        ? "[RimAI.Events] Found TalkRequest.Context property - using Context injection."
-                        : "[RimAI.Events] TalkRequest.Context not found - falling back to Prompt injection.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Warning($"[RimAI.Events] Failed to resolve TalkRequest.Context: {ex.Message}");
-            }
+            _registered = true;
+            TalkLifecycle.PromptDecorated += OnPromptDecorated;
         }
 
-        // Must match:  void DecoratePrompt(TalkRequest talkRequest, List<Pawn> pawns, string status)
-        public static void Postfix(TalkRequest talkRequest, List<Pawn> pawns, string status)
+        static void OnPromptDecorated(object talkRequestObj, object pawnsObj, string status)
         {
             try
             {
-                if (talkRequest == null)
+                if (talkRequestObj is not TalkRequest talkRequest)
                     return;
-
                 if (EventsMod.Settings != null && !EventsMod.Settings.AppendToContext)
                     return;
 
@@ -56,8 +35,6 @@ namespace Ustas.RimAI.Events
                     return;
 
                 Map map = initiator.Map;
-
-                // Only compute danger/threat state on player home maps.
                 bool isInDanger = map.IsPlayerHome &&
                     map.dangerWatcher?.DangerRating != StoryDanger.None;
 
@@ -71,8 +48,8 @@ namespace Ustas.RimAI.Events
                 if (ongoingEvents == null || ongoingEvents.Count == 0)
                     return;
 
-                // Apply context filtering if enabled
                 var settings = EventsMod.Settings;
+                var pawns = pawnsObj as List<Pawn>;
                 if (settings != null && settings.EnableContextFiltering)
                 {
                     var contextPawnIds = ContextPawnMatcher.CollectContextPawnIds(
@@ -96,83 +73,14 @@ namespace Ustas.RimAI.Events
                 if (block.NullOrEmpty())
                     return;
 
-                // Try to inject to Context (new RimTalk), fall back to Prompt (old RimTalk)
-                if (_contextProperty != null)
-                {
-                    // New RimTalk:  inject to Context (System Instruction)
-                    string currentContext = _contextProperty.GetValue(talkRequest) as string ?? string.Empty;
-
-                    if (currentContext.NullOrEmpty())
-                    {
-                        _contextProperty.SetValue(talkRequest, block);
-                    }
-                    else
-                    {
-                        _contextProperty.SetValue(talkRequest, currentContext + "\n\n" + block);
-                    }
-                }
+                if (string.IsNullOrEmpty(talkRequest.Context))
+                    talkRequest.Context = block;
                 else
-                {
-                    // Old RimTalk: fall back to Prompt (User Message)
-                    if (talkRequest.Prompt.NullOrEmpty())
-                    {
-                        talkRequest.Prompt = block;
-                    }
-                    else
-                    {
-                        talkRequest.Prompt += "\n\n" + block;
-                    }
-                }
+                    talkRequest.Context = talkRequest.Context + "\n\n" + block;
             }
             catch (Exception ex)
             {
                 Log.Warning($"[RimAI.Events] Error while appending ongoing events: {ex}");
-            }
-        }
-    }
-
-    // Manual patcher: attaches our postfix to PromptService.DecoratePrompt at startup,
-    // avoiding early static initialization issues with Ustas.RimAI.Communication.Data.Constant.
-    [StaticConstructorOnStartup]
-    public static class PromptService_OngoingEventsPatcher
-    {
-        static PromptService_OngoingEventsPatcher()
-        {
-            try
-            {
-                // Resolve Context property first
-                PromptService_OngoingEventsPatch.ResolveContextProperty();
-
-                var harmony = new Harmony("ustas.rimai.events.prompt");
-
-                var promptServiceType = typeof(PromptService);
-                var talkRequestType = typeof(TalkRequest);
-
-                var method = AccessTools.Method(
-                    promptServiceType,
-                    "DecoratePrompt",
-                    new[] { talkRequestType, typeof(List<Pawn>), typeof(string) }
-                );
-
-                if (method == null)
-                {
-                    Log.Warning("[RimAI.Events] Could not find PromptService.DecoratePrompt; skipping prompt patch.");
-                    return;
-                }
-
-                var postfix = AccessTools.Method(typeof(PromptService_OngoingEventsPatch), "Postfix");
-                if (postfix == null)
-                {
-                    Log.Warning("[RimAI.Events] Could not find Postfix method; skipping prompt patch.");
-                    return;
-                }
-
-                harmony.Patch(method, postfix: new HarmonyMethod(postfix));
-                Log.Message("[RimAI.Events] Patched Ustas.RimAI.Communication.Service.PromptService.DecoratePrompt successfully.");
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"[RimAI.Events] Failed to patch PromptService.DecoratePrompt: {ex}");
             }
         }
     }
