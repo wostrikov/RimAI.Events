@@ -29,7 +29,7 @@ namespace RimTalkEventPlus
         public override string SettingsCategory()
         {
             // Label in Options → Mod Settings
-            return Content?.Name ?? "RimTalk Event+";
+            return Content?.Name ?? "RimAI.Events";
         }
 
         public override void DoSettingsWindowContents(Rect inRect)

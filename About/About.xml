@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>RimTalk Event+</name>
+  <name>RimAI.Events</name>
   <packageId>saltgin.rimtalkeventmemory</packageId>
   <author>SaltGin</author>
   <supportedVersions>
