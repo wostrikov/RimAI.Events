@@ -27,9 +27,9 @@ namespace Ustas.RimAI.Events
                 var validatedDefs = new List<string>();
                 var skippedDefs = new List<string>();
 
-                // Read all entries from DefDatabase<RimTalkQuestBlacklistDef>
+                // Read all entries from DefDatabase<QuestBlacklistDef>
                 // This is safe at mod initialization time as defs are already loaded
-                var defs = DefDatabase<RimTalkQuestBlacklistDef>.AllDefsListForReading;
+                var defs = DefDatabase<QuestBlacklistDef>.AllDefsListForReading;
                 if (defs != null && defs.Count > 0)
                 {
                     foreach (var def in defs)

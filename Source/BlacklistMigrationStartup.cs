@@ -1,4 +1,4 @@
-﻿using Verse;
+using Verse;
 
 namespace Ustas.RimAI.Events
 {
@@ -8,9 +8,9 @@ namespace Ustas.RimAI.Events
         static BlacklistMigrationStartup()
         {
             // Now DefDatabase is fully populated
-            if (BlacklistMigrationHelper.TryMigrateBlacklist(RimTalkEventPlus.Settings))
+            if (BlacklistMigrationHelper.TryMigrateBlacklist(EventsMod.Settings))
             {
-                RimTalkEventPlus.Instance.WriteSettings();
+                EventsMod.Instance.WriteSettings();
             }
         }
     }

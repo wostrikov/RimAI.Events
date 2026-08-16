@@ -57,33 +57,33 @@ namespace Ustas.RimAI.Events
         // Helper to render the optimization section
         private static void RenderOptimizationSection(Listing_Standard listing, EventFilterSettings settings)
         {
-            listing.Label("RimTalkEventPlus_OptimizationHeader".Translate());
+            listing.Label("EventsMod_OptimizationHeader".Translate());
             listing.GapLine();
 
             // Event text compression toggle
             listing.CheckboxLabeled(
-                "RimTalkEventPlus_EnableCompression_Label".Translate(),
+                "EventsMod_EnableCompression_Label".Translate(),
                 ref settings.enableEventTextCompression,
-                "RimTalkEventPlus_EnableCompression_Tooltip".Translate()
+                "EventsMod_EnableCompression_Tooltip".Translate()
             );
 
             using (new TextBlock(GameFont.Tiny))
             {
-                listing.Label("RimTalkEventPlus_Compression_Description".Translate());
+                listing.Label("EventsMod_Compression_Description".Translate());
             }
 
             listing.Gap(12f);
 
             // Context-aware filtering toggle
             listing.CheckboxLabeled(
-                "RimTalkEventPlus_EnableContextFiltering".Translate(),
+                "EventsMod_EnableContextFiltering".Translate(),
                 ref settings.EnableContextFiltering,
-                "RimTalkEventPlus_EnableContextFilteringTooltip".Translate()
+                "EventsMod_EnableContextFilteringTooltip".Translate()
             );
 
             using (new TextBlock(GameFont.Tiny))
             {
-                listing.Label("RimTalkEventPlus_ContextFiltering_Description".Translate());
+                listing.Label("EventsMod_ContextFiltering_Description".Translate());
             }
 
             listing.Gap(SECTION_SPACING);
@@ -93,7 +93,7 @@ namespace Ustas.RimAI.Events
 
         private static void RenderAdvancedModeSection(Listing_Standard listing, EventFilterSettings settings)
         {
-            listing.Label("RimTalkEventPlus_AdvancedModeHeader".Translate());
+            listing.Label("EventsMod_AdvancedModeHeader".Translate());
             listing.GapLine();
 
             bool isAdvancedMode = RimTalkAPIIntegration.IsAdvancedModeEnabled;
@@ -101,9 +101,9 @@ namespace Ustas.RimAI.Events
             if (isAdvancedMode)
             {
                 listing.CheckboxLabeled(
-                    "RimTalkEventPlus_AppendToContext".Translate(),
+                    "EventsMod_AppendToContext".Translate(),
                     ref settings.AppendToContext,
-                    "RimTalkEventPlus_AppendToContext_Tooltip".Translate()
+                    "EventsMod_AppendToContext_Tooltip".Translate()
                 );
             }
             else
@@ -113,9 +113,9 @@ namespace Ustas.RimAI.Events
                 using (new ColorBlock(new Color(0.5f, 0.5f, 0.5f)))
                 {
                     listing.CheckboxLabeled(
-                        "RimTalkEventPlus_AppendToContext".Translate(),
+                        "EventsMod_AppendToContext".Translate(),
                         ref locked,
-                        "RimTalkEventPlus_AppendToContext_Tooltip".Translate()
+                        "EventsMod_AppendToContext_Tooltip".Translate()
                     );
                 }
             }
@@ -124,7 +124,7 @@ namespace Ustas.RimAI.Events
             {
                 using (new TextBlock(GameFont.Tiny))
                 {
-                    listing.Label("RimTalkEventPlus_AppendToContext_Desc".Translate());
+                    listing.Label("EventsMod_AppendToContext_Desc".Translate());
                 }
             }
             else
@@ -132,7 +132,7 @@ namespace Ustas.RimAI.Events
                 using (new TextBlock(GameFont.Tiny))
                 using (new ColorBlock(new Color(0.5f, 0.5f, 0.5f)))
                 {
-                    listing.Label("RimTalkEventPlus_AppendToContext_Desc".Translate());
+                    listing.Label("EventsMod_AppendToContext_Desc".Translate());
                 }
             }
 
@@ -140,14 +140,14 @@ namespace Ustas.RimAI.Events
             {
                 listing.Gap(8f);
                 listing.CheckboxLabeled(
-                    "RimTalkEventPlus_MandatoryLockToggle".Translate(),
+                    "EventsMod_MandatoryLockToggle".Translate(),
                     ref settings.allowEnhancedPromptOverlap,
-                    "RimTalkEventPlus_MandatoryLockToggle_Tooltip".Translate()
+                    "EventsMod_MandatoryLockToggle_Tooltip".Translate()
                 );
 
                 using (new TextBlock(GameFont.Tiny))
                 {
-                    listing.Label("RimTalkEventPlus_MandatoryLockToggle_Desc".Translate());
+                    listing.Label("EventsMod_MandatoryLockToggle_Desc".Translate());
                 }
             }
 
@@ -169,12 +169,12 @@ namespace Ustas.RimAI.Events
 
             using (new TextBlock(GameFont.Small))
             {
-                listing.Label("RimTalkEventPlus_CategoryFilters".Translate());
+                listing.Label("EventsMod_CategoryFilters".Translate());
             }
 
             using (new TextBlock(GameFont.Tiny))
             {
-                listing.Label("RimTalkEventPlus_CategoryFilters_Desc".Translate());
+                listing.Label("EventsMod_CategoryFilters_Desc".Translate());
             }
 
             listing.Gap(5f);
@@ -207,7 +207,7 @@ namespace Ustas.RimAI.Events
             using (new TextBlock(GameFont.Small))
             using (new ColorBlock(new Color(1f, 0.9f, 0.5f)))
             {
-                Widgets.Label(titleRect, "RimTalkEventPlus_EnhancedPromptDetected_Title".Translate());
+                Widgets.Label(titleRect, "EventsMod_EnhancedPromptDetected_Title".Translate());
             }
 
             // Description
@@ -215,7 +215,7 @@ namespace Ustas.RimAI.Events
             using (new TextBlock(GameFont.Tiny))
             using (new ColorBlock(new Color(0.85f, 0.8f, 0.65f)))
             {
-                Widgets.Label(descRect, "RimTalkEventPlus_EnhancedPromptDetected_Desc".Translate());
+                Widgets.Label(descRect, "EventsMod_EnhancedPromptDetected_Desc".Translate());
             }
 
             listing.Gap(8f);
@@ -301,8 +301,8 @@ namespace Ustas.RimAI.Events
             float buttonHeight = 30f;
             float buttonPadding = 20f;
 
-            string resetTypeText = "RimTalkEventPlus_ResetTypeFilters".Translate();
-            string resetInstanceText = "RimTalkEventPlus_ResetInstanceFilters".Translate();
+            string resetTypeText = "EventsMod_ResetTypeFilters".Translate();
+            string resetInstanceText = "EventsMod_ResetInstanceFilters".Translate();
 
             float button1Width = Text.CalcSize(resetTypeText).x + buttonPadding;
             float button2Width = Text.CalcSize(resetInstanceText).x + buttonPadding;
@@ -317,7 +317,7 @@ namespace Ustas.RimAI.Events
 
                 SoundDefOf.Click.PlayOneShotOnCamera(null);
                 Messages.Message(
-                    "RimTalkEventPlus_TypeFiltersCleared".Translate(count),
+                    "EventsMod_TypeFiltersCleared".Translate(count),
                     MessageTypeDefOf.PositiveEvent
                 );
             }
@@ -340,7 +340,7 @@ namespace Ustas.RimAI.Events
 
                 SoundDefOf.Click.PlayOneShotOnCamera(null);
                 Messages.Message(
-                    "RimTalkEventPlus_InstanceFiltersCleared".Translate(totalCount),
+                    "EventsMod_InstanceFiltersCleared".Translate(totalCount),
                     MessageTypeDefOf.PositiveEvent
                 );
             }
@@ -367,7 +367,7 @@ namespace Ustas.RimAI.Events
         // Renders the type-based filtering section.
         private static void DoTypeBasedFilteringSection(Rect rect, EventFilterSettings settings)
         {
-            DrawSectionHeader(rect, "RimTalkEventPlus_TypeBasedFiltering", "RimTalkEventPlus_TypeBasedFiltering_Desc");
+            DrawSectionHeader(rect, "EventsMod_TypeBasedFiltering", "EventsMod_TypeBasedFiltering_Desc");
 
             float yPos = HEADER_HEIGHT + 25f;
 
@@ -384,8 +384,8 @@ namespace Ustas.RimAI.Events
             var disabledEvents = allEvents.Where(e => settings.disabledEventDefNames.Contains(e.rootID)).ToList();
 
             // Draw columns
-            DoEventTypeColumn(layout.LeftColumn, "RimTalkEventPlus_AvailableTypes".Translate(), availableEvents, settings, ref _scrollPosAvailableTypes, false);
-            DoEventTypeColumn(layout.RightColumn, "RimTalkEventPlus_DisabledTypes".Translate(), disabledEvents, settings, ref _scrollPosDisabledTypes, true);
+            DoEventTypeColumn(layout.LeftColumn, "EventsMod_AvailableTypes".Translate(), availableEvents, settings, ref _scrollPosAvailableTypes, false);
+            DoEventTypeColumn(layout.RightColumn, "EventsMod_DisabledTypes".Translate(), disabledEvents, settings, ref _scrollPosDisabledTypes, true);
 
             // Draw arrow buttons
             DoTypeFilterButtons(layout.ButtonsArea, availableEvents, disabledEvents, settings);
@@ -402,7 +402,7 @@ namespace Ustas.RimAI.Events
 
             bool wasShowCurrentOnly = _showCurrentEventsOnly;
 
-            string label1 = "RimTalkEventPlus_CurrentEventsOnly".Translate();
+            string label1 = "EventsMod_CurrentEventsOnly".Translate();
             Rect radio1Rect = new Rect(leftMargin, yPos, radioSize, radioSize);
 
             if (Widgets.RadioButton(radio1Rect.x, radio1Rect.y, _showCurrentEventsOnly))
@@ -419,7 +419,7 @@ namespace Ustas.RimAI.Events
                     SoundDefOf.Tick_Tiny.PlayOneShotOnCamera(null);
             }
 
-            string label2 = "RimTalkEventPlus_AllEventTypes".Translate();
+            string label2 = "EventsMod_AllEventTypes".Translate();
             float option2X = leftMargin + optionSpacing;
             Rect radio2Rect = new Rect(option2X, yPos, radioSize, radioSize);
 
@@ -443,8 +443,8 @@ namespace Ustas.RimAI.Events
             using (new ColorBlock(new Color(0.7f, 0.7f, 0.7f)))
             {
                 string note = _showCurrentEventsOnly
-                    ? "RimTalkEventPlus_CurrentEventsNote".Translate()
-                    : "RimTalkEventPlus_AllEventTypesNote".Translate();
+                    ? "EventsMod_CurrentEventsNote".Translate()
+                    : "EventsMod_AllEventTypesNote".Translate();
 
                 Widgets.Label(noteRect, note);
             }
@@ -453,7 +453,7 @@ namespace Ustas.RimAI.Events
         // Renders the instance-based filtering section.
         private static void DoInstanceBasedFilteringSection(Rect rect, EventFilterSettings settings)
         {
-            DrawSectionHeader(rect, "RimTalkEventPlus_InstanceBasedFiltering", "RimTalkEventPlus_InstanceBasedFiltering_Desc");
+            DrawSectionHeader(rect, "EventsMod_InstanceBasedFiltering", "EventsMod_InstanceBasedFiltering_Desc");
 
             float yPos = HEADER_HEIGHT + 30f;
 
@@ -496,8 +496,8 @@ namespace Ustas.RimAI.Events
             ));
 
             // Draw columns
-            DoEventInstanceColumn(layout.LeftColumn, "RimTalkEventPlus_CurrentInstances".Translate(), currentInstances, settings, ref _scrollPosCurrentInstances, false);
-            DoEventInstanceColumn(layout.RightColumn, "RimTalkEventPlus_HiddenInstances".Translate(), hiddenInstances, settings, ref _scrollPosHiddenInstances, true);
+            DoEventInstanceColumn(layout.LeftColumn, "EventsMod_CurrentInstances".Translate(), currentInstances, settings, ref _scrollPosCurrentInstances, false);
+            DoEventInstanceColumn(layout.RightColumn, "EventsMod_HiddenInstances".Translate(), hiddenInstances, settings, ref _scrollPosHiddenInstances, true);
 
             // Draw arrow buttons
             DoInstanceFilterButtons(layout.ButtonsArea, currentInstances, hiddenInstances, settings);
@@ -570,25 +570,25 @@ namespace Ustas.RimAI.Events
 
             DrawCheckboxBox(
                 new Rect(rect.x, rect.y, cellWidth, cellHeight),
-                "RimTalkEventPlus_QuickFilter_Quests".Translate(),
+                "EventsMod_QuickFilter_Quests".Translate(),
                 ref settings.showQuests,
                 disabled: enhancedPromptConflict
             );
             DrawCheckboxBox(
                 new Rect(rect.x + cellWidth + cellPadding, rect.y, cellWidth, cellHeight),
-                "RimTalkEventPlus_QuickFilter_MapConditions".Translate(),
+                "EventsMod_QuickFilter_MapConditions".Translate(),
                 ref settings.showMapConditions,
                 disabled: enhancedPromptConflict
             );
             DrawCheckboxBox(
                 new Rect(rect.x, rect.y + cellHeight + cellPadding, cellWidth, cellHeight),
-                "RimTalkEventPlus_QuickFilter_Threats".Translate(),
+                "EventsMod_QuickFilter_Threats".Translate(),
                 ref settings.showThreats,
                 disabled: enhancedPromptConflict
             );
             DrawCheckboxBox(
                 new Rect(rect.x + cellWidth + cellPadding, rect.y + cellHeight + cellPadding, cellWidth, cellHeight),
-                "RimTalkEventPlus_QuickFilter_Sites".Translate(),
+                "EventsMod_QuickFilter_Sites".Translate(),
                 ref settings.showSiteParts,
                 disabled: false  // Site Parts is Event+ exclusive, never override by Enhanced Prompt's settings
             );
@@ -826,7 +826,7 @@ namespace Ustas.RimAI.Events
         }
 
         // Helper to draw "globally disabled" note
-        private static float DrawDisabledNote(float width, float yPos, string noteKey = "RimTalkEventPlus_GloballyDisabled")
+        private static float DrawDisabledNote(float width, float yPos, string noteKey = "EventsMod_GloballyDisabled")
         {
             Rect noteRect = new Rect(20f, yPos, width - 20f, 15f);
             using (new TextBlock(GameFont.Tiny))

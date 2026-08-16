@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -133,7 +133,7 @@ namespace Ustas.RimAI.Events
                 var def = part.def;
 
                 // Check new filtering system using helper method
-                if (IsEventFiltered(def.defName, null, EventCategory.SitePart, RimTalkEventPlus.Settings))
+                if (IsEventFiltered(def.defName, null, EventCategory.SitePart, EventsMod.Settings))
                     continue;
 
                 string label = def.LabelCap;
@@ -182,7 +182,7 @@ namespace Ustas.RimAI.Events
                 // Check new filtering system using helper method
                 string questDefName = quest.root?.defName;
                 string questInstanceID = quest.id.ToString();
-                if (IsEventFiltered(questDefName, questInstanceID, EventCategory.Quest, RimTalkEventPlus.Settings))
+                if (IsEventFiltered(questDefName, questInstanceID, EventCategory.Quest, EventsMod.Settings))
                     continue;
 
                 if (QuestLinkUtil.IsQuestHidden(quest))
@@ -262,7 +262,7 @@ namespace Ustas.RimAI.Events
                     continue;
 
                 // Check new filtering system using helper method
-                if (IsEventFiltered(cond.def.defName, null, EventCategory.MapCondition, RimTalkEventPlus.Settings))
+                if (IsEventFiltered(cond.def.defName, null, EventCategory.MapCondition, EventsMod.Settings))
                     continue;
 
                 // Use the instance's Label/Description
@@ -335,7 +335,7 @@ namespace Ustas.RimAI.Events
                     continue;
 
                 // Check new filtering system using helper method
-                if (IsEventFiltered(def.defName, null, EventCategory.Threat, RimTalkEventPlus.Settings))
+                if (IsEventFiltered(def.defName, null, EventCategory.Threat, EventsMod.Settings))
                     continue;
 
                 // Age filter: skip (and stop) if the newest threat is already too old.

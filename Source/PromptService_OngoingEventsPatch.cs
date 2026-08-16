@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
@@ -10,8 +10,7 @@ using Verse;
 
 namespace Ustas.RimAI.Events
 {
-    // Postfix that appends ongoing events to RimTalk's context.
-    // NOTE: patched manually by PromptService_OngoingEventsPatcher.
+    /// <summary>Appends ongoing semantic events to the Communication talk context.</summary>
     public static class PromptService_OngoingEventsPatch
     {
         // Cached property accessor - resolved once at startup
@@ -27,19 +26,12 @@ namespace Ustas.RimAI.Events
 
             try
             {
-                var talkRequestType = AccessTools.TypeByName("Ustas.RimAI.Communication.Data.TalkRequest");
-                if (talkRequestType != null)
+                _contextProperty = AccessTools.Property(typeof(TalkRequest), "Context");
+                if (Prefs.DevMode)
                 {
-                    _contextProperty = AccessTools.Property(talkRequestType, "Context");
-
-                    if (_contextProperty != null && Prefs.DevMode)
-                    {
-                        Log.Message("[RimAI.Events] Found TalkRequest.Context property - using Context injection.");
-                    }
-                    else if (Prefs.DevMode)
-                    {
-                        Log.Message("[RimAI.Events] TalkRequest.Context not found - falling back to Prompt injection.");
-                    }
+                    Log.Message(_contextProperty != null
+                        ? "[RimAI.Events] Found TalkRequest.Context property - using Context injection."
+                        : "[RimAI.Events] TalkRequest.Context not found - falling back to Prompt injection.");
                 }
             }
             catch (Exception ex)
@@ -56,7 +48,7 @@ namespace Ustas.RimAI.Events
                 if (talkRequest == null)
                     return;
 
-                if (RimTalkEventPlus.Settings != null && !RimTalkEventPlus.Settings.AppendToContext)
+                if (EventsMod.Settings != null && !EventsMod.Settings.AppendToContext)
                     return;
 
                 Pawn initiator = talkRequest.Initiator;
@@ -80,7 +72,7 @@ namespace Ustas.RimAI.Events
                     return;
 
                 // Apply context filtering if enabled
-                var settings = RimTalkEventPlus.Settings;
+                var settings = EventsMod.Settings;
                 if (settings != null && settings.EnableContextFiltering)
                 {
                     var contextPawnIds = ContextPawnMatcher.CollectContextPawnIds(
@@ -153,14 +145,8 @@ namespace Ustas.RimAI.Events
 
                 var harmony = new Harmony("ustas.rimai.events.prompt");
 
-                var promptServiceType = AccessTools.TypeByName("Ustas.RimAI.Communication.Service.PromptService");
-                var talkRequestType = AccessTools.TypeByName("Ustas.RimAI.Communication.Data.TalkRequest");
-
-                if (promptServiceType == null || talkRequestType == null)
-                {
-                    Log.Warning("[RimAI.Events] Could not find RimTalk types (PromptService / TalkRequest); skipping prompt patch.");
-                    return;
-                }
+                var promptServiceType = typeof(PromptService);
+                var talkRequestType = typeof(TalkRequest);
 
                 var method = AccessTools.Method(
                     promptServiceType,

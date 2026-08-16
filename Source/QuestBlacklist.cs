@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -19,8 +19,8 @@ namespace Ustas.RimAI.Events
             _initialized = true;
             _blacklistedRoots = new HashSet<string>();
 
-            // Gather all RimTalkQuestBlacklistDef instances, so users/modders can patch/add more.
-            var defs = DefDatabase<RimTalkQuestBlacklistDef>.AllDefsListForReading;
+            // Gather all QuestBlacklistDef instances, so users/modders can patch/add more.
+            var defs = DefDatabase<QuestBlacklistDef>.AllDefsListForReading;
             if (defs == null)
                 return;
 
