@@ -34,6 +34,9 @@ namespace RimTalkEventPlus
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
+            AccessTools.TypeByName("Ustas.RimAI.Core.Modules.RimAISettingsNavigation")
+                ?.GetMethod("Open")
+                ?.Invoke(null, new object[] { "events", null });
             EventFilterUI.DoFilteringUI(inRect, Settings);
         }
     }

@@ -15,7 +15,7 @@
     </li>
     <li>
       <packageId>cj.rimtalk</packageId>
-      <displayName>RimTalk</displayName>
+      <displayName>RimAI.Communication</displayName>
 	  <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752</steamWorkshopUrl>
     </li>
   </modDependencies>
@@ -23,6 +23,6 @@
 	  <li>cj.rimtalk</li>
 	</loadAfter>
   <description>
-    Lightweight event sensing expansion layer for RimTalk. Experimental.
+    RimAI.Events observes world changes and injects ongoing-event context into RimAI communication. Experimental.
   </description>
 </ModMetaData>
