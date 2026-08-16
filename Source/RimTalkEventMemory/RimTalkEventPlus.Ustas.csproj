@@ -24,5 +24,8 @@
     <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(RimWorldDir)\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="0Harmony"><HintPath>$(RimWorldWorkshopDir)\2009463077\Current\Assemblies\0Harmony.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="RimTalk"><HintPath>$(RimTalkAssembly)</HintPath><Private>false</Private></Reference>
+    <ProjectReference Include="..\..\..\RimAI.Core\src\RimAI.Core\RimAI.Core.csproj">
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>

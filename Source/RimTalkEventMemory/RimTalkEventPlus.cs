@@ -23,6 +23,12 @@ namespace RimTalkEventPlus
             // Existing behavior: Harmony patches + log
             var harmony = new Harmony("saltgin.rimtalkeventmemory");
             harmony.PatchAll();
+            Ustas.RimAI.Core.Modules.RimAIModuleRegistry.Current.Register(
+                new Ustas.RimAI.Core.Modules.RimAIModuleDescriptor(
+                    "events",
+                    "RimAI.Events",
+                    "RimAI.Events",
+                    "Events"));
             Log.Message("[RimTalk Event+] Loaded.");
         }
 
