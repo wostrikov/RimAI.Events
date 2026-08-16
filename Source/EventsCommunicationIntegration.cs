@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
@@ -73,7 +73,7 @@ namespace Ustas.RimAI.Events
                     try
                     {
                         var settingsType = AccessTools.TypeByName("Ustas.RimAI.Communication.Settings");
-                        var rimTalkSettingsType = AccessTools.TypeByName("Ustas.RimAI.Communication.RimTalkSettings");
+                        var rimTalkSettingsType = AccessTools.TypeByName("Ustas.RimAI.Communication.CommunicationSettings");
 
                         if (settingsType != null && rimTalkSettingsType != null)
                         {
