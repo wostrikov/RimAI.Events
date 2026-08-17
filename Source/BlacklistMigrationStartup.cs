@@ -1,3 +1,4 @@
+using Ustas.RimAI.Core.Handshake;
 using Verse;
 
 namespace Ustas.RimAI.Events
@@ -7,6 +8,11 @@ namespace Ustas.RimAI.Events
     {
         static BlacklistMigrationStartup()
         {
+            if (!RimAiHandshake.IsApproved(RimAiModuleIds.Events))
+            {
+                return;
+            }
+
             // Now DefDatabase is fully populated
             if (BlacklistMigrationHelper.TryMigrateBlacklist(EventsMod.Settings))
             {

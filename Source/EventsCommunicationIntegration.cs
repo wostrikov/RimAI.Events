@@ -4,6 +4,7 @@ using Ustas.RimAI.Communication;
 using Ustas.RimAI.Communication.API;
 using Ustas.RimAI.Communication.Prompt;
 using RimWorld;
+using Ustas.RimAI.Core.Handshake;
 using Verse;
 
 namespace Ustas.RimAI.Events
@@ -18,6 +19,11 @@ namespace Ustas.RimAI.Events
         {
             try
             {
+                if (!RimAiHandshake.IsApproved(RimAiModuleIds.Events))
+                {
+                    return;
+                }
+
                 RegisterVariables();
                 _apiAvailable = true;
                 Log.Message("[RimAI.Events] Advanced Mode API integration successful.");
