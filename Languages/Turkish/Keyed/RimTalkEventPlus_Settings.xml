@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-  <RimTalkEventPlus_SettingsCategory>RimTalk Event+</RimTalkEventPlus_SettingsCategory>
+  <EventsMod_SettingsCategory>RimTalk Event+</EventsMod_SettingsCategory>
 
-  <RimTalkEventPlus_OptimizationHeader>Eniyileme ayarları</RimTalkEventPlus_OptimizationHeader>
+  <EventsMod_OptimizationHeader>Eniyileme ayarları</EventsMod_OptimizationHeader>
 
-  <RimTalkEventPlus_EnableCompression_Label>Olay metni sıkıştırmasını etkinleştir (WIP - yakında gelecek, düğme şu anda hiçbir şey yapmıyor)</RimTalkEventPlus_EnableCompression_Label>
+  <EventsMod_EnableCompression_Label>Olay metni sıkıştırmasını etkinleştir (WIP - yakında gelecek, düğme şu anda hiçbir şey yapmıyor)</EventsMod_EnableCompression_Label>
 
-  <RimTalkEventPlus_EnableCompression_Tooltip>Görevler ve olaylar RimTalk’a gönderilirken token kullanımını azaltmak için sıkıştırılmış olay metni kullan.</RimTalkEventPlus_EnableCompression_Tooltip>
+  <EventsMod_EnableCompression_Tooltip>Görevler ve olaylar RimTalk’a gönderilirken token kullanımını azaltmak için sıkıştırılmış olay metni kullan.</EventsMod_EnableCompression_Tooltip>
 
-  <RimTalkEventPlus_Compression_Description>Bu seçenek etkinleştirildiğinde Event+, uzun ve tekrar eden görev açıklamalarını sıkıştırır, ancak temel bilgileri korur.
+  <EventsMod_Compression_Description>Bu seçenek etkinleştirildiğinde Event+, uzun ve tekrar eden görev açıklamalarını sıkıştırır, ancak temel bilgileri korur.
 
 Örnek (mülteci misafir etme görevi):
 - Önce: Mültecilerin kim olduğunu, neden kaçtıklarını, ne kadar kalacaklarını ve ücretsiz çalışıp savaşacaklarını anlatan, birden fazla paragraftan oluşan uzun bir mektup...
 - Sonra: Şuna benzer kısa bir özet: "Koloni mültecileri kabul etti. [reason] nedeniyle kaçtılar, dinlenip toparlanmak için X gün kalacaklar ve bu süre boyunca ücretsiz çalışıp savaşacaklar."
 
-Devre dışı bırakıldığında Event+, her zaman olayın tam orijinal metnini gönderir.</RimTalkEventPlus_Compression_Description>
+Devre dışı bırakıldığında Event+, her zaman olayın tam orijinal metnini gönderir.</EventsMod_Compression_Description>
 
   <!-- Event Filtering UI -->
-  <RimTalkEventPlus_FilteringHeader>Olay filtreleme</RimTalkEventPlus_FilteringHeader>
-  <RimTalkEventPlus_CategoryFilters>Kategori filtreleri</RimTalkEventPlus_CategoryFilters>
-  <RimTalkEventPlus_CategoryFilters_Desc>Tüm olay kategorilerini etkinleştir veya devre dışı bırak. Devre dışı bırakılan kategoriler tümüyle yapay zekâdan gizlenir ve aşağıdaki tüm ayarların yerine geçer.</RimTalkEventPlus_CategoryFilters_Desc>
-  <RimTalkEventPlus_TypeBasedFiltering>TÜR BAZLI FİLTRELEME</RimTalkEventPlus_TypeBasedFiltering>
-  <RimTalkEventPlus_TypeBasedFiltering_Desc>Seçili türlerdeki tüm olayları tüm kayıtlarda küresel olarak gizle</RimTalkEventPlus_TypeBasedFiltering_Desc>
-  <RimTalkEventPlus_InstanceBasedFiltering>ÖRNEK BAZLI FİLTRELEME</RimTalkEventPlus_InstanceBasedFiltering>
-  <RimTalkEventPlus_InstanceBasedFiltering_Desc>Bu kayıttaki belirli aktif olayları gizle. Yalnızca bir kayıt yüklendiğinde kullanılabilir.</RimTalkEventPlus_InstanceBasedFiltering_Desc>
+  <EventsMod_FilteringHeader>Olay filtreleme</EventsMod_FilteringHeader>
+  <EventsMod_CategoryFilters>Kategori filtreleri</EventsMod_CategoryFilters>
+  <EventsMod_CategoryFilters_Desc>Tüm olay kategorilerini etkinleştir veya devre dışı bırak. Devre dışı bırakılan kategoriler tümüyle yapay zekâdan gizlenir ve aşağıdaki tüm ayarların yerine geçer.</EventsMod_CategoryFilters_Desc>
+  <EventsMod_TypeBasedFiltering>TÜR BAZLI FİLTRELEME</EventsMod_TypeBasedFiltering>
+  <EventsMod_TypeBasedFiltering_Desc>Seçili türlerdeki tüm olayları tüm kayıtlarda küresel olarak gizle</EventsMod_TypeBasedFiltering_Desc>
+  <EventsMod_InstanceBasedFiltering>ÖRNEK BAZLI FİLTRELEME</EventsMod_InstanceBasedFiltering>
+  <EventsMod_InstanceBasedFiltering_Desc>Bu kayıttaki belirli aktif olayları gizle. Yalnızca bir kayıt yüklendiğinde kullanılabilir.</EventsMod_InstanceBasedFiltering_Desc>
 
-  <RimTalkEventPlus_AvailableTypes>Kullanılabilir türler</RimTalkEventPlus_AvailableTypes>
-  <RimTalkEventPlus_DisabledTypes>Devre dışı türler</RimTalkEventPlus_DisabledTypes>
-  <RimTalkEventPlus_CurrentInstances>Mevcut örnekler</RimTalkEventPlus_CurrentInstances>
-  <RimTalkEventPlus_HiddenInstances>Gizli örnekler</RimTalkEventPlus_HiddenInstances>
+  <EventsMod_AvailableTypes>Kullanılabilir türler</EventsMod_AvailableTypes>
+  <EventsMod_DisabledTypes>Devre dışı türler</EventsMod_DisabledTypes>
+  <EventsMod_CurrentInstances>Mevcut örnekler</EventsMod_CurrentInstances>
+  <EventsMod_HiddenInstances>Gizli örnekler</EventsMod_HiddenInstances>
 
-  <RimTalkEventPlus_CurrentEventsOnly>Yalnızca mevcut olayları göster</RimTalkEventPlus_CurrentEventsOnly>
-  <RimTalkEventPlus_AllEventTypes>Tüm olay türlerini göster</RimTalkEventPlus_AllEventTypes>
+  <EventsMod_CurrentEventsOnly>Yalnızca mevcut olayları göster</EventsMod_CurrentEventsOnly>
+  <EventsMod_AllEventTypes>Tüm olay türlerini göster</EventsMod_AllEventTypes>
 
-  <RimTalkEventPlus_CurrentEventsNote>Yalnızca oyununuzda şu anda aktif olan olayları gösterir. Yalnızca bir kayıt yüklendiğinde kullanılabilir.</RimTalkEventPlus_CurrentEventsNote>
-  <RimTalkEventPlus_AllEventTypesNote>Yüklü modlardan tüm olası olay türlerini gösterir. Oyununuzda aktif olsalar bile RimTalk konuşmalarından zaten hariç tutulan olay türlerini içerebilir (örn. arka plan zamanlayıcıları, diplomasi görevleri).</RimTalkEventPlus_AllEventTypesNote>
+  <EventsMod_CurrentEventsNote>Yalnızca oyununuzda şu anda aktif olan olayları gösterir. Yalnızca bir kayıt yüklendiğinde kullanılabilir.</EventsMod_CurrentEventsNote>
+  <EventsMod_AllEventTypesNote>Yüklü modlardan tüm olası olay türlerini gösterir. Oyununuzda aktif olsalar bile RimTalk konuşmalarından zaten hariç tutulan olay türlerini içerebilir (örn. arka plan zamanlayıcıları, diplomasi görevleri).</EventsMod_AllEventTypesNote>
 
-  <RimTalkEventPlus_GloballyDisabled>global olarak devre dışı</RimTalkEventPlus_GloballyDisabled>
+  <EventsMod_GloballyDisabled>global olarak devre dışı</EventsMod_GloballyDisabled>
 
-  <RimTalkEventPlus_QuickFilter_Quests>Görevler</RimTalkEventPlus_QuickFilter_Quests>
-  <RimTalkEventPlus_QuickFilter_MapConditions>Harita koşulları</RimTalkEventPlus_QuickFilter_MapConditions>
-  <RimTalkEventPlus_QuickFilter_Threats>Tehditler</RimTalkEventPlus_QuickFilter_Threats>
-  <RimTalkEventPlus_QuickFilter_Sites>Dünya Siteleri (haydut kampları, eşya zulalar vs.)</RimTalkEventPlus_QuickFilter_Sites>
+  <EventsMod_QuickFilter_Quests>Görevler</EventsMod_QuickFilter_Quests>
+  <EventsMod_QuickFilter_MapConditions>Harita koşulları</EventsMod_QuickFilter_MapConditions>
+  <EventsMod_QuickFilter_Threats>Tehditler</EventsMod_QuickFilter_Threats>
+  <EventsMod_QuickFilter_Sites>Dünya Siteleri (haydut kampları, eşya zulalar vs.)</EventsMod_QuickFilter_Sites>
 
-  <RimTalkEventPlus_ResetTypeFilters>Tüm tür filtrelerini sıfırla</RimTalkEventPlus_ResetTypeFilters>
-  <RimTalkEventPlus_ResetInstanceFilters>Tüm örnek filtrelerini sıfırla</RimTalkEventPlus_ResetInstanceFilters>
+  <EventsMod_ResetTypeFilters>Tüm tür filtrelerini sıfırla</EventsMod_ResetTypeFilters>
+  <EventsMod_ResetInstanceFilters>Tüm örnek filtrelerini sıfırla</EventsMod_ResetInstanceFilters>
 
-  <RimTalkEventPlus_TypeFiltersCleared>{0} tür filtresi temizlendi.</RimTalkEventPlus_TypeFiltersCleared>
-  <RimTalkEventPlus_InstanceFiltersCleared>Tüm kayıtlarda {0} örnek filtresi temizlendi.</RimTalkEventPlus_InstanceFiltersCleared>
+  <EventsMod_TypeFiltersCleared>{0} tür filtresi temizlendi.</EventsMod_TypeFiltersCleared>
+  <EventsMod_InstanceFiltersCleared>Tüm kayıtlarda {0} örnek filtresi temizlendi.</EventsMod_InstanceFiltersCleared>
 
-  <RimTalkEventPlus_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt algılandı</RimTalkEventPlus_EnhancedPromptDetected_Title>
-  <RimTalkEventPlus_EnhancedPromptDetected_Desc>RimTalk - Enhanced Prompt'un "Auto Event Capture" özelliği etkin. RimTalk - Enhanced Prompt'un kendi olay takip sistemiyle uyumluluk için çakışan özellikler devre dışı bırakıldı.</RimTalkEventPlus_EnhancedPromptDetected_Desc>
+  <EventsMod_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt algılandı</EventsMod_EnhancedPromptDetected_Title>
+  <EventsMod_EnhancedPromptDetected_Desc>RimTalk - Enhanced Prompt'un "Auto Event Capture" özelliği etkin. RimTalk - Enhanced Prompt'un kendi olay takip sistemiyle uyumluluk için çakışan özellikler devre dışı bırakıldı.</EventsMod_EnhancedPromptDetected_Desc>
 
-  <RimTalkEventPlus_EnableContextFiltering>Olayları konuşma bağlamına göre filtrele</RimTalkEventPlus_EnableContextFiltering>
-  <RimTalkEventPlus_EnableContextFilteringTooltip>Yalnızca mevcut konuşmadaki kişileri (yakındaki kişiler, konuşmacı, alıcı) içeren görev olaylarını ekle. Tehditler, harita koşulları ve dünya konumu olayları her zaman AI'ya gönderilir. Token tasarrufu sağlar ve (belki) LLM odağını iyileştirir.</RimTalkEventPlus_EnableContextFilteringTooltip>
-  <RimTalkEventPlus_ContextFiltering_Description>Etkinleştirildiğinde, mevcut konuşmadaki hiçbir kişiyi (yakındaki kişiler, konuşmacı, alıcı) içermeyen görevler atlanır. Bu, token kullanımını azaltır ve (belki) LLM'nin ilgili olaylara odaklanmasına yardımcı olur. Ancak etkinleştirildiğinde, ilgili kişiler yakında değilse kişiler bu tür görevler hakkında asla konuşmaz.</RimTalkEventPlus_ContextFiltering_Description>
+  <EventsMod_EnableContextFiltering>Olayları konuşma bağlamına göre filtrele</EventsMod_EnableContextFiltering>
+  <EventsMod_EnableContextFilteringTooltip>Yalnızca mevcut konuşmadaki kişileri (yakındaki kişiler, konuşmacı, alıcı) içeren görev olaylarını ekle. Tehditler, harita koşulları ve dünya konumu olayları her zaman AI'ya gönderilir. Token tasarrufu sağlar ve (belki) LLM odağını iyileştirir.</EventsMod_EnableContextFilteringTooltip>
+  <EventsMod_ContextFiltering_Description>Etkinleştirildiğinde, mevcut konuşmadaki hiçbir kişiyi (yakındaki kişiler, konuşmacı, alıcı) içermeyen görevler atlanır. Bu, token kullanımını azaltır ve (belki) LLM'nin ilgili olaylara odaklanmasına yardımcı olur. Ancak etkinleştirildiğinde, ilgili kişiler yakında değilse kişiler bu tür görevler hakkında asla konuşmaz.</EventsMod_ContextFiltering_Description>
 
-  <RimTalkEventPlus_AdvancedModeHeader>Gelişmiş ayarlar</RimTalkEventPlus_AdvancedModeHeader>
-  <RimTalkEventPlus_AppendToContext>Olayları {{context}}'e otomatik olarak ekle</RimTalkEventPlus_AppendToContext>
-  <RimTalkEventPlus_AppendToContext_Tooltip>Etkinleştirildiğinde, devam eden olaylar RimTalk istemlerindeki {{context}} değişkenine otomatik olarak eklenir.</RimTalkEventPlus_AppendToContext_Tooltip>
-  <RimTalkEventPlus_AppendToContext_Desc>Gelişmiş mod şablonlarınızda {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} veya {{eventplus_location}}'ı ayrı ayrı kullanmayı tercih ediyorsanız bunu devre dışı bırakın.</RimTalkEventPlus_AppendToContext_Desc>
+  <EventsMod_AdvancedModeHeader>Gelişmiş ayarlar</EventsMod_AdvancedModeHeader>
+  <EventsMod_AppendToContext>Olayları {{context}}'e otomatik olarak ekle</EventsMod_AppendToContext>
+  <EventsMod_AppendToContext_Tooltip>Etkinleştirildiğinde, devam eden olaylar RimTalk istemlerindeki {{context}} değişkenine otomatik olarak eklenir.</EventsMod_AppendToContext_Tooltip>
+  <EventsMod_AppendToContext_Desc>Gelişmiş mod şablonlarınızda {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} veya {{eventplus_location}}'ı ayrı ayrı kullanmayı tercih ediyorsanız bunu devre dışı bırakın.</EventsMod_AppendToContext_Desc>
   
-  <RimTalkEventPlus_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</RimTalkEventPlus_MandatoryLockToggle>
-  <RimTalkEventPlus_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</RimTalkEventPlus_MandatoryLockToggle_Tooltip>
-  <RimTalkEventPlus_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</RimTalkEventPlus_MandatoryLockToggle_Desc>
+  <EventsMod_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</EventsMod_MandatoryLockToggle>
+  <EventsMod_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</EventsMod_MandatoryLockToggle_Tooltip>
+  <EventsMod_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</EventsMod_MandatoryLockToggle_Desc>
 </LanguageData>

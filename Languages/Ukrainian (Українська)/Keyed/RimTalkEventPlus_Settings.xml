@@ -1,50 +1,50 @@
 <?xml version='1.0' encoding='utf-8'?>
 <LanguageData>
-  <RimTalkEventPlus_SettingsCategory>RimTalk Event+</RimTalkEventPlus_SettingsCategory>
-  <RimTalkEventPlus_OptimizationHeader>Налаштування оптимізації</RimTalkEventPlus_OptimizationHeader>
-  <RimTalkEventPlus_EnableCompression_Label>Увімкнути стиснення тексту подій (WIP - незабаром, перемикач наразі нічого не робить)</RimTalkEventPlus_EnableCompression_Label>
-  <RimTalkEventPlus_EnableCompression_Tooltip>Використовувати стиснений текст подій, щоб зменшити витрати токенів під час надсилання квестів і подій до RimTalk.</RimTalkEventPlus_EnableCompression_Tooltip>
-  <RimTalkEventPlus_Compression_Description>Якщо опцію увімкнено, Event+ стискає довгі, повторювані описи квестів, зберігаючи при цьому ключові факти.
+  <EventsMod_SettingsCategory>RimAI.Events</EventsMod_SettingsCategory>
+  <EventsMod_OptimizationHeader>Налаштування оптимізації</EventsMod_OptimizationHeader>
+  <EventsMod_EnableCompression_Label>Увімкнути стиснення тексту подій (WIP - незабаром, перемикач наразі нічого не робить)</EventsMod_EnableCompression_Label>
+  <EventsMod_EnableCompression_Tooltip>Використовувати стиснений текст подій, щоб зменшити витрати токенів під час надсилання завдань і подій до RimAI.Communication.</EventsMod_EnableCompression_Tooltip>
+  <EventsMod_Compression_Description>Якщо опцію увімкнено, RimAI.Events стискає довгі, повторювані описи квестів, зберігаючи при цьому ключові факти.
 
 Приклад (квест із біженцями):
 - До: Довгий лист з кількох абзаців, у якому пояснюється, хто такі біженці, чому вони втекли, як довго залишаться та що вони безкоштовно працюватимуть і воюватимуть...
 - Після: Короткий підсумок на кшталт: "Колонія прийняла біженців. Вони втекли через [reason], залишаться на X днів, щоб відпочити й оговтатися, і весь цей час безкоштовно працюватимуть та воюватимуть."
 
-Якщо опцію вимкнено, Event+ завжди надсилає повний оригінальний текст події.</RimTalkEventPlus_Compression_Description>
-  <RimTalkEventPlus_FilteringHeader>Фільтрація подій</RimTalkEventPlus_FilteringHeader>
-  <RimTalkEventPlus_CategoryFilters>Фільтри категорій</RimTalkEventPlus_CategoryFilters>
-  <RimTalkEventPlus_CategoryFilters_Desc>Увімкніть або вимкніть цілі категорії подій. Вимкнені категорії повністю приховані від ШІ й перекривають усі налаштування нижче.</RimTalkEventPlus_CategoryFilters_Desc>
-  <RimTalkEventPlus_TypeBasedFiltering>ФІЛЬТРАЦІЯ ЗА ТИПОМ</RimTalkEventPlus_TypeBasedFiltering>
-  <RimTalkEventPlus_TypeBasedFiltering_Desc>Приховати всі події обраних типів глобально, у всіх збережених іграх</RimTalkEventPlus_TypeBasedFiltering_Desc>
-  <RimTalkEventPlus_InstanceBasedFiltering>ФІЛЬТРАЦІЯ ЗА ЕКЗЕМПЛЯРАМИ</RimTalkEventPlus_InstanceBasedFiltering>
-  <RimTalkEventPlus_InstanceBasedFiltering_Desc>Приховати конкретні активні події в цьому збереженні. Доступно лише при завантаженому збереженні.</RimTalkEventPlus_InstanceBasedFiltering_Desc>
-  <RimTalkEventPlus_AvailableTypes>Доступні типи</RimTalkEventPlus_AvailableTypes>
-  <RimTalkEventPlus_DisabledTypes>Вимкнені типи</RimTalkEventPlus_DisabledTypes>
-  <RimTalkEventPlus_CurrentInstances>Поточні екземпляри</RimTalkEventPlus_CurrentInstances>
-  <RimTalkEventPlus_HiddenInstances>Приховані екземпляри</RimTalkEventPlus_HiddenInstances>
-  <RimTalkEventPlus_CurrentEventsOnly>Показувати лише поточні події</RimTalkEventPlus_CurrentEventsOnly>
-  <RimTalkEventPlus_AllEventTypes>Показувати всі типи подій</RimTalkEventPlus_AllEventTypes>
-  <RimTalkEventPlus_CurrentEventsNote>Показує лише події, які наразі активні у вашій грі. Доступно лише при завантаженому збереженні.</RimTalkEventPlus_CurrentEventsNote>
-  <RimTalkEventPlus_AllEventTypesNote>Показує всі можливі типи подій із завантажених модів. Може містити типи подій, які вже виключено з розмов RimTalk, навіть якщо вони активні у вашій грі (наприклад, фонові таймери, дипломатичні завдання).</RimTalkEventPlus_AllEventTypesNote>
-  <RimTalkEventPlus_GloballyDisabled>вимкнено глобально</RimTalkEventPlus_GloballyDisabled>
-  <RimTalkEventPlus_QuickFilter_Quests>Завдання</RimTalkEventPlus_QuickFilter_Quests>
-  <RimTalkEventPlus_QuickFilter_MapConditions>Умови карти</RimTalkEventPlus_QuickFilter_MapConditions>
-  <RimTalkEventPlus_QuickFilter_Threats>Загрози</RimTalkEventPlus_QuickFilter_Threats>
-  <RimTalkEventPlus_QuickFilter_Sites>Світові локації (табори бандитів, схованки предметів тощо)</RimTalkEventPlus_QuickFilter_Sites>
-  <RimTalkEventPlus_ResetTypeFilters>Скинути всі фільтри типів</RimTalkEventPlus_ResetTypeFilters>
-  <RimTalkEventPlus_ResetInstanceFilters>Скинути всі фільтри екземплярів</RimTalkEventPlus_ResetInstanceFilters>
-  <RimTalkEventPlus_TypeFiltersCleared>Очищено {0} фільтрів типів.</RimTalkEventPlus_TypeFiltersCleared>
-  <RimTalkEventPlus_InstanceFiltersCleared>Очищено {0} фільтрів екземплярів у всіх збереженнях.</RimTalkEventPlus_InstanceFiltersCleared>
-  <RimTalkEventPlus_EnhancedPromptDetected_Title>Виявлено RimTalk - Enhanced Prompt</RimTalkEventPlus_EnhancedPromptDetected_Title>
-  <RimTalkEventPlus_EnhancedPromptDetected_Desc>Функція «Auto Event Capture» з RimTalk - Enhanced Prompt увімкнена. Щоб забезпечити сумісність із власною системою відстеження подій RimTalk - Enhanced Prompt, перекривні функції вимкнено.</RimTalkEventPlus_EnhancedPromptDetected_Desc>
-  <RimTalkEventPlus_EnableContextFiltering>Фільтрувати події за контекстом розмови</RimTalkEventPlus_EnableContextFiltering>
-  <RimTalkEventPlus_EnableContextFilteringTooltip>Додавати лише події квестів, пов'язаних із персонажами в поточній розмові (найближчі персонажі, мовець, отримувач). Загрози, умови карти та події світових локацій завжди надсилаються ШІ. Економить токени та (можливо) покращує фокус LLM.</RimTalkEventPlus_EnableContextFilteringTooltip>
-  <RimTalkEventPlus_ContextFiltering_Description>Коли увімкнено, квести, які не стосуються жодного персонажа в поточній розмові (найближчі персонажі, мовець, отримувач), будуть пропущені. Це зменшує використання токенів та (можливо) допомагає LLM зосередитися на відповідних подіях. Однак, коли увімкнено, персонажі ніколи не говоритимуть про такі квести, якщо пов'язані персонажі не знаходяться поблизу.</RimTalkEventPlus_ContextFiltering_Description>
-  <RimTalkEventPlus_AdvancedModeHeader>Розширені налаштування</RimTalkEventPlus_AdvancedModeHeader>
-  <RimTalkEventPlus_AppendToContext>Автоматично додавати події до {{context}}</RimTalkEventPlus_AppendToContext>
-  <RimTalkEventPlus_AppendToContext_Tooltip>Коли увімкнено, поточні події автоматично додаються до змінної {{context}} у промптах RimTalk.</RimTalkEventPlus_AppendToContext_Tooltip>
-  <RimTalkEventPlus_AppendToContext_Desc>Вимкніть цю опцію, якщо надаєте перевагу використанню {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} або {{eventplus_location}} окремо у ваших шаблонах розширеного режиму.</RimTalkEventPlus_AppendToContext_Desc>
-  <RimTalkEventPlus_MandatoryLockToggle>Перевизначити блокування конфліктів (автоматичне захоплення подій Enhanced Prompt)</RimTalkEventPlus_MandatoryLockToggle>
-  <RimTalkEventPlus_MandatoryLockToggle_Tooltip>Коли в Enhanced Prompt активне автоматичне захоплення подій, Event+ блокує фільтри категорій, щоб системи відстеження не конфліктували. Увімкніть цей параметр, щоб зняти блокування й керувати фільтрами вручну.</RimTalkEventPlus_MandatoryLockToggle_Tooltip>
-  <RimTalkEventPlus_MandatoryLockToggle_Desc>Event+ обов’язково блокує категорії, якщо виявлено автоматичне захоплення подій Enhanced Prompt, оскільки обидві системи відстежують події й можуть конфліктувати. Увімкніть цей параметр лише тоді, коли свідомо хочете керувати фільтрами вручну попри можливий конфлікт.</RimTalkEventPlus_MandatoryLockToggle_Desc>
+Якщо опцію вимкнено, RimAI.Events завжди надсилає повний оригінальний текст події.</EventsMod_Compression_Description>
+  <EventsMod_FilteringHeader>Фільтрація подій</EventsMod_FilteringHeader>
+  <EventsMod_CategoryFilters>Фільтри категорій</EventsMod_CategoryFilters>
+  <EventsMod_CategoryFilters_Desc>Увімкніть або вимкніть цілі категорії подій. Вимкнені категорії повністю приховані від ШІ й перекривають усі налаштування нижче.</EventsMod_CategoryFilters_Desc>
+  <EventsMod_TypeBasedFiltering>ФІЛЬТРАЦІЯ ЗА ТИПОМ</EventsMod_TypeBasedFiltering>
+  <EventsMod_TypeBasedFiltering_Desc>Приховати всі події обраних типів глобально, у всіх збережених іграх</EventsMod_TypeBasedFiltering_Desc>
+  <EventsMod_InstanceBasedFiltering>ФІЛЬТРАЦІЯ ЗА ЕКЗЕМПЛЯРАМИ</EventsMod_InstanceBasedFiltering>
+  <EventsMod_InstanceBasedFiltering_Desc>Приховати конкретні активні події в цьому збереженні. Доступно лише при завантаженому збереженні.</EventsMod_InstanceBasedFiltering_Desc>
+  <EventsMod_AvailableTypes>Доступні типи</EventsMod_AvailableTypes>
+  <EventsMod_DisabledTypes>Вимкнені типи</EventsMod_DisabledTypes>
+  <EventsMod_CurrentInstances>Поточні екземпляри</EventsMod_CurrentInstances>
+  <EventsMod_HiddenInstances>Приховані екземпляри</EventsMod_HiddenInstances>
+  <EventsMod_CurrentEventsOnly>Показувати лише поточні події</EventsMod_CurrentEventsOnly>
+  <EventsMod_AllEventTypes>Показувати всі типи подій</EventsMod_AllEventTypes>
+  <EventsMod_CurrentEventsNote>Показує лише події, які наразі активні у вашій грі. Доступно лише при завантаженому збереженні.</EventsMod_CurrentEventsNote>
+  <EventsMod_AllEventTypesNote>Показує всі можливі типи подій із завантажених модів. Може містити типи подій, які вже виключено з розмов RimAI.Communication, навіть якщо вони активні у вашій грі (наприклад, фонові таймери, дипломатичні завдання).</EventsMod_AllEventTypesNote>
+  <EventsMod_GloballyDisabled>вимкнено глобально</EventsMod_GloballyDisabled>
+  <EventsMod_QuickFilter_Quests>Завдання</EventsMod_QuickFilter_Quests>
+  <EventsMod_QuickFilter_MapConditions>Умови карти</EventsMod_QuickFilter_MapConditions>
+  <EventsMod_QuickFilter_Threats>Загрози</EventsMod_QuickFilter_Threats>
+  <EventsMod_QuickFilter_Sites>Світові локації (табори бандитів, схованки предметів тощо)</EventsMod_QuickFilter_Sites>
+  <EventsMod_ResetTypeFilters>Скинути всі фільтри типів</EventsMod_ResetTypeFilters>
+  <EventsMod_ResetInstanceFilters>Скинути всі фільтри екземплярів</EventsMod_ResetInstanceFilters>
+  <EventsMod_TypeFiltersCleared>Очищено {0} фільтрів типів.</EventsMod_TypeFiltersCleared>
+  <EventsMod_InstanceFiltersCleared>Очищено {0} фільтрів екземплярів у всіх збереженнях.</EventsMod_InstanceFiltersCleared>
+  <EventsMod_EnhancedPromptDetected_Title>Виявлено RimTalk Enhanced Prompt</EventsMod_EnhancedPromptDetected_Title>
+  <EventsMod_EnhancedPromptDetected_Desc>Функція «Auto Event Capture» з RimTalk - Enhanced Prompt увімкнена. Щоб забезпечити сумісність із власною системою відстеження подій RimTalk - Enhanced Prompt, перекривні функції вимкнено.</EventsMod_EnhancedPromptDetected_Desc>
+  <EventsMod_EnableContextFiltering>Фільтрувати події за контекстом розмови</EventsMod_EnableContextFiltering>
+  <EventsMod_EnableContextFilteringTooltip>Додавати лише події квестів, пов'язаних із персонажами в поточній розмові (найближчі персонажі, мовець, отримувач). Загрози, умови карти та події світових локацій завжди надсилаються ШІ. Економить токени та (можливо) покращує фокус LLM.</EventsMod_EnableContextFilteringTooltip>
+  <EventsMod_ContextFiltering_Description>Коли увімкнено, квести, які не стосуються жодного персонажа в поточній розмові (найближчі персонажі, мовець, отримувач), будуть пропущені. Це зменшує використання токенів та (можливо) допомагає LLM зосередитися на відповідних подіях. Однак, коли увімкнено, персонажі ніколи не говоритимуть про такі квести, якщо пов'язані персонажі не знаходяться поблизу.</EventsMod_ContextFiltering_Description>
+  <EventsMod_AdvancedModeHeader>Розширені налаштування</EventsMod_AdvancedModeHeader>
+  <EventsMod_AppendToContext>Автоматично додавати події до {{context}}</EventsMod_AppendToContext>
+  <EventsMod_AppendToContext_Tooltip>Коли увімкнено, поточні події автоматично додаються до змінної {{context}} у промптах RimAI.Communication.</EventsMod_AppendToContext_Tooltip>
+  <EventsMod_AppendToContext_Desc>Вимкніть цю опцію, якщо надаєте перевагу використанню {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} або {{eventplus_location}} окремо у ваших шаблонах розширеного режиму.</EventsMod_AppendToContext_Desc>
+  <EventsMod_MandatoryLockToggle>Перевизначити блокування конфліктів (автоматичне захоплення подій Enhanced Prompt)</EventsMod_MandatoryLockToggle>
+  <EventsMod_MandatoryLockToggle_Tooltip>Коли в Enhanced Prompt активне автоматичне захоплення подій, RimAI.Events блокує фільтри категорій, щоб системи відстеження не конфліктували. Увімкніть цей параметр, щоб зняти блокування й керувати фільтрами вручну.</EventsMod_MandatoryLockToggle_Tooltip>
+  <EventsMod_MandatoryLockToggle_Desc>RimAI.Events обов’язково блокує категорії, якщо виявлено автоматичне захоплення подій Enhanced Prompt, оскільки обидві системи відстежують події й можуть конфліктувати. Увімкніть цей параметр лише тоді, коли свідомо хочете керувати фільтрами вручну попри можливий конфлікт.</EventsMod_MandatoryLockToggle_Desc>
 </LanguageData>

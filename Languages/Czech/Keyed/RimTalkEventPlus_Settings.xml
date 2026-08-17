@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-  <RimTalkEventPlus_SettingsCategory>RimTalk Event+</RimTalkEventPlus_SettingsCategory>
+  <EventsMod_SettingsCategory>RimTalk Event+</EventsMod_SettingsCategory>
 
-  <RimTalkEventPlus_OptimizationHeader>Nastavení optimalizace</RimTalkEventPlus_OptimizationHeader>
+  <EventsMod_OptimizationHeader>Nastavení optimalizace</EventsMod_OptimizationHeader>
 
-  <RimTalkEventPlus_EnableCompression_Label>Povolit kompresi textu událostí (WIP - připravuje se, přepínač zatím nefunguje)</RimTalkEventPlus_EnableCompression_Label>
+  <EventsMod_EnableCompression_Label>Povolit kompresi textu událostí (WIP - připravuje se, přepínač zatím nefunguje)</EventsMod_EnableCompression_Label>
 
-  <RimTalkEventPlus_EnableCompression_Tooltip>Používat komprimovaný text událostí ke snížení spotřeby tokenů při odesílání úkolů a událostí do RimTalk.</RimTalkEventPlus_EnableCompression_Tooltip>
+  <EventsMod_EnableCompression_Tooltip>Používat komprimovaný text událostí ke snížení spotřeby tokenů při odesílání úkolů a událostí do RimTalk.</EventsMod_EnableCompression_Tooltip>
 
-  <RimTalkEventPlus_Compression_Description>Když je tato volba zapnutá, Event+ komprimuje dlouhé, opakující se popisy úkolů a zachová přitom klíčové informace.
+  <EventsMod_Compression_Description>Když je tato volba zapnutá, Event+ komprimuje dlouhé, opakující se popisy úkolů a zachová přitom klíčové informace.
 
 Příklad (úkol s uprchlíky):
 - Předtím: Dlouhý dopis o několika odstavcích vysvětlující, kdo uprchlíci jsou, proč utekli, jak dlouho zůstanou a že budou zdarma pracovat a bojovat...
 - Potom: Krátké shrnutí jako: "Kolonie přijala uprchlíky. Utekli kvůli [reason], zůstanou X dní, aby si odpočinuli a znovu se zorganizovali, a po tu dobu budou zdarma pracovat a bojovat."
 
-Když je volba vypnutá, Event+ vždy odešle původní úplný text události.</RimTalkEventPlus_Compression_Description>
+Když je volba vypnutá, Event+ vždy odešle původní úplný text události.</EventsMod_Compression_Description>
 
   <!-- Event Filtering UI -->
-  <RimTalkEventPlus_FilteringHeader>Filtrování událostí</RimTalkEventPlus_FilteringHeader>
-  <RimTalkEventPlus_CategoryFilters>Filtrování kategorií</RimTalkEventPlus_CategoryFilters>
-  <RimTalkEventPlus_CategoryFilters_Desc>Povolit nebo zakázat celé kategorie událostí. Zakázané kategorie jsou pro AI zcela skryté a přepíší všechna nastavení níže.</RimTalkEventPlus_CategoryFilters_Desc>
-  <RimTalkEventPlus_TypeBasedFiltering>FILTROVÁNÍ PODLE TYPU</RimTalkEventPlus_TypeBasedFiltering>
-  <RimTalkEventPlus_TypeBasedFiltering_Desc>Skrýt všechny události vybraných typů globálně, napříč všemi uloženými hrami</RimTalkEventPlus_TypeBasedFiltering_Desc>
-  <RimTalkEventPlus_InstanceBasedFiltering>FILTROVÁNÍ PODLE INSTANCÍ</RimTalkEventPlus_InstanceBasedFiltering>
-  <RimTalkEventPlus_InstanceBasedFiltering_Desc>Skrýt konkrétní aktivní události v této uložené hře. Dostupné pouze při načtené hře.</RimTalkEventPlus_InstanceBasedFiltering_Desc>
+  <EventsMod_FilteringHeader>Filtrování událostí</EventsMod_FilteringHeader>
+  <EventsMod_CategoryFilters>Filtrování kategorií</EventsMod_CategoryFilters>
+  <EventsMod_CategoryFilters_Desc>Povolit nebo zakázat celé kategorie událostí. Zakázané kategorie jsou pro AI zcela skryté a přepíší všechna nastavení níže.</EventsMod_CategoryFilters_Desc>
+  <EventsMod_TypeBasedFiltering>FILTROVÁNÍ PODLE TYPU</EventsMod_TypeBasedFiltering>
+  <EventsMod_TypeBasedFiltering_Desc>Skrýt všechny události vybraných typů globálně, napříč všemi uloženými hrami</EventsMod_TypeBasedFiltering_Desc>
+  <EventsMod_InstanceBasedFiltering>FILTROVÁNÍ PODLE INSTANCÍ</EventsMod_InstanceBasedFiltering>
+  <EventsMod_InstanceBasedFiltering_Desc>Skrýt konkrétní aktivní události v této uložené hře. Dostupné pouze při načtené hře.</EventsMod_InstanceBasedFiltering_Desc>
 
-  <RimTalkEventPlus_AvailableTypes>Dostupné typy</RimTalkEventPlus_AvailableTypes>
-  <RimTalkEventPlus_DisabledTypes>Zakázané typy</RimTalkEventPlus_DisabledTypes>
-  <RimTalkEventPlus_CurrentInstances>Aktuální instance</RimTalkEventPlus_CurrentInstances>
-  <RimTalkEventPlus_HiddenInstances>Skryté instance</RimTalkEventPlus_HiddenInstances>
+  <EventsMod_AvailableTypes>Dostupné typy</EventsMod_AvailableTypes>
+  <EventsMod_DisabledTypes>Zakázané typy</EventsMod_DisabledTypes>
+  <EventsMod_CurrentInstances>Aktuální instance</EventsMod_CurrentInstances>
+  <EventsMod_HiddenInstances>Skryté instance</EventsMod_HiddenInstances>
 
-  <RimTalkEventPlus_CurrentEventsOnly>Zobrazit pouze aktuální události</RimTalkEventPlus_CurrentEventsOnly>
-  <RimTalkEventPlus_AllEventTypes>Zobrazit všechny typy událostí</RimTalkEventPlus_AllEventTypes>
+  <EventsMod_CurrentEventsOnly>Zobrazit pouze aktuální události</EventsMod_CurrentEventsOnly>
+  <EventsMod_AllEventTypes>Zobrazit všechny typy událostí</EventsMod_AllEventTypes>
 
-  <RimTalkEventPlus_CurrentEventsNote>Zobrazuje pouze události aktuálně aktivní ve hře. Dostupné pouze při načtené hře.</RimTalkEventPlus_CurrentEventsNote>
-  <RimTalkEventPlus_AllEventTypesNote>Zobrazuje všechny možné typy událostí z načtených modů. Může zahrnovat typy událostí, které jsou již vyloučeny z konverzací RimTalk, i když jsou ve hře aktivní (např. časovače na pozadí, diplomatické mise).</RimTalkEventPlus_AllEventTypesNote>
+  <EventsMod_CurrentEventsNote>Zobrazuje pouze události aktuálně aktivní ve hře. Dostupné pouze při načtené hře.</EventsMod_CurrentEventsNote>
+  <EventsMod_AllEventTypesNote>Zobrazuje všechny možné typy událostí z načtených modů. Může zahrnovat typy událostí, které jsou již vyloučeny z konverzací RimTalk, i když jsou ve hře aktivní (např. časovače na pozadí, diplomatické mise).</EventsMod_AllEventTypesNote>
 
-  <RimTalkEventPlus_GloballyDisabled>globálně zakázáno</RimTalkEventPlus_GloballyDisabled>
+  <EventsMod_GloballyDisabled>globálně zakázáno</EventsMod_GloballyDisabled>
 
-  <RimTalkEventPlus_QuickFilter_Quests>Úkoly</RimTalkEventPlus_QuickFilter_Quests>
-  <RimTalkEventPlus_QuickFilter_MapConditions>Podmínky mapy</RimTalkEventPlus_QuickFilter_MapConditions>
-  <RimTalkEventPlus_QuickFilter_Threats>Hrozby</RimTalkEventPlus_QuickFilter_Threats>
-  <RimTalkEventPlus_QuickFilter_Sites>Světové lokality (banditské tábory, úkryty předmětů atd.)</RimTalkEventPlus_QuickFilter_Sites>
+  <EventsMod_QuickFilter_Quests>Úkoly</EventsMod_QuickFilter_Quests>
+  <EventsMod_QuickFilter_MapConditions>Podmínky mapy</EventsMod_QuickFilter_MapConditions>
+  <EventsMod_QuickFilter_Threats>Hrozby</EventsMod_QuickFilter_Threats>
+  <EventsMod_QuickFilter_Sites>Světové lokality (banditské tábory, úkryty předmětů atd.)</EventsMod_QuickFilter_Sites>
 
-  <RimTalkEventPlus_ResetTypeFilters>Obnovit všechna filtrování typů</RimTalkEventPlus_ResetTypeFilters>
-  <RimTalkEventPlus_ResetInstanceFilters>Obnovit všechna filtrování instancí</RimTalkEventPlus_ResetInstanceFilters>
+  <EventsMod_ResetTypeFilters>Obnovit všechna filtrování typů</EventsMod_ResetTypeFilters>
+  <EventsMod_ResetInstanceFilters>Obnovit všechna filtrování instancí</EventsMod_ResetInstanceFilters>
 
-  <RimTalkEventPlus_TypeFiltersCleared>Vymazáno {0} filtrů typů.</RimTalkEventPlus_TypeFiltersCleared>
-  <RimTalkEventPlus_InstanceFiltersCleared>Vymazáno {0} filtrů instancí ve všech uložených hrách.</RimTalkEventPlus_InstanceFiltersCleared>
+  <EventsMod_TypeFiltersCleared>Vymazáno {0} filtrů typů.</EventsMod_TypeFiltersCleared>
+  <EventsMod_InstanceFiltersCleared>Vymazáno {0} filtrů instancí ve všech uložených hrách.</EventsMod_InstanceFiltersCleared>
 
-  <RimTalkEventPlus_EnhancedPromptDetected_Title>Zjištěn RimTalk - Enhanced Prompt</RimTalkEventPlus_EnhancedPromptDetected_Title>
-  <RimTalkEventPlus_EnhancedPromptDetected_Desc>Funkce „Auto Event Capture“ z RimTalk - Enhanced Prompt je zapnuta. Překrývající se funkce jsou vypnuty, aby byla zajištěna kompatibilita s vlastním systémem sledování událostí RimTalk - Enhanced Prompt.</RimTalkEventPlus_EnhancedPromptDetected_Desc>
+  <EventsMod_EnhancedPromptDetected_Title>Zjištěn RimTalk - Enhanced Prompt</EventsMod_EnhancedPromptDetected_Title>
+  <EventsMod_EnhancedPromptDetected_Desc>Funkce „Auto Event Capture“ z RimTalk - Enhanced Prompt je zapnuta. Překrývající se funkce jsou vypnuty, aby byla zajištěna kompatibilita s vlastním systémem sledování událostí RimTalk - Enhanced Prompt.</EventsMod_EnhancedPromptDetected_Desc>
 
-  <RimTalkEventPlus_EnableContextFiltering>Filtrovat události podle kontextu konverzace</RimTalkEventPlus_EnableContextFiltering>
-  <RimTalkEventPlus_EnableContextFilteringTooltip>Připojit pouze události úkolů, které zahrnují postavy v aktuální konverzaci (okolní postavy, mluvčí, příjemce). Hrozby, podmínky mapy a události světových lokalit jsou vždy odesílány do AI. Šetří tokeny a (možná) zlepšuje zaměření LLM.</RimTalkEventPlus_EnableContextFilteringTooltip>
-  <RimTalkEventPlus_ContextFiltering_Description>Pokud je tato možnost povolena, úkoly, které nezahrnují žádné postavy v aktuální konverzaci (okolní postavy, mluvčí, příjemce), budou přeskočeny. Tím se sníží spotřeba tokenů a (možná) pomůže LLM zaměřit se na relevantní události. Avšak pokud je tato možnost povolena, postavy nikdy nebudou mluvit o takových úkolech, pokud související postavy nejsou poblíž.</RimTalkEventPlus_ContextFiltering_Description>
+  <EventsMod_EnableContextFiltering>Filtrovat události podle kontextu konverzace</EventsMod_EnableContextFiltering>
+  <EventsMod_EnableContextFilteringTooltip>Připojit pouze události úkolů, které zahrnují postavy v aktuální konverzaci (okolní postavy, mluvčí, příjemce). Hrozby, podmínky mapy a události světových lokalit jsou vždy odesílány do AI. Šetří tokeny a (možná) zlepšuje zaměření LLM.</EventsMod_EnableContextFilteringTooltip>
+  <EventsMod_ContextFiltering_Description>Pokud je tato možnost povolena, úkoly, které nezahrnují žádné postavy v aktuální konverzaci (okolní postavy, mluvčí, příjemce), budou přeskočeny. Tím se sníží spotřeba tokenů a (možná) pomůže LLM zaměřit se na relevantní události. Avšak pokud je tato možnost povolena, postavy nikdy nebudou mluvit o takových úkolech, pokud související postavy nejsou poblíž.</EventsMod_ContextFiltering_Description>
 
-  <RimTalkEventPlus_AdvancedModeHeader>Pokročilá nastavení</RimTalkEventPlus_AdvancedModeHeader>
-  <RimTalkEventPlus_AppendToContext>Automaticky přidávat události do {{context}}</RimTalkEventPlus_AppendToContext>
-  <RimTalkEventPlus_AppendToContext_Tooltip>Pokud je povoleno, probíhající události se automaticky přidávají do proměnné {{context}} v RimTalk výzvách.</RimTalkEventPlus_AppendToContext_Tooltip>
-  <RimTalkEventPlus_AppendToContext_Desc>Zakažte tuto možnost, pokud dáváte přednost použití {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} nebo {{eventplus_location}} jednotlivě ve svých šablonách pokročilého režimu.</RimTalkEventPlus_AppendToContext_Desc>
+  <EventsMod_AdvancedModeHeader>Pokročilá nastavení</EventsMod_AdvancedModeHeader>
+  <EventsMod_AppendToContext>Automaticky přidávat události do {{context}}</EventsMod_AppendToContext>
+  <EventsMod_AppendToContext_Tooltip>Pokud je povoleno, probíhající události se automaticky přidávají do proměnné {{context}} v RimTalk výzvách.</EventsMod_AppendToContext_Tooltip>
+  <EventsMod_AppendToContext_Desc>Zakažte tuto možnost, pokud dáváte přednost použití {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} nebo {{eventplus_location}} jednotlivě ve svých šablonách pokročilého režimu.</EventsMod_AppendToContext_Desc>
   
-  <RimTalkEventPlus_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</RimTalkEventPlus_MandatoryLockToggle>
-  <RimTalkEventPlus_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</RimTalkEventPlus_MandatoryLockToggle_Tooltip>
-  <RimTalkEventPlus_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</RimTalkEventPlus_MandatoryLockToggle_Desc>
+  <EventsMod_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</EventsMod_MandatoryLockToggle>
+  <EventsMod_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</EventsMod_MandatoryLockToggle_Tooltip>
+  <EventsMod_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</EventsMod_MandatoryLockToggle_Desc>
 </LanguageData>

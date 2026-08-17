@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-  <RimTalkEventPlus_SettingsCategory>RimTalk Event+</RimTalkEventPlus_SettingsCategory>
+  <EventsMod_SettingsCategory>RimTalk Event+</EventsMod_SettingsCategory>
 
-  <RimTalkEventPlus_OptimizationHeader>Optimaliseringsinnstillinger</RimTalkEventPlus_OptimizationHeader>
+  <EventsMod_OptimizationHeader>Optimaliseringsinnstillinger</EventsMod_OptimizationHeader>
 
-  <RimTalkEventPlus_EnableCompression_Label>Aktiver komprimering av hendelsetekst (WIP - kommer snart, bryteren gjør ingenting for øyeblikket)</RimTalkEventPlus_EnableCompression_Label>
+  <EventsMod_EnableCompression_Label>Aktiver komprimering av hendelsetekst (WIP - kommer snart, bryteren gjør ingenting for øyeblikket)</EventsMod_EnableCompression_Label>
 
-  <RimTalkEventPlus_EnableCompression_Tooltip>Bruk komprimert hendelsetekst for å redusere token-bruk når oppdrag og hendelser sendes til RimTalk.</RimTalkEventPlus_EnableCompression_Tooltip>
+  <EventsMod_EnableCompression_Tooltip>Bruk komprimert hendelsetekst for å redusere token-bruk når oppdrag og hendelser sendes til RimTalk.</EventsMod_EnableCompression_Tooltip>
 
-  <RimTalkEventPlus_Compression_Description>Når dette er aktivert, komprimerer Event+ lange, gjentakende oppdragsbeskrivelser, samtidig som de viktigste faktaene beholdes.
+  <EventsMod_Compression_Description>Når dette er aktivert, komprimerer Event+ lange, gjentakende oppdragsbeskrivelser, samtidig som de viktigste faktaene beholdes.
 
 Eksempel (oppdrag med flyktninger):
 - Før: Et langt brev med flere avsnitt som forklarer hvem flyktningene er, hvorfor de flyktet, hvor lenge de blir, og at de skal arbeide og kjempe gratis...
 - Etter: Et kort sammendrag som: "Kolonien har tatt imot flyktningene. De flyktet på grunn av [reason], blir i X dager for å hvile og omorganisere seg, og vil arbeide og kjempe gratis i denne perioden."
 
-Når det er deaktivert, sender Event+ alltid den opprinnelige, fullstendige hendelsesteksten.</RimTalkEventPlus_Compression_Description>
+Når det er deaktivert, sender Event+ alltid den opprinnelige, fullstendige hendelsesteksten.</EventsMod_Compression_Description>
 
   <!-- Event Filtering UI -->
-  <RimTalkEventPlus_FilteringHeader>Hendelsesfiltrering</RimTalkEventPlus_FilteringHeader>
-  <RimTalkEventPlus_CategoryFilters>Kategorifiltre</RimTalkEventPlus_CategoryFilters>
-  <RimTalkEventPlus_CategoryFilters_Desc>Aktiver eller deaktiver hele hendelseskategorier. Deaktiverte kategorier skjules helt for KI-en og overstyrer alle innstillinger under.</RimTalkEventPlus_CategoryFilters_Desc>
-  <RimTalkEventPlus_TypeBasedFiltering>TYPEBASERT FILTRERING</RimTalkEventPlus_TypeBasedFiltering>
-  <RimTalkEventPlus_TypeBasedFiltering_Desc>Skjul alle hendelser av valgte typer globalt, på tvers av alle lagringer</RimTalkEventPlus_TypeBasedFiltering_Desc>
-  <RimTalkEventPlus_InstanceBasedFiltering>INSTANSBASERT FILTRERING</RimTalkEventPlus_InstanceBasedFiltering>
-  <RimTalkEventPlus_InstanceBasedFiltering_Desc>Skjul spesifikke aktive hendelser i denne lagringen. Kun tilgjengelig når en lagring er lastet.</RimTalkEventPlus_InstanceBasedFiltering_Desc>
+  <EventsMod_FilteringHeader>Hendelsesfiltrering</EventsMod_FilteringHeader>
+  <EventsMod_CategoryFilters>Kategorifiltre</EventsMod_CategoryFilters>
+  <EventsMod_CategoryFilters_Desc>Aktiver eller deaktiver hele hendelseskategorier. Deaktiverte kategorier skjules helt for KI-en og overstyrer alle innstillinger under.</EventsMod_CategoryFilters_Desc>
+  <EventsMod_TypeBasedFiltering>TYPEBASERT FILTRERING</EventsMod_TypeBasedFiltering>
+  <EventsMod_TypeBasedFiltering_Desc>Skjul alle hendelser av valgte typer globalt, på tvers av alle lagringer</EventsMod_TypeBasedFiltering_Desc>
+  <EventsMod_InstanceBasedFiltering>INSTANSBASERT FILTRERING</EventsMod_InstanceBasedFiltering>
+  <EventsMod_InstanceBasedFiltering_Desc>Skjul spesifikke aktive hendelser i denne lagringen. Kun tilgjengelig når en lagring er lastet.</EventsMod_InstanceBasedFiltering_Desc>
 
-  <RimTalkEventPlus_AvailableTypes>Tilgjengelige typer</RimTalkEventPlus_AvailableTypes>
-  <RimTalkEventPlus_DisabledTypes>Deaktiverte typer</RimTalkEventPlus_DisabledTypes>
-  <RimTalkEventPlus_CurrentInstances>Nåværende instanser</RimTalkEventPlus_CurrentInstances>
-  <RimTalkEventPlus_HiddenInstances>Skjulte instanser</RimTalkEventPlus_HiddenInstances>
+  <EventsMod_AvailableTypes>Tilgjengelige typer</EventsMod_AvailableTypes>
+  <EventsMod_DisabledTypes>Deaktiverte typer</EventsMod_DisabledTypes>
+  <EventsMod_CurrentInstances>Nåværende instanser</EventsMod_CurrentInstances>
+  <EventsMod_HiddenInstances>Skjulte instanser</EventsMod_HiddenInstances>
 
-  <RimTalkEventPlus_CurrentEventsOnly>Vis kun nåværende hendelser</RimTalkEventPlus_CurrentEventsOnly>
-  <RimTalkEventPlus_AllEventTypes>Vis alle hendelsestyper</RimTalkEventPlus_AllEventTypes>
+  <EventsMod_CurrentEventsOnly>Vis kun nåværende hendelser</EventsMod_CurrentEventsOnly>
+  <EventsMod_AllEventTypes>Vis alle hendelsestyper</EventsMod_AllEventTypes>
 
-  <RimTalkEventPlus_CurrentEventsNote>Viser bare hendelser som er aktive i spillet ditt. Kun tilgjengelig når en lagring er lastet.</RimTalkEventPlus_CurrentEventsNote>
-  <RimTalkEventPlus_AllEventTypesNote>Viser alle mulige hendelsestyper fra innlastede modifikasjoner. Kan inkludere hendelsestyper som allerede er ekskludert fra RimTalk-samtaler, selv om de er aktive i spillet ditt (f.eks. bakgrunnstimere, diplomatioppdrag).</RimTalkEventPlus_AllEventTypesNote>
+  <EventsMod_CurrentEventsNote>Viser bare hendelser som er aktive i spillet ditt. Kun tilgjengelig når en lagring er lastet.</EventsMod_CurrentEventsNote>
+  <EventsMod_AllEventTypesNote>Viser alle mulige hendelsestyper fra innlastede modifikasjoner. Kan inkludere hendelsestyper som allerede er ekskludert fra RimTalk-samtaler, selv om de er aktive i spillet ditt (f.eks. bakgrunnstimere, diplomatioppdrag).</EventsMod_AllEventTypesNote>
 
-  <RimTalkEventPlus_GloballyDisabled>globalt deaktivert</RimTalkEventPlus_GloballyDisabled>
+  <EventsMod_GloballyDisabled>globalt deaktivert</EventsMod_GloballyDisabled>
 
-  <RimTalkEventPlus_QuickFilter_Quests>Oppdrag</RimTalkEventPlus_QuickFilter_Quests>
-  <RimTalkEventPlus_QuickFilter_MapConditions>Kartforhold</RimTalkEventPlus_QuickFilter_MapConditions>
-  <RimTalkEventPlus_QuickFilter_Threats>Trusler</RimTalkEventPlus_QuickFilter_Threats>
-  <RimTalkEventPlus_QuickFilter_Sites>Verdenssteder (bandittkamper, gjemte gjenstander osv.)</RimTalkEventPlus_QuickFilter_Sites>
+  <EventsMod_QuickFilter_Quests>Oppdrag</EventsMod_QuickFilter_Quests>
+  <EventsMod_QuickFilter_MapConditions>Kartforhold</EventsMod_QuickFilter_MapConditions>
+  <EventsMod_QuickFilter_Threats>Trusler</EventsMod_QuickFilter_Threats>
+  <EventsMod_QuickFilter_Sites>Verdenssteder (bandittkamper, gjemte gjenstander osv.)</EventsMod_QuickFilter_Sites>
 
-  <RimTalkEventPlus_ResetTypeFilters>Tilbakestill alle typefiltre</RimTalkEventPlus_ResetTypeFilters>
-  <RimTalkEventPlus_ResetInstanceFilters>Tilbakestill alle instansfiltre</RimTalkEventPlus_ResetInstanceFilters>
+  <EventsMod_ResetTypeFilters>Tilbakestill alle typefiltre</EventsMod_ResetTypeFilters>
+  <EventsMod_ResetInstanceFilters>Tilbakestill alle instansfiltre</EventsMod_ResetInstanceFilters>
 
-  <RimTalkEventPlus_TypeFiltersCleared>Tømt {0} typefiltre.</RimTalkEventPlus_TypeFiltersCleared>
-  <RimTalkEventPlus_InstanceFiltersCleared>Tømt {0} instansfiltre på tvers av alle lagringer.</RimTalkEventPlus_InstanceFiltersCleared>
+  <EventsMod_TypeFiltersCleared>Tømt {0} typefiltre.</EventsMod_TypeFiltersCleared>
+  <EventsMod_InstanceFiltersCleared>Tømt {0} instansfiltre på tvers av alle lagringer.</EventsMod_InstanceFiltersCleared>
 
-  <RimTalkEventPlus_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt oppdaget</RimTalkEventPlus_EnhancedPromptDetected_Title>
-  <RimTalkEventPlus_EnhancedPromptDetected_Desc>"Auto Event Capture" fra RimTalk - Enhanced Prompt er aktivert. Overlappende funksjoner deaktiveres for å sikre kompatibilitet med RimTalk - Enhanced Prompt sitt eget hendelsessporingssystem.</RimTalkEventPlus_EnhancedPromptDetected_Desc>
+  <EventsMod_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt oppdaget</EventsMod_EnhancedPromptDetected_Title>
+  <EventsMod_EnhancedPromptDetected_Desc>"Auto Event Capture" fra RimTalk - Enhanced Prompt er aktivert. Overlappende funksjoner deaktiveres for å sikre kompatibilitet med RimTalk - Enhanced Prompt sitt eget hendelsessporingssystem.</EventsMod_EnhancedPromptDetected_Desc>
 
-  <RimTalkEventPlus_EnableContextFiltering>Filtrer hendelser etter samtalekontekst</RimTalkEventPlus_EnableContextFiltering>
-  <RimTalkEventPlus_EnableContextFilteringTooltip>Legg bare til oppdragshendelser som involverer personer i den gjeldende samtalen (nærliggende personer, taleren, mottakeren). Trusler, kartforhold og verdens-sted-hendelser sendes alltid til AI-en. Sparer tokens og forbedrer (muligens) LLM-fokus.</RimTalkEventPlus_EnableContextFilteringTooltip>
-  <RimTalkEventPlus_ContextFiltering_Description>Når aktivert, hoppes oppdrag over som ikke involverer personer i den gjeldende samtalen (nærliggende personer, taleren, mottakeren). Dette reduserer token-bruken og hjelper (muligens) LLM-en med å fokusere på relevante hendelser. Men når aktivert, vil personer aldri snakke om slike oppdrag hvis de relaterte personene ikke er i nærheten.</RimTalkEventPlus_ContextFiltering_Description>
+  <EventsMod_EnableContextFiltering>Filtrer hendelser etter samtalekontekst</EventsMod_EnableContextFiltering>
+  <EventsMod_EnableContextFilteringTooltip>Legg bare til oppdragshendelser som involverer personer i den gjeldende samtalen (nærliggende personer, taleren, mottakeren). Trusler, kartforhold og verdens-sted-hendelser sendes alltid til AI-en. Sparer tokens og forbedrer (muligens) LLM-fokus.</EventsMod_EnableContextFilteringTooltip>
+  <EventsMod_ContextFiltering_Description>Når aktivert, hoppes oppdrag over som ikke involverer personer i den gjeldende samtalen (nærliggende personer, taleren, mottakeren). Dette reduserer token-bruken og hjelper (muligens) LLM-en med å fokusere på relevante hendelser. Men når aktivert, vil personer aldri snakke om slike oppdrag hvis de relaterte personene ikke er i nærheten.</EventsMod_ContextFiltering_Description>
 
-  <RimTalkEventPlus_AdvancedModeHeader>Avanserte innstillinger</RimTalkEventPlus_AdvancedModeHeader>
-  <RimTalkEventPlus_AppendToContext>Legg til hendelser i {{context}} automatisk</RimTalkEventPlus_AppendToContext>
-  <RimTalkEventPlus_AppendToContext_Tooltip>Når aktivert, legges pågående hendelser automatisk til i {{context}}-variabelen i RimTalk-prompts.</RimTalkEventPlus_AppendToContext_Tooltip>
-  <RimTalkEventPlus_AppendToContext_Desc>Deaktiver dette hvis du foretrekker å bruke {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} eller {{eventplus_location}} individuelt i dine avansert modus-maler.</RimTalkEventPlus_AppendToContext_Desc>
+  <EventsMod_AdvancedModeHeader>Avanserte innstillinger</EventsMod_AdvancedModeHeader>
+  <EventsMod_AppendToContext>Legg til hendelser i {{context}} automatisk</EventsMod_AppendToContext>
+  <EventsMod_AppendToContext_Tooltip>Når aktivert, legges pågående hendelser automatisk til i {{context}}-variabelen i RimTalk-prompts.</EventsMod_AppendToContext_Tooltip>
+  <EventsMod_AppendToContext_Desc>Deaktiver dette hvis du foretrekker å bruke {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} eller {{eventplus_location}} individuelt i dine avansert modus-maler.</EventsMod_AppendToContext_Desc>
   
-  <RimTalkEventPlus_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</RimTalkEventPlus_MandatoryLockToggle>
-  <RimTalkEventPlus_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</RimTalkEventPlus_MandatoryLockToggle_Tooltip>
-  <RimTalkEventPlus_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</RimTalkEventPlus_MandatoryLockToggle_Desc>
+  <EventsMod_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</EventsMod_MandatoryLockToggle>
+  <EventsMod_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</EventsMod_MandatoryLockToggle_Tooltip>
+  <EventsMod_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</EventsMod_MandatoryLockToggle_Desc>
 </LanguageData>

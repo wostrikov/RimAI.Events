@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-  <RimTalkEventPlus_SettingsCategory>RimTalk Event+</RimTalkEventPlus_SettingsCategory>
+  <EventsMod_SettingsCategory>RimTalk Event+</EventsMod_SettingsCategory>
 
-  <RimTalkEventPlus_OptimizationHeader>最適化設定</RimTalkEventPlus_OptimizationHeader>
+  <EventsMod_OptimizationHeader>最適化設定</EventsMod_OptimizationHeader>
 
-  <RimTalkEventPlus_EnableCompression_Label>イベントテキストの圧縮を有効にする（WIP - 近日公開、トグルは現在何もしません）</RimTalkEventPlus_EnableCompression_Label>
+  <EventsMod_EnableCompression_Label>イベントテキストの圧縮を有効にする（WIP - 近日公開、トグルは現在何もしません）</EventsMod_EnableCompression_Label>
 
-  <RimTalkEventPlus_EnableCompression_Tooltip>クエストやイベントを RimTalk に送信するとき、圧縮されたイベントテキストを使ってトークン消費を抑えます。</RimTalkEventPlus_EnableCompression_Tooltip>
+  <EventsMod_EnableCompression_Tooltip>クエストやイベントを RimTalk に送信するとき、圧縮されたイベントテキストを使ってトークン消費を抑えます。</EventsMod_EnableCompression_Tooltip>
 
-  <RimTalkEventPlus_Compression_Description>このオプションを有効にすると、Event+ は長くて繰り返しの多いクエスト説明を圧縮し、重要な情報だけを残します。
+  <EventsMod_Compression_Description>このオプションを有効にすると、Event+ は長くて繰り返しの多いクエスト説明を圧縮し、重要な情報だけを残します。
 
 例（難民のホスピタリティ系クエスト）:
 - 圧縮前: 難民が誰なのか、なぜ逃げてきたのか、どのくらい滞在するのか、そして無料で働き戦うことなどを、複数の段落にわたって説明する長い手紙...
 - 圧縮後: 「コロニーは難民を受け入れた。[reason] のために逃れてきており、休息と立て直しのために X 日間滞在し、その間は無料で働き戦う。」といった短い要約になります。
 
-無効の場合、Event+ は常に元のイベントテキスト全文を送信します。</RimTalkEventPlus_Compression_Description>
+無効の場合、Event+ は常に元のイベントテキスト全文を送信します。</EventsMod_Compression_Description>
 
   <!-- Event Filtering UI -->
-  <RimTalkEventPlus_FilteringHeader>イベントフィルター</RimTalkEventPlus_FilteringHeader>
-  <RimTalkEventPlus_CategoryFilters>カテゴリーフィルター</RimTalkEventPlus_CategoryFilters>
-  <RimTalkEventPlus_CategoryFilters_Desc>イベントカテゴリ全体を有効または無効にします。無効にしたカテゴリはAIから完全に隠され、以下の設定をすべて上書きします。</RimTalkEventPlus_CategoryFilters_Desc>
-  <RimTalkEventPlus_TypeBasedFiltering>タイプ別フィルター</RimTalkEventPlus_TypeBasedFiltering>
-  <RimTalkEventPlus_TypeBasedFiltering_Desc>選択したタイプのすべてのイベントをグローバルに、すべてのセーブファイルで非表示にする</RimTalkEventPlus_TypeBasedFiltering_Desc>
-  <RimTalkEventPlus_InstanceBasedFiltering>インスタンス別フィルター</RimTalkEventPlus_InstanceBasedFiltering>
-  <RimTalkEventPlus_InstanceBasedFiltering_Desc>このセーブファイル内の特定のアクティブなイベントを非表示にします。セーブファイルがロードされている場合のみ利用可能です。</RimTalkEventPlus_InstanceBasedFiltering_Desc>
+  <EventsMod_FilteringHeader>イベントフィルター</EventsMod_FilteringHeader>
+  <EventsMod_CategoryFilters>カテゴリーフィルター</EventsMod_CategoryFilters>
+  <EventsMod_CategoryFilters_Desc>イベントカテゴリ全体を有効または無効にします。無効にしたカテゴリはAIから完全に隠され、以下の設定をすべて上書きします。</EventsMod_CategoryFilters_Desc>
+  <EventsMod_TypeBasedFiltering>タイプ別フィルター</EventsMod_TypeBasedFiltering>
+  <EventsMod_TypeBasedFiltering_Desc>選択したタイプのすべてのイベントをグローバルに、すべてのセーブファイルで非表示にする</EventsMod_TypeBasedFiltering_Desc>
+  <EventsMod_InstanceBasedFiltering>インスタンス別フィルター</EventsMod_InstanceBasedFiltering>
+  <EventsMod_InstanceBasedFiltering_Desc>このセーブファイル内の特定のアクティブなイベントを非表示にします。セーブファイルがロードされている場合のみ利用可能です。</EventsMod_InstanceBasedFiltering_Desc>
 
-  <RimTalkEventPlus_AvailableTypes>利用可能なタイプ</RimTalkEventPlus_AvailableTypes>
-  <RimTalkEventPlus_DisabledTypes>無効なタイプ</RimTalkEventPlus_DisabledTypes>
-  <RimTalkEventPlus_CurrentInstances>現在のインスタンス</RimTalkEventPlus_CurrentInstances>
-  <RimTalkEventPlus_HiddenInstances>非表示のインスタンス</RimTalkEventPlus_HiddenInstances>
+  <EventsMod_AvailableTypes>利用可能なタイプ</EventsMod_AvailableTypes>
+  <EventsMod_DisabledTypes>無効なタイプ</EventsMod_DisabledTypes>
+  <EventsMod_CurrentInstances>現在のインスタンス</EventsMod_CurrentInstances>
+  <EventsMod_HiddenInstances>非表示のインスタンス</EventsMod_HiddenInstances>
 
-  <RimTalkEventPlus_CurrentEventsOnly>現在のイベントのみ表示</RimTalkEventPlus_CurrentEventsOnly>
-  <RimTalkEventPlus_AllEventTypes>すべてのイベントタイプを表示</RimTalkEventPlus_AllEventTypes>
+  <EventsMod_CurrentEventsOnly>現在のイベントのみ表示</EventsMod_CurrentEventsOnly>
+  <EventsMod_AllEventTypes>すべてのイベントタイプを表示</EventsMod_AllEventTypes>
 
-  <RimTalkEventPlus_CurrentEventsNote>ゲーム内で現在アクティブなイベントのみを表示します。セーブファイルがロードされている場合のみ利用可能です。</RimTalkEventPlus_CurrentEventsNote>
-  <RimTalkEventPlus_AllEventTypesNote>ロードされたMODからの可能なすべてのイベントタイプを表示します。ゲームでアクティブであっても、RimTalk会話から既に除外されているイベントタイプが含まれる場合があります（例：バックグラウンドタイマー、外交クエスト）。</RimTalkEventPlus_AllEventTypesNote>
+  <EventsMod_CurrentEventsNote>ゲーム内で現在アクティブなイベントのみを表示します。セーブファイルがロードされている場合のみ利用可能です。</EventsMod_CurrentEventsNote>
+  <EventsMod_AllEventTypesNote>ロードされたMODからの可能なすべてのイベントタイプを表示します。ゲームでアクティブであっても、RimTalk会話から既に除外されているイベントタイプが含まれる場合があります（例：バックグラウンドタイマー、外交クエスト）。</EventsMod_AllEventTypesNote>
 
-  <RimTalkEventPlus_GloballyDisabled>全体で無効</RimTalkEventPlus_GloballyDisabled>
+  <EventsMod_GloballyDisabled>全体で無効</EventsMod_GloballyDisabled>
 
-  <RimTalkEventPlus_QuickFilter_Quests>クエスト</RimTalkEventPlus_QuickFilter_Quests>
-  <RimTalkEventPlus_QuickFilter_MapConditions>マップコンディション</RimTalkEventPlus_QuickFilter_MapConditions>
-  <RimTalkEventPlus_QuickFilter_Threats>脅威</RimTalkEventPlus_QuickFilter_Threats>
-  <RimTalkEventPlus_QuickFilter_Sites>世界サイト（盗賊キャンプ、アイテム隠し場所など）</RimTalkEventPlus_QuickFilter_Sites>
+  <EventsMod_QuickFilter_Quests>クエスト</EventsMod_QuickFilter_Quests>
+  <EventsMod_QuickFilter_MapConditions>マップコンディション</EventsMod_QuickFilter_MapConditions>
+  <EventsMod_QuickFilter_Threats>脅威</EventsMod_QuickFilter_Threats>
+  <EventsMod_QuickFilter_Sites>世界サイト（盗賊キャンプ、アイテム隠し場所など）</EventsMod_QuickFilter_Sites>
 
-  <RimTalkEventPlus_ResetTypeFilters>すべてのタイプフィルターをリセット</RimTalkEventPlus_ResetTypeFilters>
-  <RimTalkEventPlus_ResetInstanceFilters>すべてのインスタンスフィルターをリセット</RimTalkEventPlus_ResetInstanceFilters>
+  <EventsMod_ResetTypeFilters>すべてのタイプフィルターをリセット</EventsMod_ResetTypeFilters>
+  <EventsMod_ResetInstanceFilters>すべてのインスタンスフィルターをリセット</EventsMod_ResetInstanceFilters>
 
-  <RimTalkEventPlus_TypeFiltersCleared>{0}個のタイプフィルターをクリアしました。</RimTalkEventPlus_TypeFiltersCleared>
-  <RimTalkEventPlus_InstanceFiltersCleared>すべてのセーブで{0}個のインスタンスフィルターをクリアしました。</RimTalkEventPlus_InstanceFiltersCleared>
+  <EventsMod_TypeFiltersCleared>{0}個のタイプフィルターをクリアしました。</EventsMod_TypeFiltersCleared>
+  <EventsMod_InstanceFiltersCleared>すべてのセーブで{0}個のインスタンスフィルターをクリアしました。</EventsMod_InstanceFiltersCleared>
 
-  <RimTalkEventPlus_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt を検出しました</RimTalkEventPlus_EnhancedPromptDetected_Title>
-  <RimTalkEventPlus_EnhancedPromptDetected_Desc>RimTalk - Enhanced Prompt の「Auto Event Capture」が有効になっています。RimTalk - Enhanced Prompt 独自のイベント追跡システムとの互換性を確保するため、重複する機能を無効化しました。</RimTalkEventPlus_EnhancedPromptDetected_Desc>
+  <EventsMod_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt を検出しました</EventsMod_EnhancedPromptDetected_Title>
+  <EventsMod_EnhancedPromptDetected_Desc>RimTalk - Enhanced Prompt の「Auto Event Capture」が有効になっています。RimTalk - Enhanced Prompt 独自のイベント追跡システムとの互換性を確保するため、重複する機能を無効化しました。</EventsMod_EnhancedPromptDetected_Desc>
 
-  <RimTalkEventPlus_EnableContextFiltering>会話のコンテキストでイベントをフィルター</RimTalkEventPlus_EnableContextFiltering>
-  <RimTalkEventPlus_EnableContextFilteringTooltip>現在の会話に関わるポーン（近くのポーン、話し手、受け手）を含むクエストイベントのみを追加します。脅威、マップコンディション、ワールドサイトイベントは常にAIに送信されます。トークンを節約し、（おそらく）LLMの集中力を向上させます。</RimTalkEventPlus_EnableContextFilteringTooltip>
-  <RimTalkEventPlus_ContextFiltering_Description>有効にすると、現在の会話のどのポーン（近くのポーン、話し手、受け手）も関わらないクエストはスキップされます。これによりトークン使用量が減り、（おそらく）LLMが関連するイベントに集中しやすくなります。ただし、有効にすると、関連するポーンが近くにいない場合、ポーンはそのようなクエストについて話すことはありません。</RimTalkEventPlus_ContextFiltering_Description>
+  <EventsMod_EnableContextFiltering>会話のコンテキストでイベントをフィルター</EventsMod_EnableContextFiltering>
+  <EventsMod_EnableContextFilteringTooltip>現在の会話に関わるポーン（近くのポーン、話し手、受け手）を含むクエストイベントのみを追加します。脅威、マップコンディション、ワールドサイトイベントは常にAIに送信されます。トークンを節約し、（おそらく）LLMの集中力を向上させます。</EventsMod_EnableContextFilteringTooltip>
+  <EventsMod_ContextFiltering_Description>有効にすると、現在の会話のどのポーン（近くのポーン、話し手、受け手）も関わらないクエストはスキップされます。これによりトークン使用量が減り、（おそらく）LLMが関連するイベントに集中しやすくなります。ただし、有効にすると、関連するポーンが近くにいない場合、ポーンはそのようなクエストについて話すことはありません。</EventsMod_ContextFiltering_Description>
 
-  <RimTalkEventPlus_AdvancedModeHeader>高度設定</RimTalkEventPlus_AdvancedModeHeader>
-  <RimTalkEventPlus_AppendToContext>イベントを {{context}} に自動的に追加</RimTalkEventPlus_AppendToContext>
-  <RimTalkEventPlus_AppendToContext_Tooltip>有効にすると、進行中のイベントは RimTalk プロンプトの {{context}} 変数に自動的に追加されます。</RimTalkEventPlus_AppendToContext_Tooltip>
-  <RimTalkEventPlus_AppendToContext_Desc>高度モードテンプレートで {{eventplus_all}}、{{eventplus_quests}}、{{eventplus_conditions}}、{{eventplus_threats}}、{{eventplus_location}} を個別に使用したい場合は、この設定を無効にしてください。</RimTalkEventPlus_AppendToContext_Desc>
+  <EventsMod_AdvancedModeHeader>高度設定</EventsMod_AdvancedModeHeader>
+  <EventsMod_AppendToContext>イベントを {{context}} に自動的に追加</EventsMod_AppendToContext>
+  <EventsMod_AppendToContext_Tooltip>有効にすると、進行中のイベントは RimTalk プロンプトの {{context}} 変数に自動的に追加されます。</EventsMod_AppendToContext_Tooltip>
+  <EventsMod_AppendToContext_Desc>高度モードテンプレートで {{eventplus_all}}、{{eventplus_quests}}、{{eventplus_conditions}}、{{eventplus_threats}}、{{eventplus_location}} を個別に使用したい場合は、この設定を無効にしてください。</EventsMod_AppendToContext_Desc>
   
-  <RimTalkEventPlus_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</RimTalkEventPlus_MandatoryLockToggle>
-  <RimTalkEventPlus_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</RimTalkEventPlus_MandatoryLockToggle_Tooltip>
-  <RimTalkEventPlus_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</RimTalkEventPlus_MandatoryLockToggle_Desc>
+  <EventsMod_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</EventsMod_MandatoryLockToggle>
+  <EventsMod_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</EventsMod_MandatoryLockToggle_Tooltip>
+  <EventsMod_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</EventsMod_MandatoryLockToggle_Desc>
 </LanguageData>

@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-  <RimTalkEventPlus_SettingsCategory>RimTalk Event+</RimTalkEventPlus_SettingsCategory>
+  <EventsMod_SettingsCategory>RimTalk Event+</EventsMod_SettingsCategory>
 
-  <RimTalkEventPlus_OptimizationHeader>最佳化設定</RimTalkEventPlus_OptimizationHeader>
+  <EventsMod_OptimizationHeader>最佳化設定</EventsMod_OptimizationHeader>
 
-  <RimTalkEventPlus_EnableCompression_Label>啟用事件文字壓縮（開發中 - 即將推出，開關目前無效）</RimTalkEventPlus_EnableCompression_Label>
+  <EventsMod_EnableCompression_Label>啟用事件文字壓縮（開發中 - 即將推出，開關目前無效）</EventsMod_EnableCompression_Label>
 
-  <RimTalkEventPlus_EnableCompression_Tooltip>在向 RimTalk 傳送任務與事件時，使用壓縮後的事件文字，以降低 token 消耗。</RimTalkEventPlus_EnableCompression_Tooltip>
+  <EventsMod_EnableCompression_Tooltip>在向 RimTalk 傳送任務與事件時，使用壓縮後的事件文字，以降低 token 消耗。</EventsMod_EnableCompression_Tooltip>
 
-  <RimTalkEventPlus_Compression_Description>啟用後，Event+ 會壓縮冗長、重複的任務描述，同時保留關鍵資訊。
+  <EventsMod_Compression_Description>啟用後，Event+ 會壓縮冗長、重複的任務描述，同時保留關鍵資訊。
 
 範例（收留難民任務）：
 - 壓縮前：一封篇幅很長、包含多個段落的信件，詳細說明難民是誰、為什麼逃離、會停留多久，以及他們會免費幫忙工作與戰鬥等內容……
 - 壓縮後：一段簡短摘要，例如：「殖民地已經接納了這些難民。他們因為 [reason] 而逃離，會在此停留 X 天以休息並重新整頓，在這段期間會免費為你工作與戰鬥。」
 
-當此選項關閉時，Event+ 一律傳送事件的完整原始文字。</RimTalkEventPlus_Compression_Description>
+當此選項關閉時，Event+ 一律傳送事件的完整原始文字。</EventsMod_Compression_Description>
 
   <!-- Event Filtering UI -->
-  <RimTalkEventPlus_FilteringHeader>事件篩選</RimTalkEventPlus_FilteringHeader>
-  <RimTalkEventPlus_CategoryFilters>分類篩選</RimTalkEventPlus_CategoryFilters>
-  <RimTalkEventPlus_CategoryFilters_Desc>啟用或停用整個事件分類。停用的分類會完全對 AI 隱藏，並覆蓋下方所有設定。</RimTalkEventPlus_CategoryFilters_Desc>
-  <RimTalkEventPlus_TypeBasedFiltering>依類型篩選</RimTalkEventPlus_TypeBasedFiltering>
-  <RimTalkEventPlus_TypeBasedFiltering_Desc>全域隱藏所選類型的所有事件，適用於所有存檔</RimTalkEventPlus_TypeBasedFiltering_Desc>
-  <RimTalkEventPlus_InstanceBasedFiltering>依實例篩選</RimTalkEventPlus_InstanceBasedFiltering>
-  <RimTalkEventPlus_InstanceBasedFiltering_Desc>隱藏此存檔中的特定活動事件。僅在載入存檔時可用。</RimTalkEventPlus_InstanceBasedFiltering_Desc>
+  <EventsMod_FilteringHeader>事件篩選</EventsMod_FilteringHeader>
+  <EventsMod_CategoryFilters>分類篩選</EventsMod_CategoryFilters>
+  <EventsMod_CategoryFilters_Desc>啟用或停用整個事件分類。停用的分類會完全對 AI 隱藏，並覆蓋下方所有設定。</EventsMod_CategoryFilters_Desc>
+  <EventsMod_TypeBasedFiltering>依類型篩選</EventsMod_TypeBasedFiltering>
+  <EventsMod_TypeBasedFiltering_Desc>全域隱藏所選類型的所有事件，適用於所有存檔</EventsMod_TypeBasedFiltering_Desc>
+  <EventsMod_InstanceBasedFiltering>依實例篩選</EventsMod_InstanceBasedFiltering>
+  <EventsMod_InstanceBasedFiltering_Desc>隱藏此存檔中的特定活動事件。僅在載入存檔時可用。</EventsMod_InstanceBasedFiltering_Desc>
 
-  <RimTalkEventPlus_AvailableTypes>可用類型</RimTalkEventPlus_AvailableTypes>
-  <RimTalkEventPlus_DisabledTypes>停用的類型</RimTalkEventPlus_DisabledTypes>
-  <RimTalkEventPlus_CurrentInstances>目前實例</RimTalkEventPlus_CurrentInstances>
-  <RimTalkEventPlus_HiddenInstances>隱藏的實例</RimTalkEventPlus_HiddenInstances>
+  <EventsMod_AvailableTypes>可用類型</EventsMod_AvailableTypes>
+  <EventsMod_DisabledTypes>停用的類型</EventsMod_DisabledTypes>
+  <EventsMod_CurrentInstances>目前實例</EventsMod_CurrentInstances>
+  <EventsMod_HiddenInstances>隱藏的實例</EventsMod_HiddenInstances>
 
-  <RimTalkEventPlus_CurrentEventsOnly>僅顯示當前事件</RimTalkEventPlus_CurrentEventsOnly>
-  <RimTalkEventPlus_AllEventTypes>顯示所有事件類型</RimTalkEventPlus_AllEventTypes>
+  <EventsMod_CurrentEventsOnly>僅顯示當前事件</EventsMod_CurrentEventsOnly>
+  <EventsMod_AllEventTypes>顯示所有事件類型</EventsMod_AllEventTypes>
 
-  <RimTalkEventPlus_CurrentEventsNote>僅顯示遊戲中當前活動的事件。僅在載入存檔時可用。</RimTalkEventPlus_CurrentEventsNote>
-  <RimTalkEventPlus_AllEventTypesNote>顯示已載入模組中所有可能的事件類型。可能包括即使在遊戲中處於活躍狀態也已被排除在RimTalk對話之外的事件類型（例如：後台計時器、外交任務）。</RimTalkEventPlus_AllEventTypesNote>
+  <EventsMod_CurrentEventsNote>僅顯示遊戲中當前活動的事件。僅在載入存檔時可用。</EventsMod_CurrentEventsNote>
+  <EventsMod_AllEventTypesNote>顯示已載入模組中所有可能的事件類型。可能包括即使在遊戲中處於活躍狀態也已被排除在RimTalk對話之外的事件類型（例如：後台計時器、外交任務）。</EventsMod_AllEventTypesNote>
 
-  <RimTalkEventPlus_GloballyDisabled>全域停用</RimTalkEventPlus_GloballyDisabled>
+  <EventsMod_GloballyDisabled>全域停用</EventsMod_GloballyDisabled>
 
-  <RimTalkEventPlus_QuickFilter_Quests>任務</RimTalkEventPlus_QuickFilter_Quests>
-  <RimTalkEventPlus_QuickFilter_MapConditions>地圖狀態</RimTalkEventPlus_QuickFilter_MapConditions>
-  <RimTalkEventPlus_QuickFilter_Threats>威脅</RimTalkEventPlus_QuickFilter_Threats>
-  <RimTalkEventPlus_QuickFilter_Sites>世界地點（強盜營地、物品藏匿處等）</RimTalkEventPlus_QuickFilter_Sites>
+  <EventsMod_QuickFilter_Quests>任務</EventsMod_QuickFilter_Quests>
+  <EventsMod_QuickFilter_MapConditions>地圖狀態</EventsMod_QuickFilter_MapConditions>
+  <EventsMod_QuickFilter_Threats>威脅</EventsMod_QuickFilter_Threats>
+  <EventsMod_QuickFilter_Sites>世界地點（強盜營地、物品藏匿處等）</EventsMod_QuickFilter_Sites>
 
-  <RimTalkEventPlus_ResetTypeFilters>重設所有類型篩選器</RimTalkEventPlus_ResetTypeFilters>
-  <RimTalkEventPlus_ResetInstanceFilters>重設所有實例篩選器</RimTalkEventPlus_ResetInstanceFilters>
+  <EventsMod_ResetTypeFilters>重設所有類型篩選器</EventsMod_ResetTypeFilters>
+  <EventsMod_ResetInstanceFilters>重設所有實例篩選器</EventsMod_ResetInstanceFilters>
 
-  <RimTalkEventPlus_TypeFiltersCleared>已清除 {0} 個類型篩選器。</RimTalkEventPlus_TypeFiltersCleared>
-  <RimTalkEventPlus_InstanceFiltersCleared>已清除所有存檔中的 {0} 個實例篩選器。</RimTalkEventPlus_InstanceFiltersCleared>
+  <EventsMod_TypeFiltersCleared>已清除 {0} 個類型篩選器。</EventsMod_TypeFiltersCleared>
+  <EventsMod_InstanceFiltersCleared>已清除所有存檔中的 {0} 個實例篩選器。</EventsMod_InstanceFiltersCleared>
 
-  <RimTalkEventPlus_EnhancedPromptDetected_Title>偵測到 RimTalk - Enhanced Prompt</RimTalkEventPlus_EnhancedPromptDetected_Title>
-  <RimTalkEventPlus_EnhancedPromptDetected_Desc>RimTalk - Enhanced Prompt 的「自動事件捕獲」已啟用。為確保與 RimTalk - Enhanced Prompt 自身的事件追蹤系統相容，重疊功能已被停用。</RimTalkEventPlus_EnhancedPromptDetected_Desc>
+  <EventsMod_EnhancedPromptDetected_Title>偵測到 RimTalk - Enhanced Prompt</EventsMod_EnhancedPromptDetected_Title>
+  <EventsMod_EnhancedPromptDetected_Desc>RimTalk - Enhanced Prompt 的「自動事件捕獲」已啟用。為確保與 RimTalk - Enhanced Prompt 自身的事件追蹤系統相容，重疊功能已被停用。</EventsMod_EnhancedPromptDetected_Desc>
 
-  <RimTalkEventPlus_EnableContextFiltering>根據對話上下文過濾事件</RimTalkEventPlus_EnableContextFiltering>
-  <RimTalkEventPlus_EnableContextFilteringTooltip>僅附加涉及目前對話中角色（附近的角色、說話者、接收者）的任務事件。威脅事件、地圖狀態以及世界地點事件則始終會傳送給 AI。可節省 token 用量，並（可能）提升 LLM 的專注度。</RimTalkEventPlus_EnableContextFilteringTooltip>
-  <RimTalkEventPlus_ContextFiltering_Description>啟用後，不涉及目前對話中任何角色（附近的角色、說話者、接收者）的任務將不會傳送給 AI。這可以減少 token 用量，並（可能）幫助 LLM 專注於相關事件。注意：啟用後，如果相關角色不在附近，角色們將永遠不會談論這些任務。</RimTalkEventPlus_ContextFiltering_Description>
+  <EventsMod_EnableContextFiltering>根據對話上下文過濾事件</EventsMod_EnableContextFiltering>
+  <EventsMod_EnableContextFilteringTooltip>僅附加涉及目前對話中角色（附近的角色、說話者、接收者）的任務事件。威脅事件、地圖狀態以及世界地點事件則始終會傳送給 AI。可節省 token 用量，並（可能）提升 LLM 的專注度。</EventsMod_EnableContextFilteringTooltip>
+  <EventsMod_ContextFiltering_Description>啟用後，不涉及目前對話中任何角色（附近的角色、說話者、接收者）的任務將不會傳送給 AI。這可以減少 token 用量，並（可能）幫助 LLM 專注於相關事件。注意：啟用後，如果相關角色不在附近，角色們將永遠不會談論這些任務。</EventsMod_ContextFiltering_Description>
 
-  <RimTalkEventPlus_AdvancedModeHeader>高級設定</RimTalkEventPlus_AdvancedModeHeader>
-  <RimTalkEventPlus_AppendToContext>自動將事件附加到 {{context}}</RimTalkEventPlus_AppendToContext>
-  <RimTalkEventPlus_AppendToContext_Tooltip>啟用後，正在進行的事件會自動附加到 RimTalk 提示詞中的 {{context}} 變數。</RimTalkEventPlus_AppendToContext_Tooltip>
-  <RimTalkEventPlus_AppendToContext_Desc>如果你希望在高級模式模板中單獨使用 {{eventplus_all}}、{{eventplus_quests}}、{{eventplus_conditions}}、{{eventplus_threats}} 或 {{eventplus_location}}，請停用此選項。</RimTalkEventPlus_AppendToContext_Desc>
+  <EventsMod_AdvancedModeHeader>高級設定</EventsMod_AdvancedModeHeader>
+  <EventsMod_AppendToContext>自動將事件附加到 {{context}}</EventsMod_AppendToContext>
+  <EventsMod_AppendToContext_Tooltip>啟用後，正在進行的事件會自動附加到 RimTalk 提示詞中的 {{context}} 變數。</EventsMod_AppendToContext_Tooltip>
+  <EventsMod_AppendToContext_Desc>如果你希望在高級模式模板中單獨使用 {{eventplus_all}}、{{eventplus_quests}}、{{eventplus_conditions}}、{{eventplus_threats}} 或 {{eventplus_location}}，請停用此選項。</EventsMod_AppendToContext_Desc>
   
-  <RimTalkEventPlus_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</RimTalkEventPlus_MandatoryLockToggle>
-  <RimTalkEventPlus_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</RimTalkEventPlus_MandatoryLockToggle_Tooltip>
-  <RimTalkEventPlus_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</RimTalkEventPlus_MandatoryLockToggle_Desc>
+  <EventsMod_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</EventsMod_MandatoryLockToggle>
+  <EventsMod_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</EventsMod_MandatoryLockToggle_Tooltip>
+  <EventsMod_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</EventsMod_MandatoryLockToggle_Desc>
 </LanguageData>

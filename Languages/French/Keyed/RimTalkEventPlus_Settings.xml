@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-  <RimTalkEventPlus_SettingsCategory>RimTalk Event+</RimTalkEventPlus_SettingsCategory>
+  <EventsMod_SettingsCategory>RimTalk Event+</EventsMod_SettingsCategory>
 
-  <RimTalkEventPlus_OptimizationHeader>Paramètres d’optimisation</RimTalkEventPlus_OptimizationHeader>
+  <EventsMod_OptimizationHeader>Paramètres d’optimisation</EventsMod_OptimizationHeader>
 
-  <RimTalkEventPlus_EnableCompression_Label>Activer la compression du texte des événements (WIP - bientôt disponible, le bouton ne fait actuellement rien)</RimTalkEventPlus_EnableCompression_Label>
+  <EventsMod_EnableCompression_Label>Activer la compression du texte des événements (WIP - bientôt disponible, le bouton ne fait actuellement rien)</EventsMod_EnableCompression_Label>
 
-  <RimTalkEventPlus_EnableCompression_Tooltip>Utiliser un texte d’événement compressé pour réduire la consommation de jetons lors de l’envoi de quêtes et d’événements à RimTalk.</RimTalkEventPlus_EnableCompression_Tooltip>
+  <EventsMod_EnableCompression_Tooltip>Utiliser un texte d’événement compressé pour réduire la consommation de jetons lors de l’envoi de quêtes et d’événements à RimTalk.</EventsMod_EnableCompression_Tooltip>
 
-  <RimTalkEventPlus_Compression_Description>Quand cette option est activée, Event+ compresse les descriptions de quêtes longues et répétitives tout en conservant les informations importantes.
+  <EventsMod_Compression_Description>Quand cette option est activée, Event+ compresse les descriptions de quêtes longues et répétitives tout en conservant les informations importantes.
 
 Exemple (quête d’hospitalité pour des réfugiés) :
 - Avant : Une longue lettre en plusieurs paragraphes expliquant qui sont les réfugiés, pourquoi ils ont fui, combien de temps ils resteront et qu’ils travailleront et se battront gratuitement...
 - Après : Un court résumé du type : "La colonie a accepté les réfugiés. Ils ont fui pour [reason], resteront X jours pour se reposer et se réorganiser, et travailleront et se battront gratuitement pendant cette période."
 
-Quand l’option est désactivée, Event+ envoie toujours le texte original complet de l’événement.</RimTalkEventPlus_Compression_Description>
+Quand l’option est désactivée, Event+ envoie toujours le texte original complet de l’événement.</EventsMod_Compression_Description>
 
   <!-- Event Filtering UI -->
-  <RimTalkEventPlus_FilteringHeader>Filtrage des événements</RimTalkEventPlus_FilteringHeader>
-  <RimTalkEventPlus_CategoryFilters>Filtres par catégorie</RimTalkEventPlus_CategoryFilters>
-  <RimTalkEventPlus_CategoryFilters_Desc>Activer ou désactiver des catégories d'événements entières. Les catégories désactivées sont totalement cachées à l'IA et écrasent tous les réglages ci-dessous.</RimTalkEventPlus_CategoryFilters_Desc>
-  <RimTalkEventPlus_TypeBasedFiltering>FILTRAGE PAR TYPE</RimTalkEventPlus_TypeBasedFiltering>
-  <RimTalkEventPlus_TypeBasedFiltering_Desc>Masquer tous les événements des types sélectionnés globalement, dans toutes les sauvegardes</RimTalkEventPlus_TypeBasedFiltering_Desc>
-  <RimTalkEventPlus_InstanceBasedFiltering>FILTRAGE PAR INSTANCE</RimTalkEventPlus_InstanceBasedFiltering>
-  <RimTalkEventPlus_InstanceBasedFiltering_Desc>Masquer des événements actifs spécifiques dans cette sauvegarde. Disponible uniquement lorsqu'une sauvegarde est chargée.</RimTalkEventPlus_InstanceBasedFiltering_Desc>
+  <EventsMod_FilteringHeader>Filtrage des événements</EventsMod_FilteringHeader>
+  <EventsMod_CategoryFilters>Filtres par catégorie</EventsMod_CategoryFilters>
+  <EventsMod_CategoryFilters_Desc>Activer ou désactiver des catégories d'événements entières. Les catégories désactivées sont totalement cachées à l'IA et écrasent tous les réglages ci-dessous.</EventsMod_CategoryFilters_Desc>
+  <EventsMod_TypeBasedFiltering>FILTRAGE PAR TYPE</EventsMod_TypeBasedFiltering>
+  <EventsMod_TypeBasedFiltering_Desc>Masquer tous les événements des types sélectionnés globalement, dans toutes les sauvegardes</EventsMod_TypeBasedFiltering_Desc>
+  <EventsMod_InstanceBasedFiltering>FILTRAGE PAR INSTANCE</EventsMod_InstanceBasedFiltering>
+  <EventsMod_InstanceBasedFiltering_Desc>Masquer des événements actifs spécifiques dans cette sauvegarde. Disponible uniquement lorsqu'une sauvegarde est chargée.</EventsMod_InstanceBasedFiltering_Desc>
 
-  <RimTalkEventPlus_AvailableTypes>Types disponibles</RimTalkEventPlus_AvailableTypes>
-  <RimTalkEventPlus_DisabledTypes>Types désactivés</RimTalkEventPlus_DisabledTypes>
-  <RimTalkEventPlus_CurrentInstances>Instances actuelles</RimTalkEventPlus_CurrentInstances>
-  <RimTalkEventPlus_HiddenInstances>Instances masquées</RimTalkEventPlus_HiddenInstances>
+  <EventsMod_AvailableTypes>Types disponibles</EventsMod_AvailableTypes>
+  <EventsMod_DisabledTypes>Types désactivés</EventsMod_DisabledTypes>
+  <EventsMod_CurrentInstances>Instances actuelles</EventsMod_CurrentInstances>
+  <EventsMod_HiddenInstances>Instances masquées</EventsMod_HiddenInstances>
 
-  <RimTalkEventPlus_CurrentEventsOnly>Afficher les événements actuels uniquement</RimTalkEventPlus_CurrentEventsOnly>
-  <RimTalkEventPlus_AllEventTypes>Afficher tous les types d'événements</RimTalkEventPlus_AllEventTypes>
+  <EventsMod_CurrentEventsOnly>Afficher les événements actuels uniquement</EventsMod_CurrentEventsOnly>
+  <EventsMod_AllEventTypes>Afficher tous les types d'événements</EventsMod_AllEventTypes>
 
-  <RimTalkEventPlus_CurrentEventsNote>Affiche uniquement les événements actuellement actifs dans votre jeu. Disponible uniquement lorsqu'une sauvegarde est chargée.</RimTalkEventPlus_CurrentEventsNote>
-  <RimTalkEventPlus_AllEventTypesNote>Affiche tous les types d'événements possibles des mods chargés. Peut inclure des types d'événements qui sont déjà exclus des conversations RimTalk, même s'ils sont actifs dans votre jeu (par ex., minuteurs d'arrière-plan, quêtes diplomatiques).</RimTalkEventPlus_AllEventTypesNote>
+  <EventsMod_CurrentEventsNote>Affiche uniquement les événements actuellement actifs dans votre jeu. Disponible uniquement lorsqu'une sauvegarde est chargée.</EventsMod_CurrentEventsNote>
+  <EventsMod_AllEventTypesNote>Affiche tous les types d'événements possibles des mods chargés. Peut inclure des types d'événements qui sont déjà exclus des conversations RimTalk, même s'ils sont actifs dans votre jeu (par ex., minuteurs d'arrière-plan, quêtes diplomatiques).</EventsMod_AllEventTypesNote>
 
-  <RimTalkEventPlus_GloballyDisabled>désactivé globalement</RimTalkEventPlus_GloballyDisabled>
+  <EventsMod_GloballyDisabled>désactivé globalement</EventsMod_GloballyDisabled>
 
-  <RimTalkEventPlus_QuickFilter_Quests>Quêtes</RimTalkEventPlus_QuickFilter_Quests>
-  <RimTalkEventPlus_QuickFilter_MapConditions>Conditions de carte</RimTalkEventPlus_QuickFilter_MapConditions>
-  <RimTalkEventPlus_QuickFilter_Threats>Menaces</RimTalkEventPlus_QuickFilter_Threats>
-  <RimTalkEventPlus_QuickFilter_Sites>Sites mondiaux (camps de bandits, caches d'objets, etc.)</RimTalkEventPlus_QuickFilter_Sites>
+  <EventsMod_QuickFilter_Quests>Quêtes</EventsMod_QuickFilter_Quests>
+  <EventsMod_QuickFilter_MapConditions>Conditions de carte</EventsMod_QuickFilter_MapConditions>
+  <EventsMod_QuickFilter_Threats>Menaces</EventsMod_QuickFilter_Threats>
+  <EventsMod_QuickFilter_Sites>Sites mondiaux (camps de bandits, caches d'objets, etc.)</EventsMod_QuickFilter_Sites>
 
-  <RimTalkEventPlus_ResetTypeFilters>Réinitialiser tous les filtres de type</RimTalkEventPlus_ResetTypeFilters>
-  <RimTalkEventPlus_ResetInstanceFilters>Réinitialiser tous les filtres d'instance</RimTalkEventPlus_ResetInstanceFilters>
+  <EventsMod_ResetTypeFilters>Réinitialiser tous les filtres de type</EventsMod_ResetTypeFilters>
+  <EventsMod_ResetInstanceFilters>Réinitialiser tous les filtres d'instance</EventsMod_ResetInstanceFilters>
 
-  <RimTalkEventPlus_TypeFiltersCleared>{0} filtre(s) de type effacé(s).</RimTalkEventPlus_TypeFiltersCleared>
-  <RimTalkEventPlus_InstanceFiltersCleared>{0} filtre(s) d'instance effacé(s) dans toutes les sauvegardes.</RimTalkEventPlus_InstanceFiltersCleared>
+  <EventsMod_TypeFiltersCleared>{0} filtre(s) de type effacé(s).</EventsMod_TypeFiltersCleared>
+  <EventsMod_InstanceFiltersCleared>{0} filtre(s) d'instance effacé(s) dans toutes les sauvegardes.</EventsMod_InstanceFiltersCleared>
 
-  <RimTalkEventPlus_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt détecté</RimTalkEventPlus_EnhancedPromptDetected_Title>
-  <RimTalkEventPlus_EnhancedPromptDetected_Desc>La fonction "Auto Event Capture" de RimTalk - Enhanced Prompt est activée. Les fonctionnalités qui se chevauchent sont désactivées pour garantir la compatibilité avec le système de suivi d'événements de RimTalk - Enhanced Prompt.</RimTalkEventPlus_EnhancedPromptDetected_Desc>
+  <EventsMod_EnhancedPromptDetected_Title>RimTalk - Enhanced Prompt détecté</EventsMod_EnhancedPromptDetected_Title>
+  <EventsMod_EnhancedPromptDetected_Desc>La fonction "Auto Event Capture" de RimTalk - Enhanced Prompt est activée. Les fonctionnalités qui se chevauchent sont désactivées pour garantir la compatibilité avec le système de suivi d'événements de RimTalk - Enhanced Prompt.</EventsMod_EnhancedPromptDetected_Desc>
 
-  <RimTalkEventPlus_EnableContextFiltering>Filtrer les événements par contexte de conversation</RimTalkEventPlus_EnableContextFiltering>
-  <RimTalkEventPlus_EnableContextFilteringTooltip>N'ajoute que les événements de quêtes impliquant des personnages dans la conversation actuelle (personnages proches, orateur, destinataire). Les menaces, conditions de carte et événements de sites mondiaux sont toujours envoyés à l'IA. Économise des tokens et améliore (peut-être) la concentration du LLM.</RimTalkEventPlus_EnableContextFilteringTooltip>
-  <RimTalkEventPlus_ContextFiltering_Description>Lorsque cette option est activée, les quêtes qui n'impliquent aucun personnage dans la conversation actuelle (personnages proches, orateur, destinataire) sont ignorées. Cela réduit l'utilisation de tokens et aide (peut-être) le LLM à se concentrer sur les événements pertinents. Cependant, lorsque cette option est activée, les personnages ne parleront jamais de ces quêtes si les personnages concernés ne sont pas à proximité.</RimTalkEventPlus_ContextFiltering_Description>
+  <EventsMod_EnableContextFiltering>Filtrer les événements par contexte de conversation</EventsMod_EnableContextFiltering>
+  <EventsMod_EnableContextFilteringTooltip>N'ajoute que les événements de quêtes impliquant des personnages dans la conversation actuelle (personnages proches, orateur, destinataire). Les menaces, conditions de carte et événements de sites mondiaux sont toujours envoyés à l'IA. Économise des tokens et améliore (peut-être) la concentration du LLM.</EventsMod_EnableContextFilteringTooltip>
+  <EventsMod_ContextFiltering_Description>Lorsque cette option est activée, les quêtes qui n'impliquent aucun personnage dans la conversation actuelle (personnages proches, orateur, destinataire) sont ignorées. Cela réduit l'utilisation de tokens et aide (peut-être) le LLM à se concentrer sur les événements pertinents. Cependant, lorsque cette option est activée, les personnages ne parleront jamais de ces quêtes si les personnages concernés ne sont pas à proximité.</EventsMod_ContextFiltering_Description>
 
-  <RimTalkEventPlus_AdvancedModeHeader>Paramètres avancés</RimTalkEventPlus_AdvancedModeHeader>
-  <RimTalkEventPlus_AppendToContext>Ajouter automatiquement les événements à {{context}}</RimTalkEventPlus_AppendToContext>
-  <RimTalkEventPlus_AppendToContext_Tooltip>Lorsque cette option est activée, les événements en cours sont automatiquement ajoutés à la variable {{context}} dans les prompts RimTalk.</RimTalkEventPlus_AppendToContext_Tooltip>
-  <RimTalkEventPlus_AppendToContext_Desc>Désactivez cette option si vous préférez utiliser {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} ou {{eventplus_location}} individuellement dans vos modèles de mode avancé.</RimTalkEventPlus_AppendToContext_Desc>
+  <EventsMod_AdvancedModeHeader>Paramètres avancés</EventsMod_AdvancedModeHeader>
+  <EventsMod_AppendToContext>Ajouter automatiquement les événements à {{context}}</EventsMod_AppendToContext>
+  <EventsMod_AppendToContext_Tooltip>Lorsque cette option est activée, les événements en cours sont automatiquement ajoutés à la variable {{context}} dans les prompts RimTalk.</EventsMod_AppendToContext_Tooltip>
+  <EventsMod_AppendToContext_Desc>Désactivez cette option si vous préférez utiliser {{eventplus_all}}, {{eventplus_quests}}, {{eventplus_conditions}}, {{eventplus_threats}} ou {{eventplus_location}} individuellement dans vos modèles de mode avancé.</EventsMod_AppendToContext_Desc>
   
-  <RimTalkEventPlus_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</RimTalkEventPlus_MandatoryLockToggle>
-  <RimTalkEventPlus_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</RimTalkEventPlus_MandatoryLockToggle_Tooltip>
-  <RimTalkEventPlus_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</RimTalkEventPlus_MandatoryLockToggle_Desc>
+  <EventsMod_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</EventsMod_MandatoryLockToggle>
+  <EventsMod_MandatoryLockToggle_Tooltip>Event+ locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</EventsMod_MandatoryLockToggle_Tooltip>
+  <EventsMod_MandatoryLockToggle_Desc>Event+ enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</EventsMod_MandatoryLockToggle_Desc>
 </LanguageData>
