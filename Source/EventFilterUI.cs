@@ -96,7 +96,7 @@ namespace Ustas.RimAI.Events
             listing.Label("EventsMod_AdvancedModeHeader".Translate());
             listing.GapLine();
 
-            bool isAdvancedMode = RimTalkAPIIntegration.IsAdvancedModeEnabled;
+            bool isAdvancedMode = EventsCommunicationIntegration.IsAdvancedModeEnabled;
 
             if (isAdvancedMode)
             {

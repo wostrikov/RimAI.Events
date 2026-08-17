@@ -10,12 +10,12 @@ using Verse;
 namespace Ustas.RimAI.Events
 {
     [StaticConstructorOnStartup]
-    public static class RimTalkAPIIntegration
+    public static class EventsCommunicationIntegration
     {
         private const string MOD_ID = "rimtalkeventplus";
         private static readonly bool _apiAvailable;
 
-        static RimTalkAPIIntegration()
+        static EventsCommunicationIntegration()
         {
             try
             {
@@ -108,6 +108,6 @@ namespace Ustas.RimAI.Events
             return OngoingEventsFormatter.FormatOngoingEventsBlock(events, maxChars: 1500, includeWrapper: false);
         }
 
-        public static bool IsAPIAvailable => _apiAvailable;
+        public static bool IsApiAvailable => _apiAvailable;
     }
 }
