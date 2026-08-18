@@ -156,46 +156,17 @@ namespace Ustas.RimAI.Events
 
                 Type partType = partObj.GetType();
 
-                // 1) Single pawn field:  "pawn"
-                try
-                {
-                    var pawnField = cache?.GetField(partType, "pawn")
-                        ?? partType.GetField("pawn", FallbackBindingFlags);
+                var pawn = TryGetFieldValue(partObj, partType, "pawn", cache) as Pawn;
+                if (pawn != null && seenIds.Add(pawn.thingIDNumber))
+                    pawns.Add(pawn);
 
-                    if (pawnField != null)
+                if (TryGetFieldValue(partObj, partType, "pawns", cache) is System.Collections.IList pawnListObj)
+                {
+                    foreach (object o in pawnListObj)
                     {
-                        Pawn pawn = pawnField.GetValue(partObj) as Pawn;
-                        if (pawn != null && seenIds.Add(pawn.thingIDNumber))
-                            pawns.Add(pawn);
+                        if (o is Pawn p && seenIds.Add(p.thingIDNumber))
+                            pawns.Add(p);
                     }
-                }
-                catch
-                {
-                    // ignore
-                }
-
-                // 2) List field: "pawns"
-                try
-                {
-                    var pawnsField = cache?.GetField(partType, "pawns")
-                        ?? partType.GetField("pawns", FallbackBindingFlags);
-
-                    if (pawnsField != null)
-                    {
-                        var pawnListObj = pawnsField.GetValue(partObj) as System.Collections.IList;
-                        if (pawnListObj != null)
-                        {
-                            foreach (object o in pawnListObj)
-                            {
-                                if (o is Pawn p && seenIds.Add(p.thingIDNumber))
-                                    pawns.Add(p);
-                            }
-                        }
-                    }
-                }
-                catch
-                {
-                    // ignore
                 }
             }
 
@@ -217,29 +188,7 @@ namespace Ustas.RimAI.Events
                 if (p == null)
                     continue;
 
-                string name = null;
-
-                try
-                {
-                    name = p.LabelShortCap;
-                }
-                catch
-                {
-                    // ignore
-                }
-
-                if (name.NullOrEmpty())
-                {
-                    try
-                    {
-                        name = p.Name?.ToStringShort;
-                    }
-                    catch
-                    {
-                        // ignore
-                    }
-                }
-
+                string name = TryReadPawnDisplayName(p);
                 if (!name.NullOrEmpty())
                     names.Add(name);
             }
@@ -339,9 +288,10 @@ namespace Ustas.RimAI.Events
                             }
                         }
                     }
-                    catch
+                    // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — QuestLookTargets can throw during map generation
+                    catch (Exception ex)
                     {
-                        // Silently skip - QuestLookTargets enumeration can throw during map generation
+                        Log.WarningOnce("[RimAI.Events] QuestLookTargets enumeration failed: " + ex, part.GetHashCode());
                     }
                 }
             }
@@ -359,53 +309,13 @@ namespace Ustas.RimAI.Events
 
                     Type partType = part.GetType();
 
-                    // Check "worldObject" field
-                    try
-                    {
-                        FieldInfo worldObjectField = cache?.GetField(partType, "worldObject")
-                            ?? partType.GetField("worldObject", FallbackBindingFlags);
+                    var wo = TryGetFieldValue(part, partType, "worldObject", cache) as WorldObject;
+                    if (wo is MapParent mp && (mp == mapParent || TryMapParentOnMap(mp, map)))
+                        return true;
 
-                        if (worldObjectField != null)
-                        {
-                            var wo = worldObjectField.GetValue(part) as WorldObject;
-                            if (wo is MapParent mp)
-                            {
-                                if (mp == mapParent)
-                                    return true;
-                                try
-                                {
-                                    if (mp.HasMap && mp.Map == map)
-                                        return true;
-                                }
-                                catch { }
-                            }
-                        }
-                    }
-                    catch { }
-
-                    // Check "site" field (used by QuestPart_DistressCallAmbush, etc.)
-                    try
-                    {
-                        FieldInfo siteField = cache?.GetField(partType, "site")
-                            ?? partType.GetField("site", FallbackBindingFlags);
-
-                        if (siteField != null)
-                        {
-                            var site = siteField.GetValue(part) as MapParent;
-                            if (site != null)
-                            {
-                                if (site == mapParent)
-                                    return true;
-                                try
-                                {
-                                    if (site.HasMap && site.Map == map)
-                                        return true;
-                                }
-                                catch { }
-                            }
-                        }
-                    }
-                    catch { }
+                    var site = TryGetFieldValue(part, partType, "site", cache) as MapParent;
+                    if (site != null && (site == mapParent || TryMapParentOnMap(site, map)))
+                        return true;
                 }
             }
 
@@ -443,54 +353,91 @@ namespace Ustas.RimAI.Events
                             }
                         }
                     }
-                    catch { }
+                    // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — QuestSelectTargets can throw during map generation
+                    catch (Exception ex)
+                    {
+                        Log.WarningOnce("[RimAI.Events] QuestSelectTargets enumeration failed: " + ex, part.GetHashCode());
+                    }
 
                     Type partType = part.GetType();
-                    MapParent partParent = null;
+                    var partParent = TryGetFieldValue(part, partType, "mapParent", cache) as MapParent
+                        ?? TryGetPropertyValue(part, partType, "MapParent") as MapParent;
 
-                    // Try field "mapParent"
-                    try
-                    {
-                        FieldInfo mapParentField = cache?.GetField(partType, "mapParent")
-                            ?? partType.GetField("mapParent", FallbackBindingFlags);
-
-                        if (mapParentField != null)
-                            partParent = mapParentField.GetValue(part) as MapParent;
-                    }
-                    catch { }
-
-                    // Try property "MapParent" if field not found
-                    if (partParent == null)
-                    {
-                        try
-                        {
-                            var mapParentProp = partType.GetProperty("MapParent", FallbackBindingFlags);
-                            if (mapParentProp != null)
-                                partParent = mapParentProp.GetValue(part) as MapParent;
-                        }
-                        catch { }
-                    }
-
-                    if (partParent != null)
-                    {
-                        if (partParent == mapParent)
-                            return true;
-
-                        // Check if MapParent has a map property pointing to our map
-                        try
-                        {
-                            if (partParent.HasMap && partParent.Map == map)
-                                return true;
-                        }
-                        catch
-                        {
-                            // MapParent not fully initialized, skip
-                        }
-                    }
+                    if (partParent != null && (partParent == mapParent || TryMapParentOnMap(partParent, map)))
+                        return true;
                 }
             }
 
             return false;
+        }
+
+        static bool TryMapParentOnMap(MapParent parent, Map map)
+        {
+            if (parent == null || map == null)
+                return false;
+            try
+            {
+                return parent.HasMap && parent.Map == map;
+            }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — MapParent can be uninitialized during generation
+            catch (Exception ex)
+            {
+                Log.WarningOnce("[RimAI.Events] QuestLinkUtil map-parent check failed: " + ex, parent.GetHashCode());
+                return false;
+            }
+        }
+
+        static object TryGetFieldValue(object instance, Type type, string name, QuestCacheComponent cache)
+        {
+            if (instance == null || type == null || string.IsNullOrEmpty(name))
+                return null;
+            try
+            {
+                FieldInfo field = cache?.GetField(type, name) ?? type.GetField(name, FallbackBindingFlags);
+                return field?.GetValue(instance);
+            }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional quest-part fields must not abort prompt build
+            catch (Exception ex)
+            {
+                Log.WarningOnce("[RimAI.Events] QuestLinkUtil field '" + name + "' failed: " + ex, type.GetHashCode() ^ name.GetHashCode());
+                return null;
+            }
+        }
+
+        static object TryGetPropertyValue(object instance, Type type, string name)
+        {
+            if (instance == null || type == null || string.IsNullOrEmpty(name))
+                return null;
+            try
+            {
+                var prop = type.GetProperty(name, FallbackBindingFlags);
+                return prop?.GetValue(instance);
+            }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional quest-part properties must not abort prompt build
+            catch (Exception ex)
+            {
+                Log.WarningOnce("[RimAI.Events] QuestLinkUtil property '" + name + "' failed: " + ex, type.GetHashCode() ^ name.GetHashCode());
+                return null;
+            }
+        }
+
+        static string TryReadPawnDisplayName(Pawn pawn)
+        {
+            if (pawn == null)
+                return null;
+            try
+            {
+                var cap = pawn.LabelShortCap;
+                if (!cap.NullOrEmpty())
+                    return cap;
+                return pawn.Name?.ToStringShort;
+            }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — destroyed pawn labels must not abort quest prompt
+            catch (Exception ex)
+            {
+                Log.WarningOnce("[RimAI.Events] QuestLinkUtil pawn name failed: " + ex, pawn.thingIDNumber);
+                return null;
+            }
         }
 
         private static bool ShouldSkipQuestPart(QuestPart part)

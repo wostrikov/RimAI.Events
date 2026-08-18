@@ -1,6 +1,7 @@
 ﻿using Ustas.RimAI.Communication.Service;
 using Ustas.RimAI.Communication.Util;
 using RimWorld;
+using System;
 using System.Collections.Generic;
 using Verse;
 
@@ -41,9 +42,10 @@ namespace Ustas.RimAI.Events
                     }
                 }
             }
-            catch
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional nearby-pawn scan must not abort talk context
+            catch (Exception ex)
             {
-                // PawnSelector may not be available, ignore
+                Log.Warning("[RimAI.Events] ContextPawnMatcher nearby pawns failed: " + ex);
             }
 
             // Add nearby animals for quest context matching
@@ -61,7 +63,11 @@ namespace Ustas.RimAI.Events
                     }
                 }
             }
-            catch { }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional nearby-animal scan must not abort talk context
+            catch (Exception ex)
+            {
+                Log.Warning("[RimAI.Events] ContextPawnMatcher nearby animals failed: " + ex);
+            }
 
             return pawnIds;
         }

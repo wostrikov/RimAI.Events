@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using System.Reflection;
 using Verse;
 
@@ -38,8 +39,10 @@ namespace Ustas.RimAI.Events
 
                     return (bool)_enableAutoEventCaptureField.GetValue(settingsInstance);
                 }
-                catch
+                // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional third-party settings adapter must fail closed
+                catch (Exception ex)
                 {
+                    Log.WarningOnce("[RimAI.Events] EnhancedPromptDetector settings read failed: " + ex, 0x51E11);
                     return false;
                 }
             }
