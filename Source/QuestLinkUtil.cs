@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -291,7 +292,7 @@ namespace Ustas.RimAI.Events
                     // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — QuestLookTargets can throw during map generation
                     catch (Exception ex)
                     {
-                        Log.WarningOnce("[RimAI.Events] QuestLookTargets enumeration failed: " + ex, part.GetHashCode());
+                        RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] QuestLookTargets enumeration failed: " + ex, part.GetHashCode());
                     }
                 }
             }
@@ -356,7 +357,7 @@ namespace Ustas.RimAI.Events
                     // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — QuestSelectTargets can throw during map generation
                     catch (Exception ex)
                     {
-                        Log.WarningOnce("[RimAI.Events] QuestSelectTargets enumeration failed: " + ex, part.GetHashCode());
+                        RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] QuestSelectTargets enumeration failed: " + ex, part.GetHashCode());
                     }
 
                     Type partType = part.GetType();
@@ -382,7 +383,7 @@ namespace Ustas.RimAI.Events
             // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — MapParent can be uninitialized during generation
             catch (Exception ex)
             {
-                Log.WarningOnce("[RimAI.Events] QuestLinkUtil map-parent check failed: " + ex, parent.GetHashCode());
+                RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] QuestLinkUtil map-parent check failed: " + ex, parent.GetHashCode());
                 return false;
             }
         }
@@ -399,7 +400,7 @@ namespace Ustas.RimAI.Events
             // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional quest-part fields must not abort prompt build
             catch (Exception ex)
             {
-                Log.WarningOnce("[RimAI.Events] QuestLinkUtil field '" + name + "' failed: " + ex, type.GetHashCode() ^ name.GetHashCode());
+                RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] QuestLinkUtil field '" + name + "' failed: " + ex, type.GetHashCode() ^ name.GetHashCode());
                 return null;
             }
         }
@@ -416,7 +417,7 @@ namespace Ustas.RimAI.Events
             // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional quest-part properties must not abort prompt build
             catch (Exception ex)
             {
-                Log.WarningOnce("[RimAI.Events] QuestLinkUtil property '" + name + "' failed: " + ex, type.GetHashCode() ^ name.GetHashCode());
+                RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] QuestLinkUtil property '" + name + "' failed: " + ex, type.GetHashCode() ^ name.GetHashCode());
                 return null;
             }
         }
@@ -435,7 +436,7 @@ namespace Ustas.RimAI.Events
             // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — destroyed pawn labels must not abort quest prompt
             catch (Exception ex)
             {
-                Log.WarningOnce("[RimAI.Events] QuestLinkUtil pawn name failed: " + ex, pawn.thingIDNumber);
+                RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] QuestLinkUtil pawn name failed: " + ex, pawn.thingIDNumber);
                 return null;
             }
         }

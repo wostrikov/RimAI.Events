@@ -1,6 +1,7 @@
 using RimWorld;
 using System.Collections.Generic;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -71,25 +72,25 @@ namespace Ustas.RimAI.Events
                 // Log migration results
                 if (validatedDefs.Count > 0 || skippedDefs.Count > 0)
                 {
-                    Log.Message($"[RimAI.Events] Blacklist migration completed:");
+                    RimAiLog.Info(RimAiLogCategory.Events, $"[RimAI.Events] Blacklist migration completed:");
                     if (validatedDefs.Count > 0)
                     {
-                        Log.Message($"  - Migrated {validatedDefs.Count} quest type(s) to new filter system: {string.Join(", ", validatedDefs)}");
+                        RimAiLog.Info(RimAiLogCategory.Events, $"  - Migrated {validatedDefs.Count} quest type(s) to new filter system: {string.Join(", ", validatedDefs)}");
                     }
                     if (skippedDefs.Count > 0)
                     {
-                        Log.Message($"  - Skipped {skippedDefs.Count} quest type(s) not found in current mod loadout: {string.Join(", ", skippedDefs)}");
+                        RimAiLog.Info(RimAiLogCategory.Events, $"  - Skipped {skippedDefs.Count} quest type(s) not found in current mod loadout: {string.Join(", ", skippedDefs)}");
                     }
                 }
                 else
                 {
-                    Log.Message("[RimAI.Events] Blacklist migration completed: No blacklist entries found.");
+                    RimAiLog.Info(RimAiLogCategory.Events, "[RimAI.Events] Blacklist migration completed: No blacklist entries found.");
                 }
                 return true; // Migration was performed
             }
             catch (System.Exception ex)
             {
-                Log.Error($"[RimAI.Events] Error during blacklist migration: {ex.Message}\n{ex.StackTrace}");
+                RimAiLog.Error(RimAiLogCategory.Events, $"[RimAI.Events] Error during blacklist migration: {ex.Message}\n{ex.StackTrace}");
                 // Still mark as migrated to avoid repeated failures
                 settings.questBlacklistMigrated = true;
                 return true;

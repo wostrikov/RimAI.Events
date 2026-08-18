@@ -6,6 +6,7 @@ using Ustas.RimAI.Communication.Prompt;
 using RimWorld;
 using Ustas.RimAI.Core.Handshake;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -26,11 +27,11 @@ namespace Ustas.RimAI.Events
 
                 RegisterVariables();
                 _apiAvailable = true;
-                Log.Message("[RimAI.Events] Advanced Mode API integration successful.");
+                RimAiLog.Info(RimAiLogCategory.Events, "[RimAI.Events] Advanced Mode API integration successful.");
             }
             catch (Exception ex)
             {
-                Log.Warning($"[RimAI.Events] Failed to integrate with Communication prompt API: {ex.Message}");
+                RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Failed to integrate with Communication prompt API: {ex.Message}");
             }
         }
 

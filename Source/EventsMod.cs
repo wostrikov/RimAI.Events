@@ -3,6 +3,7 @@ using UnityEngine;
 using Verse;
 using Ustas.RimAI.Core.Handshake;
 using Ustas.RimAI.Core.Modules;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -33,7 +34,7 @@ namespace Ustas.RimAI.Events
                     "RimAI.Events",
                     "RimAI.Events",
                     "Events"));
-            Log.Message("[RimAI.Events] Loaded.");
+            RimAiLog.Info(RimAiLogCategory.Events, "[RimAI.Events] Loaded.");
         }
 
         public override string SettingsCategory()

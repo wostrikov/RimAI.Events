@@ -4,6 +4,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -45,7 +46,7 @@ namespace Ustas.RimAI.Events
             // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional nearby-pawn scan must not abort talk context
             catch (Exception ex)
             {
-                Log.Warning("[RimAI.Events] ContextPawnMatcher nearby pawns failed: " + ex);
+                RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] ContextPawnMatcher nearby pawns failed: " + ex);
             }
 
             // Add nearby animals for quest context matching
@@ -66,7 +67,7 @@ namespace Ustas.RimAI.Events
             // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional nearby-animal scan must not abort talk context
             catch (Exception ex)
             {
-                Log.Warning("[RimAI.Events] ContextPawnMatcher nearby animals failed: " + ex);
+                RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] ContextPawnMatcher nearby animals failed: " + ex);
             }
 
             return pawnIds;

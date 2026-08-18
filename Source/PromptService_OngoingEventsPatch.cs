@@ -5,6 +5,7 @@ using Ustas.RimAI.Communication.Util;
 using Ustas.RimAI.Core.Communication;
 using RimWorld;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -80,7 +81,7 @@ namespace Ustas.RimAI.Events
             }
             catch (Exception ex)
             {
-                Log.Warning($"[RimAI.Events] Error while appending ongoing events: {ex}");
+                RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Error while appending ongoing events: {ex}");
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -350,7 +351,7 @@ namespace Ustas.RimAI.Events
                     // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — archive adapters must not abort threat scan
                     catch (Exception ex)
                     {
-                        Log.WarningOnce("[RimAI.Events] archive CreatedTicksGame failed: " + ex, a.GetHashCode());
+                        RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] archive CreatedTicksGame failed: " + ex, a.GetHashCode());
                         createdTicks = 0;
                     }
 
@@ -376,7 +377,7 @@ namespace Ustas.RimAI.Events
                 // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — archive label adapters must not abort threat scan
                 catch (Exception ex)
                 {
-                    Log.WarningOnce("[RimAI.Events] archive label failed: " + ex, a.GetHashCode() ^ 7);
+                    RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] archive label failed: " + ex, a.GetHashCode() ^ 7);
                     label = string.Empty;
                     tooltip = string.Empty;
                 }

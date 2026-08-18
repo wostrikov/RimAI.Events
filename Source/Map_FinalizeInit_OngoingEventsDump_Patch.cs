@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -32,13 +33,13 @@ namespace Ustas.RimAI.Events
                 maxThreatScanBack: 30
             );
 
-            Log.Message($"[RimAI.Events] Ongoing quests affecting this map at init: {ongoing.Count}");
+            RimAiLog.Info(RimAiLogCategory.Events, $"[RimAI.Events] Ongoing quests affecting this map at init: {ongoing.Count}");
 
             foreach (var e in ongoing)
             {
                 var singleList = new System.Collections.Generic.List<OngoingEventSnapshot> { e };
                 string body = OngoingEventsFormatter.FormatOngoingEventsBlock(singleList, maxChars: 800);
-                Log.Message($"[RimAI.Events] {(e.IsThreat ? "[THREAT]" : "[EVENT]")} {e.Label}\n{body}");
+                RimAiLog.Info(RimAiLogCategory.Events, $"[RimAI.Events] {(e.IsThreat ? "[THREAT]" : "[EVENT]")} {e.Label}\n{body}");
             }
         }
     }

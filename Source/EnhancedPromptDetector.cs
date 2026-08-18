@@ -2,6 +2,7 @@
 using System;
 using System.Reflection;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -42,7 +43,7 @@ namespace Ustas.RimAI.Events
                 // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional third-party settings adapter must fail closed
                 catch (Exception ex)
                 {
-                    Log.WarningOnce("[RimAI.Events] EnhancedPromptDetector settings read failed: " + ex, 0x51E11);
+                    RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] EnhancedPromptDetector settings read failed: " + ex, 0x51E11);
                     return false;
                 }
             }
@@ -55,7 +56,7 @@ namespace Ustas.RimAI.Events
             if (!IsLoaded)
                 return;
 
-            Log.Message("[RimAI.Events] Detected RimTalk Enhanced Prompt mod.");
+            RimAiLog.Info(RimAiLogCategory.Events, "[RimAI.Events] Detected RimTalk Enhanced Prompt mod.");
 
             // Cache reflection metadata at startup
             try
@@ -63,21 +64,21 @@ namespace Ustas.RimAI.Events
                 var modType = AccessTools.TypeByName("RimTalkHealthEnhance.RimTalkHealthEnhanceMod");
                 if (modType == null)
                 {
-                    Log.Warning("[RimAI.Events] Could not find RimTalkHealthEnhanceMod type for caching.");
+                    RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Could not find RimTalkHealthEnhanceMod type for caching.");
                     return;
                 }
 
                 _settingsField = AccessTools.Field(modType, "Settings");
                 if (_settingsField == null)
                 {
-                    Log.Warning("[RimAI.Events] Could not find Settings field for caching.");
+                    RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Could not find Settings field for caching.");
                     return;
                 }
 
                 var settingsInstance = _settingsField.GetValue(null);
                 if (settingsInstance == null)
                 {
-                    Log.Warning("[RimAI.Events] Settings instance is null at startup; will retry on access.");
+                    RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Settings instance is null at startup; will retry on access.");
                     return;
                 }
 
@@ -96,16 +97,16 @@ namespace Ustas.RimAI.Events
 
                 if (_enableAutoEventCaptureProperty != null || _enableAutoEventCaptureField != null)
                 {
-                    Log.Message("[RimAI.Events] Successfully cached Enhanced Prompt settings accessor.");
+                    RimAiLog.Info(RimAiLogCategory.Events, "[RimAI.Events] Successfully cached Enhanced Prompt settings accessor.");
                 }
                 else
                 {
-                    Log.Warning("[RimAI.Events] Could not find EnableAutoEventCapture field; feature detection disabled.");
+                    RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Could not find EnableAutoEventCapture field; feature detection disabled.");
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Warning($"[RimAI.Events] Failed to cache Enhanced Prompt settings: {ex.Message}");
+                RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Failed to cache Enhanced Prompt settings: {ex.Message}");
             }
         }
     }

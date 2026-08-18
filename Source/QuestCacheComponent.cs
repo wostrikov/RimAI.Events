@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Verse;
+using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
@@ -127,7 +128,7 @@ namespace Ustas.RimAI.Events
                 {
                     // Prewarm is optional; never let it interfere with gameplay.
                     if (Prefs.DevMode)
-                        Log.Warning($"[RimAI.Events] Failed to prewarm quest {quest?.name}: {ex.Message}");
+                        RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Failed to prewarm quest {quest?.name}: {ex.Message}");
                 }
             }
         }
