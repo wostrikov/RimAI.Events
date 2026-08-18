@@ -1,13 +1,11 @@
-using HarmonyLib;
 using UnityEngine;
 using Verse;
 using Ustas.RimAI.Core.Handshake;
 using Ustas.RimAI.Core.Modules;
-using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
-    /// <summary>RimAI.Events mod entry. Registers the module and applies Harmony patches.</summary>
+    /// <summary>RimAI.Events mod entry. Service graph lives in <see cref="EventsComposition"/>.</summary>
     public class EventsMod : Mod
     {
         public const string HandshakeModuleVersion = "1.0.0";
@@ -20,21 +18,7 @@ namespace Ustas.RimAI.Events
             Settings = GetSettings<EventFilterSettings>();
             RimAiHandshake.TryActivate(
                 RimAiHandshakeDescriptor.Current(RimAiModuleIds.Events, HandshakeModuleVersion, isOptional: true),
-                Activate);
-        }
-
-        static void Activate()
-        {
-            var harmony = new Harmony("ustas.rimai.events");
-            harmony.PatchAll();
-            PromptService_OngoingEventsPatch.Register();
-            RimAIModuleRegistry.Current.Register(
-                new RimAIModuleDescriptor(
-                    "events",
-                    "RimAI.Events",
-                    "RimAI.Events",
-                    "Events"));
-            RimAiLog.Info(RimAiLogCategory.Events, "[RimAI.Events] Loaded.");
+                EventsComposition.Current.Start);
         }
 
         public override string SettingsCategory()

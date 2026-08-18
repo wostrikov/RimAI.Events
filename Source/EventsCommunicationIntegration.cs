@@ -10,28 +10,30 @@ using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
-    [StaticConstructorOnStartup]
     public static class EventsCommunicationIntegration
     {
         private const string MOD_ID = "rimtalkeventplus";
-        private static readonly bool _apiAvailable;
+        private static bool _apiAvailable;
 
-        static EventsCommunicationIntegration()
+        public static bool TryRegister()
         {
+            if (_apiAvailable)
+                return true;
+            if (!RimAiHandshake.IsApproved(RimAiModuleIds.Events))
+                return false;
+
             try
             {
-                if (!RimAiHandshake.IsApproved(RimAiModuleIds.Events))
-                {
-                    return;
-                }
-
                 RegisterVariables();
                 _apiAvailable = true;
                 RimAiLog.Info(RimAiLogCategory.Events, "[RimAI.Events] Advanced Mode API integration successful.");
+                return true;
             }
+            // RimAI.catch-boundary: TEMPORARY_EXPLICIT_EXCEPTION — Events prompt API registration is optional at boot
             catch (Exception ex)
             {
                 RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Failed to integrate with Communication prompt API: {ex.Message}");
+                return false;
             }
         }
 
