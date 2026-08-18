@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using Verse;
 using Ustas.RimAI.Core.Diagnostics;
+using Ustas.RimAI.Core.Events;
 
 namespace Ustas.RimAI.Events
 {
@@ -29,7 +30,7 @@ namespace Ustas.RimAI.Events
             var ongoing = OngoingEventsUtil.GetOngoingEventsNow(
                 __instance,
                 isInDanger: false,
-                maxEvents: 5,
+                maxEvents: EventsInteriorDefaults.DefaultMaxOngoingEvents,
                 maxThreatScanBack: 30
             );
 

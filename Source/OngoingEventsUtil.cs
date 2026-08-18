@@ -4,14 +4,14 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 using Ustas.RimAI.Core.Diagnostics;
+using Ustas.RimAI.Core.Events;
 
 namespace Ustas.RimAI.Events
 {
     public static class OngoingEventsUtil
     {
-        // 3 in-game hours * 2500 ticks per hour = 7500 ticks
-        // Hell yeah no more magical numbers
-        private const int ThreatLetterTimeoutTicks = 7500;
+        // Consumed from Core EventsInteriorDefaults (3 in-game hours * 2500 ticks).
+        private static int ThreatLetterTimeoutTicks => EventsInteriorDefaults.ThreatLetterTimeoutTicks;
 
         // Helper method to check if an event should be filtered based on settings.
         private static bool IsEventFiltered(string defName, string instanceID, EventCategory? category, EventFilterSettings settings)
@@ -66,9 +66,12 @@ namespace Ustas.RimAI.Events
         public static List<OngoingEventSnapshot> GetOngoingEventsNow(
             Map map,
             bool isInDanger,
-            int maxEvents = 5,
+            int maxEvents = -1,
             int maxThreatScanBack = 30)
         {
+            if (maxEvents < 0)
+                maxEvents = EventsInteriorDefaults.DefaultMaxOngoingEvents;
+
             var result = new List<OngoingEventSnapshot>();
             if (map == null || Current.Game == null)
                 return result;
@@ -217,7 +220,7 @@ namespace Ustas.RimAI.Events
 
                 result.Add(new OngoingEventSnapshot
                 {
-                    Kind = "Quest",
+                    Kind = EventsInteriorDefaults.QuestSnapshotKind,
                     SourceDefName = rootDefName,
                     QuestId = quest.id,
                     Label = label,

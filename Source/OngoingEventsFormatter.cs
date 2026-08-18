@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Ustas.RimAI.Core.Events;
 using Verse;
 
 namespace Ustas.RimAI.Events
@@ -6,67 +8,26 @@ namespace Ustas.RimAI.Events
     public static class OngoingEventsFormatter
     {
         public static string FormatOngoingEventsBlock(
-            System.Collections.Generic.List<OngoingEventSnapshot> events,
-            int maxChars = 2000, bool includeWrapper = true)
+            List<OngoingEventSnapshot> events,
+            int maxChars = OngoingEventsPromptFormatter.DefaultMaxChars,
+            bool includeWrapper = true)
         {
             if (events == null || events.Count == 0)
                 return string.Empty;
 
-            var sb = new StringBuilder();
-            if (includeWrapper)
+            var lines = events.Select(e =>
             {
-                sb.AppendLine("[Ongoing events]");
-            }
-
-            int index = 1;
-            foreach (var e in events)
-            {
-                if (sb.Length > maxChars)
-                    break;
-
-                // Base body selection
-                string body = !e.QuestDescription.NullOrEmpty()
-                    ? e.QuestDescription
-                    : e.Body;
-
-                // Optional compression: only if the setting is on and we have a SourceDefName
-                //if (Ustas.RimAI.Events.Settings != null &&
-                //    Ustas.RimAI.Events.Settings.enableEventTextCompression &&
-                //    !e.SourceDefName.NullOrEmpty())
-                //{
-                //    var compressed = EventTextCompressionUtil.TryGetCompressedBody(e);
-                //    if (!compressed.NullOrEmpty())
-                //    {
-                //        body = compressed;
-                //    }
-                //}
-
-                body = StripSimpleTags(body);
-                string label = StripSimpleTags(e.Label);
-
-                sb.AppendLine();
-                sb.Append(index).Append(") ")
-                  .Append(label.NullOrEmpty() ? "(no title)" : label)
-                  .AppendLine();
-
-                if (!body.NullOrEmpty())
+                string body = e == null
+                    ? string.Empty
+                    : (!e.QuestDescription.NullOrEmpty() ? e.QuestDescription : e.Body);
+                return new OngoingEventPromptLine
                 {
-                    if (body.Length > 600)
-                        body = body.Substring(0, 600) + "...";
+                    Label = StripSimpleTags(e?.Label),
+                    Body = StripSimpleTags(body),
+                };
+            }).ToList();
 
-                    sb.AppendLine("   " + body.Replace("\n", "\n   "));
-                }
-
-                index++;
-            }
-
-            if (includeWrapper)
-            {
-                sb.AppendLine();
-                sb.AppendLine("[Event list end]");
-            }
-
-            return sb.ToString();
+            return OngoingEventsPromptFormatter.FormatBlock(lines, maxChars, includeWrapper);
         }
 
         private static string StripSimpleTags(string input)
@@ -74,7 +35,6 @@ namespace Ustas.RimAI.Events
             if (input.NullOrEmpty())
                 return string.Empty;
 
-            // Use RimWorld's built-in StripTags
             return input.StripTags();
         }
     }

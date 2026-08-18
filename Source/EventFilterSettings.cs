@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ustas.RimAI.Core.Events;
 using Verse;
 
 namespace Ustas.RimAI.Events
@@ -13,7 +14,7 @@ namespace Ustas.RimAI.Events
 
         public void ExposeData()
         {
-            Scribe_Collections.Look(ref ids, "ids", LookMode.Value);
+            Scribe_Collections.Look(ref ids, EventScribeLabels.DisabledInstanceSet.Ids, LookMode.Value);
             if (ids == null)
             {
                 ids = new HashSet<string>();
@@ -89,68 +90,68 @@ namespace Ustas.RimAI.Events
 
             Scribe_Values.Look(
                 ref enableEventTextCompression,
-                "enableEventTextCompression",
+                EventScribeLabels.Settings.EnableEventTextCompression,
                 true
             );
 
             Scribe_Collections.Look(
                 ref disabledEventDefNames,
-                "disabledEventDefNames",
+                EventScribeLabels.Settings.DisabledEventDefNames,
                 LookMode.Value
             );
 
             Scribe_Collections.Look(
                 ref disabledEventInstances,
-                "disabledEventInstances",
+                EventScribeLabels.Settings.DisabledEventInstances,
                 LookMode.Value,
                 LookMode.Deep
             );
 
             Scribe_Values.Look(
                 ref questBlacklistMigrated,
-                "questBlacklistMigrated",
+                EventScribeLabels.Settings.QuestBlacklistMigrated,
                 false
             );
 
             Scribe_Values.Look(
                 ref showQuests,
-                "showQuests",
+                EventScribeLabels.Settings.ShowQuests,
                 true
             );
 
             Scribe_Values.Look(
                 ref showMapConditions,
-                "showMapConditions",
+                EventScribeLabels.Settings.ShowMapConditions,
                 true
             );
 
             Scribe_Values.Look(
                 ref showThreats,
-                "showThreats",
+                EventScribeLabels.Settings.ShowThreats,
                 true
             );
 
             Scribe_Values.Look(
                 ref showSiteParts,
-                "showSiteParts",
+                EventScribeLabels.Settings.ShowSiteParts,
                 true
             );
 
             Scribe_Values.Look(
                 ref EnableContextFiltering,
-                "EnableContextFiltering",
+                EventScribeLabels.Settings.EnableContextFiltering,
                 false
             );
 
             Scribe_Values.Look(
                 ref AppendToContext,
-                "AppendToContext",
+                EventScribeLabels.Settings.AppendToContext,
                 true
             );
 
             Scribe_Values.Look(
                 ref allowEnhancedPromptOverlap,
-                "allowEnhancedPromptOverlap",
+                EventScribeLabels.Settings.AllowEnhancedPromptOverlap,
                 false
             );
 

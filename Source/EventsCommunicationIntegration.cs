@@ -7,12 +7,13 @@ using RimWorld;
 using Ustas.RimAI.Core.Handshake;
 using Verse;
 using Ustas.RimAI.Core.Diagnostics;
+using Ustas.RimAI.Core.Events;
 
 namespace Ustas.RimAI.Events
 {
     public static class EventsCommunicationIntegration
     {
-        private const string MOD_ID = "rimtalkeventplus";
+        private static string MOD_ID => EventsInteriorDefaults.AdvancedModeModId;
         private static bool _apiAvailable;
 
         public static bool TryRegister()
@@ -37,6 +38,14 @@ namespace Ustas.RimAI.Events
             }
         }
 
+        public static void Unregister()
+        {
+            if (!_apiAvailable)
+                return;
+            RimTalkPromptAPI.UnregisterAllHooks(MOD_ID);
+            _apiAvailable = false;
+        }
+
         public static bool IsAdvancedModeEnabled => Settings.Get()?.UseAdvancedPromptMode == true;
 
         private static void RegisterVariables()
@@ -58,7 +67,7 @@ namespace Ustas.RimAI.Events
                     var map = ctx?.Map;
                     if (map == null) return string.Empty;
                     var result = new List<OngoingEventSnapshot>();
-                    OngoingEventsUtil.TryAddOngoingQuestsForMap(map, result, 5);
+                    OngoingEventsUtil.TryAddOngoingQuestsForMap(map, result, EventsInteriorDefaults.DefaultMaxOngoingEvents);
                     return Format(result);
                 });
 
@@ -69,7 +78,7 @@ namespace Ustas.RimAI.Events
                     var map = ctx?.Map;
                     if (map == null) return string.Empty;
                     var result = new List<OngoingEventSnapshot>();
-                    OngoingEventsUtil.TryAddActiveGameConditionsForMap(map, result, 5);
+                    OngoingEventsUtil.TryAddActiveGameConditionsForMap(map, result, EventsInteriorDefaults.DefaultMaxOngoingEvents);
                     return Format(result);
                 });
 
@@ -108,7 +117,10 @@ namespace Ustas.RimAI.Events
         {
             if (events == null || events.Count == 0)
                 return string.Empty;
-            return OngoingEventsFormatter.FormatOngoingEventsBlock(events, maxChars: 1500, includeWrapper: false);
+            return OngoingEventsFormatter.FormatOngoingEventsBlock(
+                events,
+                maxChars: OngoingEventsPromptFormatter.AdvancedModeMaxChars,
+                includeWrapper: false);
         }
 
         public static bool IsApiAvailable => _apiAvailable;

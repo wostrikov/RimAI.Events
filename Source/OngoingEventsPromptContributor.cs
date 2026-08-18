@@ -3,23 +3,37 @@ using System.Collections.Generic;
 using Ustas.RimAI.Communication.Data;
 using Ustas.RimAI.Communication.Util;
 using Ustas.RimAI.Core.Communication;
+using Ustas.RimAI.Core.Events;
 using RimWorld;
 using Verse;
 using Ustas.RimAI.Core.Diagnostics;
 
 namespace Ustas.RimAI.Events
 {
-    /// <summary>Appends ongoing semantic events to the Communication talk context.</summary>
-    public static class PromptService_OngoingEventsPatch
+    /// <summary>
+    /// Talk-path contributor: appends ongoing semantic events to Communication talk context
+    /// via <see cref="TalkLifecycle.PromptDecorated"/>. Not a Harmony patch.
+    /// </summary>
+    public static class OngoingEventsPromptContributor
     {
         static bool _registered;
+
+        public static bool IsRegistered => _registered;
 
         public static void Register()
         {
             if (_registered)
                 return;
-            _registered = true;
             TalkLifecycle.PromptDecorated += OnPromptDecorated;
+            _registered = true;
+        }
+
+        public static void Unregister()
+        {
+            if (!_registered)
+                return;
+            TalkLifecycle.PromptDecorated -= OnPromptDecorated;
+            _registered = false;
         }
 
         static void OnPromptDecorated(object talkRequestObj, object pawnsObj, string status)
@@ -42,7 +56,7 @@ namespace Ustas.RimAI.Events
                 var ongoingEvents = OngoingEventsUtil.GetOngoingEventsNow(
                     map,
                     isInDanger,
-                    maxEvents: 5,
+                    maxEvents: EventsInteriorDefaults.DefaultMaxOngoingEvents,
                     maxThreatScanBack: 30
                 );
 
@@ -68,7 +82,7 @@ namespace Ustas.RimAI.Events
 
                 string block = OngoingEventsFormatter.FormatOngoingEventsBlock(
                     ongoingEvents,
-                    maxChars: 1200
+                    maxChars: OngoingEventsPromptFormatter.TalkAppendMaxChars
                 );
 
                 if (block.NullOrEmpty())
@@ -79,9 +93,10 @@ namespace Ustas.RimAI.Events
                 else
                     talkRequest.Context = talkRequest.Context + "\n\n" + block;
             }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — Talk decorate contributor must not abort Communication prompt build
             catch (Exception ex)
             {
-                RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Error while appending ongoing events: {ex}");
+                RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Error while appending ongoing events: " + ex);
             }
         }
     }

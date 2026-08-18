@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Verse;
 using Ustas.RimAI.Core.Diagnostics;
+using Ustas.RimAI.Core.Events;
 
 namespace Ustas.RimAI.Events
 {
@@ -139,7 +140,7 @@ namespace Ustas.RimAI.Events
             bool hasQuestEvent = false;
             foreach (var evt in events)
             {
-                if (evt != null && evt.Kind == "Quest")
+                if (evt != null && evt.Kind == EventsInteriorDefaults.QuestSnapshotKind)
                 {
                     hasQuestEvent = true;
                     break;
@@ -174,7 +175,7 @@ namespace Ustas.RimAI.Events
                 return true;
 
             // Always include non-quest events (GameConditions, SiteParts)
-            if (evt.Kind == null || !evt.Kind.Equals("Quest"))
+            if (evt.Kind == null || !evt.Kind.Equals(EventsInteriorDefaults.QuestSnapshotKind))
                 return true;
 
             // A missing ID or lookup entry is treated conservatively: include the

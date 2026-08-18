@@ -7,8 +7,8 @@ using Ustas.RimAI.Core.Modules;
 namespace Ustas.RimAI.Events;
 
 /// <summary>
-/// Module composition root for RimAI.Events. Owns Harmony, prompt patches, and
-/// Communication prompt-variable registration.
+/// Module composition root for RimAI.Events. Owns Harmony install (process lifetime),
+/// Talk decorate contributor registration, and Communication prompt-variable registration.
 /// </summary>
 public sealed class EventsComposition : IRimAiModuleComposition
 {
@@ -25,7 +25,7 @@ public sealed class EventsComposition : IRimAiModuleComposition
 
         var harmony = new Harmony("ustas.rimai.events");
         harmony.PatchAll();
-        PromptService_OngoingEventsPatch.Register();
+        OngoingEventsPromptContributor.Register();
         EventsCommunicationIntegration.TryRegister();
         RimAIModuleRegistry.Current.Register(
             new RimAIModuleDescriptor(
@@ -39,6 +39,13 @@ public sealed class EventsComposition : IRimAiModuleComposition
 
     public void Stop()
     {
+        if (!IsStarted)
+            return;
+
+        // Harmony patches remain process-lifetime (7.5.8 host policy). Callbacks must
+        // no-op once owned registrations are cleared.
+        OngoingEventsPromptContributor.Unregister();
+        EventsCommunicationIntegration.Unregister();
         IsStarted = false;
     }
 }
