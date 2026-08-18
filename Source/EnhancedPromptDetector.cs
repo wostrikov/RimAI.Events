@@ -104,9 +104,10 @@ namespace Ustas.RimAI.Events
                     RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Could not find EnableAutoEventCapture field; feature detection disabled.");
                 }
             }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional third-party Enhanced Prompt reflection must fail closed
             catch (System.Exception ex)
             {
-                RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Failed to cache Enhanced Prompt settings: {ex.Message}");
+                RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Failed to cache Enhanced Prompt settings: " + ex);
             }
         }
     }

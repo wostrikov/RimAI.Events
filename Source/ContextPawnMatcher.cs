@@ -170,37 +170,41 @@ namespace Ustas.RimAI.Events
             HashSet<int> contextPawnIds,
             Dictionary<int, Quest> activeQuestsById)
         {
-            // Always include threats
-            if (evt.IsThreat)
-                return true;
+            IReadOnlyCollection<int> questPawnIds = null;
+            bool questResolved = false;
 
-            // Always include non-quest events (GameConditions, SiteParts)
-            if (evt.Kind == null || !evt.Kind.Equals(EventsInteriorDefaults.QuestSnapshotKind))
-                return true;
-
-            // A missing ID or lookup entry is treated conservatively: include the
-            // event rather than accidentally hiding information from the prompt.
-            if (evt.QuestId < 0 || activeQuestsById == null ||
-                !activeQuestsById.TryGetValue(evt.QuestId, out var matchedQuest))
+            if (evt != null &&
+                evt.Kind != null &&
+                evt.Kind.Equals(EventsInteriorDefaults.QuestSnapshotKind) &&
+                evt.QuestId >= 0 &&
+                activeQuestsById != null &&
+                activeQuestsById.TryGetValue(evt.QuestId, out var matchedQuest))
             {
-                return true;
+                questResolved = true;
+                var questPawns = QuestLinkUtil.GetQuestKeyPawns(matchedQuest);
+                if (questPawns == null || questPawns.Count == 0)
+                {
+                    questPawnIds = Array.Empty<int>();
+                }
+                else
+                {
+                    var ids = new List<int>(questPawns.Count);
+                    foreach (var p in questPawns)
+                    {
+                        if (p != null)
+                            ids.Add(p.thingIDNumber);
+                    }
+                    questPawnIds = ids;
+                }
             }
 
-            var questPawns = QuestLinkUtil.GetQuestKeyPawns(matchedQuest);
-
-            // Quest has no pawns - always include
-            if (questPawns == null || questPawns.Count == 0)
-                return true;
-
-            // Check if any quest pawn is in context
-            foreach (var p in questPawns)
-            {
-                if (p != null && contextPawnIds.Contains(p.thingIDNumber))
-                    return true;
-            }
-
-            // No overlap - filter out
-            return false;
+            // Unresolved quest lookup → null questPawnIds → policy includes conservatively.
+            return ContextEventIncludePolicy.ShouldInclude(
+                evt?.Kind,
+                evt != null && evt.IsThreat,
+                evt?.QuestId ?? -1,
+                questResolved ? questPawnIds : null,
+                contextPawnIds);
         }
 
         // Check if a specific quest involves any of the context pawns.

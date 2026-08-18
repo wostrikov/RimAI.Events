@@ -88,9 +88,10 @@ namespace Ustas.RimAI.Events
                 }
                 return true; // Migration was performed
             }
+            // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — one-shot blacklist migration must not abort settings load
             catch (System.Exception ex)
             {
-                RimAiLog.Error(RimAiLogCategory.Events, $"[RimAI.Events] Error during blacklist migration: {ex.Message}\n{ex.StackTrace}");
+                RimAiLog.Error(RimAiLogCategory.Events, "[RimAI.Events] Error during blacklist migration: " + ex);
                 // Still mark as migrated to avoid repeated failures
                 settings.questBlacklistMigrated = true;
                 return true;

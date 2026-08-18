@@ -13,47 +13,50 @@ namespace Ustas.RimAI.Events
         // Consumed from Core EventsInteriorDefaults (3 in-game hours * 2500 ticks).
         private static int ThreatLetterTimeoutTicks => EventsInteriorDefaults.ThreatLetterTimeoutTicks;
 
-        // Helper method to check if an event should be filtered based on settings.
+        // Adapter onto Core EventFilterPolicy — semantics unchanged.
         private static bool IsEventFiltered(string defName, string instanceID, EventCategory? category, EventFilterSettings settings)
         {
             if (settings == null)
                 return false;
 
-            // Filter by category
+            EventFilterCategory? coreCategory = null;
             if (category.HasValue)
             {
                 switch (category.Value)
                 {
                     case EventCategory.Quest:
-                        if (!settings.ShowQuestsEffective) return true;
+                        coreCategory = EventFilterCategory.Quest;
                         break;
                     case EventCategory.MapCondition:
-                        if (!settings.ShowMapConditionsEffective) return true;
+                        coreCategory = EventFilterCategory.MapCondition;
                         break;
                     case EventCategory.Threat:
-                        if (!settings.ShowThreatsEffective) return true;
+                        coreCategory = EventFilterCategory.Threat;
                         break;
                     case EventCategory.SitePart:
-                        if (!settings.ShowSitePartsEffective) return true;
+                        coreCategory = EventFilterCategory.SitePart;
                         break;
                 }
             }
 
-            // Filter by type (def name)
-            if (!string.IsNullOrEmpty(defName) && settings.IsEventDefDisabled(defName))
-                return true;
-
-            // Filter by instance ID (per-colony)
+            string colonyId = null;
             if (!string.IsNullOrEmpty(instanceID))
             {
                 var worldInfo = Find.World?.info;
-                string colonyId = worldInfo != null ? $"{worldInfo.seedString}_{worldInfo.persistentRandomValue}" : null;
-
-                if (!string.IsNullOrEmpty(colonyId) && settings.IsEventInstanceDisabled(colonyId, instanceID))
-                    return true;
+                colonyId = worldInfo != null ? $"{worldInfo.seedString}_{worldInfo.persistentRandomValue}" : null;
             }
 
-            return false;
+            return EventFilterPolicy.IsFiltered(
+                defName,
+                instanceID,
+                coreCategory,
+                settings.ShowQuestsEffective,
+                settings.ShowMapConditionsEffective,
+                settings.ShowThreatsEffective,
+                settings.ShowSitePartsEffective,
+                settings.IsEventDefDisabled,
+                colonyId,
+                settings.IsEventInstanceDisabled);
         }
 
         // Get a small list of "ongoing" situations on this map right now.
@@ -153,9 +156,9 @@ namespace Ustas.RimAI.Events
                 // Body:  "A hostile company of mercenaries hiding out in an ancient structure."
                 result.Add(new OngoingEventSnapshot
                 {
-                    Kind = "SitePart_" + def.defName,
+                    Kind = OngoingEventNormalizer.SitePartKind(def.defName),
                     SourceDefName = def.defName,
-                    Label = "[current location] " + label,
+                    Label = OngoingEventNormalizer.FormatSitePartLabel(label),
                     Body = desc,
                     QuestDescription = string.Empty,
                     IsThreat = false
@@ -276,7 +279,7 @@ namespace Ustas.RimAI.Events
 
                 result.Add(new OngoingEventSnapshot
                 {
-                    Kind = "GameCondition_" + cond.def.defName,
+                    Kind = OngoingEventNormalizer.GameConditionKind(cond.def.defName),
                     SourceDefName = cond.def.defName,
                     Label = label,
                     Body = body,

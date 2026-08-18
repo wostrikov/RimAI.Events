@@ -7,100 +7,49 @@ Measured against `RimAI.Events`. Production scope: `Source/**/*.cs` excluding `o
 | A | inventory + structural characterization |
 | pre-B | Core contracts consumed; formatter in Core; scribe labels; measured Harmony guard |
 | B | composition Stop unwinds Talk/API; rename to `OngoingEventsPromptContributor` |
-| C–D | pending |
-
-Authoritative HEADs at Wave A start (post-7.5.10): Core `f61836d`, Communication `863fa3e`,
-Personas `9d4a0a8`, Events `ff2109c`, integration `382692e`.
+| C | structural normalize/filter/dispatch ownership; behavioral isolation tests; **no prompt-set change** |
+| D | catch markers; docs; guards; stage close |
 
 ---
 
-## Product shape (critical)
+## Product shape
 
-`RimAI.Events` is **not** a general RimWorld event bus (death / damage / social / construction
-emitters). It is the **RimTalk Event+** ongoing-situation injector:
+`RimAI.Events` is an **ongoing-situation prompt injector** (quests / map conditions /
+threat letters / site parts), not a push event bus.
 
 ```text
-active quests / map conditions / threat letters / site parts
-  → filter (category / def / instance / context pawns)
-  → OngoingEventsPromptFormatter (Core) via Events StripTags adapter
-  → Communication prompt context (Talk decorate + Advanced Mode variables)
+EventsComposition
+  → Harmony (Map.FinalizeInit, Quest.End) thin host adapters
+  → OngoingEventsPromptContributor / EventsCommunicationIntegration
+       → OngoingEventsUtil (collect + host adapt)
+            → EventFilterPolicy (Core)
+            → OngoingEventNormalizer (Core)
+            → QuestRuntimeCacheStore via QuestCacheComponent (Core)
+       → ContextEventIncludePolicy (Core) on Talk context filter
+       → OngoingEventsFormatter → OngoingEventsPromptFormatter (Core)
 ```
 
----
-
-## Starting metrics (Wave A)
-
-| Metric | Value |
-| --- | ---: |
-| Production files | 28 |
-| Production LOC (line count) | 3756 |
-| `.Instance` (mod facade) | 1 (`EventsMod.Instance`) |
-| `EventsComposition.Current` | 1 |
-| `Lazy<T>` | 0 |
-| Direct Verse `Log.*` | **0** |
-| `RimAiLog.*` | 30 |
-| Catch-all | 16 (1 TEMPORARY labeled; 11 ALLOWED; 4 unmarked) |
-| Direct `File.*` | **0** |
-| `AiRequestArbiter` | **0** |
-| Live `[HarmonyPatch]` | **2** (measured by `validate_events_interior_sources.py`) |
-| Oversized 501+ | **0** |
+Wave C discriminator: `Formatter_injection_output_shape_is_frozen` / Wave C
+formatter discriminator tests were **not** rewritten for behavior — only structural
+ownership moved. `EventsInteriorDefaults.WaveCChangesPromptEventSet = false`.
 
 ---
 
-## Responsibility map (post Wave B)
+## Lifecycle
 
-```text
-EventsMod (handshake + Settings + settings UI)
-    ↓ RimAiHandshake.TryActivate
-EventsComposition.Start
-    ↓ Harmony PatchAll (2 patches, process lifetime)
-    ↓ OngoingEventsPromptContributor.Register  → TalkLifecycle.PromptDecorated
-    ↓ EventsCommunicationIntegration.TryRegister → RimTalkPromptAPI variables
-    ↓ RimAIModuleRegistry.Register("events")
-EventsComposition.Stop
-    ↓ OngoingEventsPromptContributor.Unregister
-    ↓ EventsCommunicationIntegration.Unregister
-    ↓ IsStarted=false
-    (no Harmony Unpatch)
+- Start: PatchAll (process lifetime) + Talk Register + Prompt API TryRegister
+- Stop: Unregister Talk + Prompt API; **no** Harmony Unpatch
+- Quest.End → `QuestCacheComponent.InvalidateQuest` → `QuestRuntimeCacheStore.InvalidateQuest`
 
-Pull dispatch:
-  Talk decorate OR Advanced Mode vars
-    → OngoingEventsUtil (consumes EventsInteriorDefaults bounds/kinds)
-    → EventFilterSettings (EventScribeLabels)
-    → optional ContextPawnMatcher
-    → OngoingEventsFormatter → OngoingEventsPromptFormatter
-```
+## Rename
 
-### Core contracts consumed by production
+`PromptService_OngoingEventsPatch` → `OngoingEventsPromptContributor` (done in Wave B;
+guard refuses legacy filename).
 
-| Constant / type | Consumer |
-| --- | --- |
-| `EventScribeLabels.*` | `EventFilterSettings.ExposeData` |
-| `ThreatLetterTimeoutTicks` | `OngoingEventsUtil` |
-| `DefaultMaxOngoingEvents` | util / Talk / Advanced Mode / Map dump |
-| `QuestSnapshotKind` | util + `ContextPawnMatcher` |
-| `AdvancedModeModId` | `EventsCommunicationIntegration` |
-| `OngoingEventsPromptFormatter` | `OngoingEventsFormatter` + Talk/Advanced maxChars |
+## Debt notes
 
-Structural Harmony targets are **measured** by `tools/architecture/guards/validate_events_interior_sources.py`
-(not trusted from a lone Core constant).
-
----
-
-## Characterization
-
-- `Stage7511EventsInteriorCharacterizationTests` — product role, scribe labels, formatter output,
-  Stop unwind facts, isolation flag names.
-- Live Verse quest/map emission remains host-level (not claimed by pure Core tests).
-- Communication `tests/` still has no real test methods.
-
----
-
-## Known warts remaining for Waves C–D
-
-1. Dual surfaces (Talk append + Advanced vars) can duplicate content when both enabled.
-2. Four unmarked catch-alls.
-3. `EventsComposition.Current` ambient singleton.
-4. Compression setting remains; compression body path still commented out.
-5. Donor naming residue (`rimtalkeventplus`).
-6. Filter/normalize still concentrated in large static util + UI query helpers (Wave C).
+- Dual surfaces (Talk append + Advanced vars) can duplicate content when both enabled
+- `EventsComposition.Current` ambient facade remains
+- Compression setting retained; compression body path still commented out
+- Donor mod id `rimtalkeventplus` retained for Prompt API registration
+- Communication `tests/` still has no real test methods

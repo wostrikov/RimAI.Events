@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using System.Reflection;
 using Verse;
 using Ustas.RimAI.Core.Diagnostics;
+using Ustas.RimAI.Core.Events;
 
 namespace Ustas.RimAI.Events
 {
-    // Per-game cache for quest-related lookups:
-    // 1. FieldInfo for QuestPart subclass fields (avoids repeated Type.GetField calls)
-    // 2. Known-positive quest-map affinity results (avoids expensive recomputation)
-    // 3. Quest-Pawns extraction results (avoids repeated reflection on quest parts)
+    // Per-game cache for quest-related lookups.
+    // Map-affinity isolation + invalidate semantics live in QuestRuntimeCacheStore (Core).
+    // Pawn object lists stay host-side (Verse Pawn references).
     public class QuestCacheComponent : GameComponent
     {
-        // FieldInfo cache for QuestPart subclass fields
         private readonly Dictionary<(Type, string), FieldInfo> _fieldCache =
             new Dictionary<(Type, string), FieldInfo>();
 
-        // Quest-Map affinity cache (key: questId << 32 | mapUniqueId)
-        private readonly Dictionary<long, bool> _questAffectsMapCache =
-            new Dictionary<long, bool>();
+        private readonly QuestRuntimeCacheStore _runtime = new QuestRuntimeCacheStore();
 
-        // Quest-Pawns cache (key: questId, value: list of pawns involved in quest)
         private readonly Dictionary<int, List<Pawn>> _questPawnsCache =
             new Dictionary<int, List<Pawn>>();
 
@@ -31,10 +27,9 @@ namespace Ustas.RimAI.Events
         {
         }
 
-        #region FieldInfo Cache
+        /// <summary>Exposed for characterization / tests of the owned Core store.</summary>
+        internal QuestRuntimeCacheStore RuntimeStore => _runtime;
 
-        // Get cached FieldInfo for a QuestPart subclass field.
-        // Returns null if field doesn't exist (result is cached to avoid repeated lookups).
         public FieldInfo GetField(Type type, string fieldName)
         {
             var key = (type, fieldName);
@@ -46,65 +41,18 @@ namespace Ustas.RimAI.Events
             return field;
         }
 
-        #endregion
+        public bool TryGetQuestAffectsMap(int questId, int mapUniqueId, out bool affects) =>
+            _runtime.TryGetQuestAffectsMap(questId, mapUniqueId, out affects);
 
-        #region Quest-Map Affinity Cache
+        public void StoreQuestAffectsMap(int questId, int mapUniqueId, bool affects) =>
+            _runtime.StoreQuestAffectsMap(questId, mapUniqueId, affects);
 
-        private static long MakeQuestMapKey(int questId, int mapUniqueId)
-        {
-            return ((long)questId << 32) | (uint)mapUniqueId;
-        }
-
-        // Only positive results are cached. A missing entry means the relationship
-        // must be checked again, so a quest that retargets later is not hidden.
-        public bool TryGetQuestAffectsMap(int questId, int mapUniqueId, out bool affects)
-        {
-            long key = MakeQuestMapKey(questId, mapUniqueId);
-            return _questAffectsMapCache.TryGetValue(key, out affects);
-        }
-
-        // Store a known-positive quest-map affinity result.
-        public void StoreQuestAffectsMap(int questId, int mapUniqueId, bool affects)
-        {
-            if (!affects)
-                return;
-
-            long key = MakeQuestMapKey(questId, mapUniqueId);
-            _questAffectsMapCache[key] = affects;
-        }
-
-        // Clear all runtime data for a quest once it has ended.
         public void InvalidateQuest(int questId)
         {
-            if (questId < 0)
-                return;
-
-            List<long> keysToRemove = null;
-            foreach (var entry in _questAffectsMapCache)
-            {
-                if ((int)(entry.Key >> 32) != questId)
-                    continue;
-
-                if (keysToRemove == null)
-                    keysToRemove = new List<long>();
-                keysToRemove.Add(entry.Key);
-            }
-
-            if (keysToRemove != null)
-            {
-                foreach (var key in keysToRemove)
-                    _questAffectsMapCache.Remove(key);
-            }
-
+            _runtime.InvalidateQuest(questId);
             _questPawnsCache.Remove(questId);
         }
 
-        #endregion
-
-        #region Map Prewarm
-
-        // Called after the map-generation long event has completed, rather than
-        // querying quest parts directly from Map.FinalizeInit.
         public void PrewarmActiveQuestsForMap(Map map)
         {
             if (map == null)
@@ -124,38 +72,23 @@ namespace Ustas.RimAI.Events
                 {
                     QuestLinkUtil.QuestAffectsMap(quest, map);
                 }
+                // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional map prewarm must not abort FinalizeInit
                 catch (Exception ex)
                 {
-                    // Prewarm is optional; never let it interfere with gameplay.
                     if (Prefs.DevMode)
-                        RimAiLog.Warning(RimAiLogCategory.Events, $"[RimAI.Events] Failed to prewarm quest {quest?.name}: {ex.Message}");
+                        RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Failed to prewarm quest: " + ex);
                 }
             }
         }
 
-        #endregion
+        public bool TryGetQuestPawns(int questId, out List<Pawn> pawns) =>
+            _questPawnsCache.TryGetValue(questId, out pawns);
 
-        #region Quest-Pawns Cache
-
-        // Try to get cached quest pawns list.
-        public bool TryGetQuestPawns(int questId, out List<Pawn> pawns)
-        {
-            return _questPawnsCache.TryGetValue(questId, out pawns);
-        }
-
-        // Store quest pawns list in cache.
-        public void StoreQuestPawns(int questId, List<Pawn> pawns)
-        {
+        public void StoreQuestPawns(int questId, List<Pawn> pawns) =>
             _questPawnsCache[questId] = pawns;
-        }
 
-        // Clear cached pawns for a specific quest (call when quest state changes).
-        public void InvalidateQuestPawns(int questId)
-        {
+        public void InvalidateQuestPawns(int questId) =>
             _questPawnsCache.Remove(questId);
-        }
-
-        #endregion
     }
 
     // DEPRECATED STUB: Preserves backward compatibility with saves that reference
