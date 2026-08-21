@@ -15,8 +15,6 @@ namespace Ustas.RimAI.Events
     {
         private const float NearbyAnimalRange = 20f;
 
-        // Collect all context-relevant pawn IDs from the conversation.
-        // Includes:  pawns parameter (speaker/recipient) + nearby pawns from RimTalk's selector + nearby animals.
         public static HashSet<int> CollectContextPawnIds(List<Pawn> pawns, Pawn initiator, Pawn recipient)
         {
             var pawnIds = new HashSet<int>();
@@ -50,9 +48,6 @@ namespace Ustas.RimAI.Events
                 RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] ContextPawnMatcher nearby pawns failed: " + ex);
             }
 
-            // Add nearby animals for quest context matching
-            // RimTalk's PawnSelector only returns talk-eligible (humanlike) pawns,
-            // but quests may involve animals stored in their pawn/pawns fields.
             try
             {
                 var nearbyAnimals = GetNearbyAnimals(initiator, recipient, NearbyAnimalRange);
@@ -74,8 +69,6 @@ namespace Ustas.RimAI.Events
             return pawnIds;
         }
 
-        // Get nearby animals within range of the conversation participants.
-        // This supplements RimTalk's PawnSelector which excludes non-humanlike pawns.
         private static List<Pawn> GetNearbyAnimals(Pawn pawn1, Pawn pawn2 = null, float range = 20f)
         {
             var result = new List<Pawn>();

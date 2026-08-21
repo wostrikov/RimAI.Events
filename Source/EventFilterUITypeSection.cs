@@ -27,7 +27,6 @@ namespace Ustas.RimAI.Events
         // Two-column layout
         var layout = new EventFilterUIChrome.TwoColumnLayout(rect, yPos);
 
-        // Get available and disabled events
         var allEvents = EventFilterUIEventQueries.GetAvailableEventTypes(_showCurrentEventsOnly, settings);
         var availableEvents = allEvents.Where(e => !settings.disabledEventDefNames.Contains(e.rootID)).ToList();
         var disabledEvents = allEvents.Where(e => settings.disabledEventDefNames.Contains(e.rootID)).ToList();

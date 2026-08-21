@@ -28,7 +28,6 @@ namespace Ustas.RimAI.Events
         public int Count => ids?.Count ?? 0;
     }
 
-    // Settings container for RimTalk Event+ filtering system.
     public class EventFilterSettings : ModSettings
     {
         // If true, Event+ will compress quest text using XML templates

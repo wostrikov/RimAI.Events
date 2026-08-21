@@ -222,7 +222,6 @@ namespace Ustas.RimAI.Events
         if (currentMap == null)
             return events;
 
-        // Use OngoingEventsUtil to get the same events that would be appended to RimTalk
         bool isInDanger = currentMap.dangerWatcher?.DangerRating != StoryDanger.None;
         var ongoingEvents = OngoingEventsUtil.GetOngoingEventsNow(
             currentMap,

@@ -1,10 +1,8 @@
-# RimTalk Event+
+# RimAI.Events
 
-This repository contains the source code and XML assets for the RimWorld mod **RimTalk Event+**.
+Event-filter / event-context module for the RimAI suite (`ustas.rimai.events`).
 
-https://steamcommunity.com/sharedfiles/filedetails/?id=3612632140
-
----
+Historical Steam listing name: RimTalk Event+.
 
 This work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
@@ -13,4 +11,3 @@ This work is licensed under a
 
 [cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
-[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
