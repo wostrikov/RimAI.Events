@@ -22,7 +22,7 @@
   <loadAfter>
 	  <li>ustas.rimai.communication</li>
 	</loadAfter>
-  <description>
-    RimAI.Events observes world changes and injects ongoing-event context into RimAI communication. Experimental.
-  </description>
+  <description>RimAI.Events стежить за змінами у світі й додає контекст поточних подій у розмови RimAI. Експериментальний модуль.
+
+Потрібні Harmony та RimAI.Communication.</description>
 </ModMetaData>
