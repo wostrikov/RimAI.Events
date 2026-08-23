@@ -13,7 +13,7 @@ namespace Ustas.RimAI.Events
         // Consumed from Core EventsInteriorDefaults (3 in-game hours * 2500 ticks).
         private static int ThreatLetterTimeoutTicks => EventsInteriorDefaults.ThreatLetterTimeoutTicks;
 
-        // Adapter onto Core EventFilterPolicy — semantics unchanged.
+        // Adapter onto Core EventFilterPolicy (category + disabled def/instance + minor deny-list).
         private static bool IsEventFiltered(string defName, string instanceID, EventCategory? category, EventFilterSettings settings)
         {
             if (settings == null)
