@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using Ustas.RimAI.Core.Events;
+using Verse;
 
 namespace Ustas.RimAI.Events
 {
@@ -26,5 +27,23 @@ namespace Ustas.RimAI.Events
 
         /// True if this is a threat-type event (raid, big danger).
         public bool IsThreat;
+
+        public string Faction;
+        public string ArrivalMethod;
+        public string Motive;
+        public string Participants;
+        public string Deadline;
+
+        public OngoingEventRegistryRecord ToRegistryRecord() =>
+            new()
+            {
+                Label = Label ?? string.Empty,
+                Body = !string.IsNullOrEmpty(QuestDescription) ? QuestDescription : (Body ?? string.Empty),
+                Faction = Faction ?? string.Empty,
+                ArrivalMethod = ArrivalMethod ?? string.Empty,
+                Motive = Motive ?? string.Empty,
+                Participants = Participants ?? string.Empty,
+                Deadline = Deadline ?? string.Empty
+            };
     }
 }

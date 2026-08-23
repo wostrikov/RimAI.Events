@@ -161,7 +161,8 @@ namespace Ustas.RimAI.Events
                     Label = OngoingEventNormalizer.FormatSitePartLabel(label),
                     Body = desc,
                     QuestDescription = string.Empty,
-                    IsThreat = false
+                    IsThreat = false,
+                    Faction = site.Faction?.Name
                 });
             }
         }
@@ -229,7 +230,9 @@ namespace Ustas.RimAI.Events
                     Label = label,
                     Body = desc,
                     QuestDescription = desc,
-                    IsThreat = false
+                    IsThreat = false,
+                    Participants = pawnNames,
+                    Deadline = ageMarker
                 });
 
                 if (result.Count >= maxEvents)
@@ -284,11 +287,22 @@ namespace Ustas.RimAI.Events
                     Label = label,
                     Body = body,
                     QuestDescription = string.Empty,
-                    IsThreat = false
+                    IsThreat = false,
+                    Deadline = FormatConditionDeadline(cond)
                 });
 
                 added++;
             }
+        }
+
+        static string FormatConditionDeadline(GameCondition cond)
+        {
+            if (cond == null || cond.Permanent || cond.TicksLeft <= 0)
+                return string.Empty;
+            int hours = cond.TicksLeft / 2500;
+            if (hours <= 0)
+                return "ending soon";
+            return hours == 1 ? "~1 hour left" : "~" + hours + " hours left";
         }
 
         // Gets the current colony identifier for per-colony instance filtering. 
@@ -388,6 +402,7 @@ namespace Ustas.RimAI.Events
                     tooltip = string.Empty;
                 }
 
+                var threat = EventsRaidMetadata.FromLetter(letter);
                 result.Add(new OngoingEventSnapshot
                 {
                     Kind = letter.GetType().Name,
@@ -395,7 +410,12 @@ namespace Ustas.RimAI.Events
                     Label = label,
                     Body = tooltip,
                     QuestDescription = string.Empty,
-                    IsThreat = true
+                    IsThreat = true,
+                    Faction = threat.Faction,
+                    ArrivalMethod = threat.ArrivalMethod,
+                    Motive = threat.Motive,
+                    Participants = threat.Participants,
+                    Deadline = threat.Deadline
                 });
 
                 break; // only one threat event

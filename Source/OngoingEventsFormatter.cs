@@ -17,14 +17,15 @@ namespace Ustas.RimAI.Events
 
             var lines = events.Select(e =>
             {
-                string body = e == null
-                    ? string.Empty
-                    : (!e.QuestDescription.NullOrEmpty() ? e.QuestDescription : e.Body);
-                return new OngoingEventPromptLine
-                {
-                    Label = StripSimpleTags(e?.Label),
-                    Body = StripSimpleTags(body),
-                };
+                var record = e?.ToRegistryRecord() ?? new OngoingEventRegistryRecord();
+                record.Label = StripSimpleTags(record.Label);
+                record.Body = StripSimpleTags(record.Body);
+                record.Faction = StripSimpleTags(record.Faction);
+                record.ArrivalMethod = StripSimpleTags(record.ArrivalMethod);
+                record.Motive = StripSimpleTags(record.Motive);
+                record.Participants = StripSimpleTags(record.Participants);
+                record.Deadline = StripSimpleTags(record.Deadline);
+                return EventsActiveRegistryPolicy.ToPromptLine(record);
             }).ToList();
 
             return OngoingEventsPromptFormatter.FormatBlock(lines, maxChars, includeWrapper);
