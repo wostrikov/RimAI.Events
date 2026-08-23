@@ -58,15 +58,23 @@ namespace Ustas.RimAI.Events
         // true  = allow Event+ category filters even when Enhanced Prompt auto-capture is enabled
         public bool allowEnhancedPromptOverlap = false;
 
-        // Effective lock state
+        // Effective lock state — Core EventsEnhancedPromptDedupPolicy is authoritative.
         public bool IsEnhancedPromptLockActive =>
-            EnhancedPromptDetector.IsAutoEventCaptureEnabled && !allowEnhancedPromptOverlap;
+            EventsEnhancedPromptDedupPolicy.IsLockActive(
+                EnhancedPromptDetector.IsAutoEventCaptureEnabled,
+                allowEnhancedPromptOverlap);
 
-        // Effective values (consider Enhanced Prompt conflict lock + manual override)
-        public bool ShowQuestsEffective => showQuests && !IsEnhancedPromptLockActive;
-        public bool ShowMapConditionsEffective => showMapConditions && !IsEnhancedPromptLockActive;
-        public bool ShowThreatsEffective => showThreats && !IsEnhancedPromptLockActive;
-        public bool ShowSitePartsEffective => showSiteParts;
+        public bool ShowQuestsEffective =>
+            EventsEnhancedPromptDedupPolicy.ShowQuestsEffective(showQuests, IsEnhancedPromptLockActive);
+
+        public bool ShowMapConditionsEffective =>
+            EventsEnhancedPromptDedupPolicy.ShowMapConditionsEffective(showMapConditions, IsEnhancedPromptLockActive);
+
+        public bool ShowThreatsEffective =>
+            EventsEnhancedPromptDedupPolicy.ShowThreatsEffective(showThreats, IsEnhancedPromptLockActive);
+
+        public bool ShowSitePartsEffective =>
+            EventsEnhancedPromptDedupPolicy.ShowSitePartsEffective(showSiteParts, IsEnhancedPromptLockActive);
 
         // When enabled, only append events involving pawns in the conversation context.
         // Threats, map conditions, and site parts are always included.

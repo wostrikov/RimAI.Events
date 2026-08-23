@@ -42,7 +42,8 @@ namespace Ustas.RimAI.Events
             {
                 if (talkRequestObj is not TalkRequest talkRequest)
                     return;
-                if (EventsMod.Settings != null && !EventsMod.Settings.AppendToContext)
+                if (!EventsPromptInjectionPolicy.ShouldAppend(
+                        EventsMod.Settings == null || EventsMod.Settings.AppendToContext))
                     return;
 
                 Pawn initiator = talkRequest.Initiator;
@@ -50,8 +51,9 @@ namespace Ustas.RimAI.Events
                     return;
 
                 Map map = initiator.Map;
-                bool isInDanger = map.IsPlayerHome &&
-                    map.dangerWatcher?.DangerRating != StoryDanger.None;
+                bool isInDanger = EventsPromptInjectionPolicy.ShouldScanThreatLetters(
+                    map.IsPlayerHome,
+                    map.dangerWatcher == null || map.dangerWatcher.DangerRating == StoryDanger.None);
 
                 var ongoingEvents = OngoingEventsUtil.GetOngoingEventsNow(
                     map,
@@ -88,10 +90,7 @@ namespace Ustas.RimAI.Events
                 if (block.NullOrEmpty())
                     return;
 
-                if (string.IsNullOrEmpty(talkRequest.Context))
-                    talkRequest.Context = block;
-                else
-                    talkRequest.Context = talkRequest.Context + "\n\n" + block;
+                talkRequest.Context = EventsPromptInjectionPolicy.MergeContext(talkRequest.Context, block);
             }
             // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — Talk decorate contributor must not abort Communication prompt build
             catch (Exception ex)

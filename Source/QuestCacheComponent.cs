@@ -49,6 +49,8 @@ namespace Ustas.RimAI.Events
 
         public void InvalidateQuest(int questId)
         {
+            if (!EventsLifecyclePolicy.ShouldInvalidateOnQuestEnd(questId))
+                return;
             _runtime.InvalidateQuest(questId);
             _questPawnsCache.Remove(questId);
         }
