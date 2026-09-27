@@ -25,7 +25,7 @@ namespace Ustas.RimAI.Events
             });
 
             // Only dump/log the ongoing events list in DevMode.
-            if (!Prefs.DevMode) return;
+            if (!RimAiLog.Detailed) return;
 
             var ongoing = OngoingEventsUtil.GetOngoingEventsNow(
                 __instance,

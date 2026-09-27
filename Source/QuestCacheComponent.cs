@@ -77,7 +77,7 @@ namespace Ustas.RimAI.Events
                 // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — optional map prewarm must not abort FinalizeInit
                 catch (Exception ex)
                 {
-                    if (Prefs.DevMode)
+                    if (RimAiLog.Detailed)
                         RimAiLog.Warning(RimAiLogCategory.Events, "[RimAI.Events] Failed to prewarm quest: " + ex);
                 }
             }
