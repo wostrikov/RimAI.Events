@@ -61,7 +61,8 @@ namespace Ustas.RimAI.Events
         }
     }
 
-    [HarmonyPatch(typeof(Quest), "AddPart")]
+    // By argument type: Quest also has a generic AddPart<T>(), and a patch by name alone is ambiguous.
+    [HarmonyPatch(typeof(Quest), "AddPart", new[] { typeof(QuestPart) })]
     public static class Quest_AddPart_CachePatch
     {
         static void Prefix(Quest __instance, out int __state) =>
@@ -77,7 +78,7 @@ namespace Ustas.RimAI.Events
         }
     }
 
-    [HarmonyPatch(typeof(Quest), "RemovePart")]
+    [HarmonyPatch(typeof(Quest), "RemovePart", new[] { typeof(QuestPart) })]
     public static class Quest_RemovePart_CachePatch
     {
         static void Prefix(Quest __instance, out int __state) =>
