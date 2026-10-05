@@ -10,9 +10,6 @@ namespace Ustas.RimAI.Events
 {
     public static class OngoingEventsUtil
     {
-        // Consumed from Core EventsInteriorDefaults (3 in-game hours * 2500 ticks).
-        private static int ThreatLetterTimeoutTicks => EventsInteriorDefaults.ThreatLetterTimeoutTicks;
-
         // Adapter onto Core EventFilterPolicy (category + disabled def/instance + minor deny-list).
         private static bool IsEventFiltered(string defName, string instanceID, EventCategory? category, EventFilterSettings settings)
         {
@@ -60,15 +57,16 @@ namespace Ustas.RimAI.Events
         }
 
         // Get a small list of "ongoing" situations on this map right now.
-        // Stateless: reads QuestManager + archive each time.
         //
         // Priority order:
-        // - Threat letter: at most one most-recent red threat letter, only if isInDanger == true.
+        // - Location: the site's visible parts, on a map that is not a player home.
+        // - Threats: every hostile group ThreatTrackerComponent follows on this map,
+        //   then the newest threat letter no tracked group owns, while it still
+        //   points at a live threat.
         // - Game conditions: all active GameConditions on this map (solar flare, psychic drone, etc.).
         // - Quests: QuestManager-based, only quests that are ongoing and affect this map.
         public static List<OngoingEventSnapshot> GetOngoingEventsNow(
             Map map,
-            bool isInDanger,
             int maxEvents = -1,
             int maxThreatScanBack = 30)
         {
@@ -86,10 +84,14 @@ namespace Ustas.RimAI.Events
                 TryAddSitePartEvents(map, result, maxEvents);
             }
 
-            // 1) Single active threat letter (raid/siege), only if caller says we're in danger.
-            if (isInDanger && result.Count < maxEvents)
+            // 1) Hostile groups on this map, then a threat letter none of them owns.
+            if (result.Count < maxEvents)
             {
-                TryAddMostRecentThreatLetter(result, maxEvents, maxThreatScanBack);
+                TryAddActiveThreatsForMap(map, result, maxEvents);
+            }
+            if (result.Count < maxEvents)
+            {
+                TryAddMostRecentThreatLetter(map, result, maxEvents, maxThreatScanBack);
             }
 
             // 2) Active game conditions on this map (solar flare, psychic drone, heat wave, etc.)
@@ -325,109 +327,59 @@ namespace Ustas.RimAI.Events
             return $"{worldInfo.seedString ?? ""}_{worldInfo.persistentRandomValue}";
         }
 
-        // Threat side: at most one most-recent red threat letter,
-        // only if isInDanger == true, and only if it's not too old
-        // (currently within 3 in-game hours).
+        // Every tracked hostile group on this map that the threat filter lets through.
+        public static void TryAddActiveThreatsForMap(Map map, List<OngoingEventSnapshot> result, int maxEvents)
+        {
+            if (map == null || result == null || result.Count >= maxEvents)
+                return;
+
+            var tracker = ThreatTrackerComponent.Get();
+            if (tracker == null)
+                return;
+
+            var snapshots = tracker.GetPromptSnapshotsForMap(map, int.MaxValue);
+            for (int i = 0; i < snapshots.Count && result.Count < maxEvents; i++)
+            {
+                var snapshot = snapshots[i];
+                if (IsEventFiltered(snapshot.SourceDefName, null, EventCategory.Threat, EventsMod.Settings))
+                    continue;
+                result.Add(snapshot);
+            }
+        }
+
+        // The newest threat letter that no tracked group owns, while something it
+        // points at is still a live threat on this map. Replaces the fixed
+        // three-hour window: a letter is news for exactly as long as its threat is.
         public static void TryAddMostRecentThreatLetter(
+            Map map,
             List<OngoingEventSnapshot> result,
             int maxEvents,
             int maxThreatScanBack)
         {
-            if (Find.Archive == null)
+            if (map == null || result == null || result.Count >= maxEvents)
                 return;
 
-            var list = Find.Archive.ArchivablesListForReading;
+            var list = Find.Archive?.ArchivablesListForReading;
             if (list == null || list.Count == 0)
                 return;
 
-            // Current in-game time for age computation
-            int nowTicks = (Find.TickManager != null) ? Find.TickManager.TicksGame : -1;
+            var tracker = ThreatTrackerComponent.Get();
+            if (tracker == null)
+                return;
 
-            int count = list.Count;
             int scanned = 0;
-
-            // Walk backwards: newest -> older, stop after the first suitable threat
-            for (int i = count - 1; i >= 0 && scanned < maxThreatScanBack && result.Count < maxEvents; i--, scanned++)
+            for (int i = list.Count - 1; i >= 0 && scanned < maxThreatScanBack; i--, scanned++)
             {
-                IArchivable a = list[i];
-                if (a == null)
+                if (!(list[i] is Letter letter) || !ThreatLetterBinder.IsThreatLetter(letter))
                     continue;
-
-                // Only Letters are interesting here
-                if (!(a is Letter letter && letter.def != null))
+                if (IsEventFiltered(letter.def.defName, null, EventCategory.Threat, EventsMod.Settings))
                     continue;
-
-                var def = letter.def;
-                bool isThreatLetter = def == LetterDefOf.ThreatBig || def == LetterDefOf.ThreatSmall;
-                if (!isThreatLetter)
-                    continue;
-
-                // Check new filtering system using helper method
-                if (IsEventFiltered(def.defName, null, EventCategory.Threat, EventsMod.Settings))
-                    continue;
-
-                // Age filter: skip (and stop) if the newest threat is already too old.
-                if (nowTicks >= 0 && ThreatLetterTimeoutTicks > 0)
+                if (tracker.TryGetUntrackedLetterSnapshot(letter, map, out var snapshot))
                 {
-                    int createdTicks = 0;
-                    try
-                    {
-                        createdTicks = a.CreatedTicksGame;
-                    }
-                    // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — archive adapters must not abort threat scan
-                    catch (Exception ex)
-                    {
-                        RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] archive CreatedTicksGame failed: " + ex, a.GetHashCode());
-                        createdTicks = 0;
-                    }
-
-                    if (createdTicks > 0)
-                    {
-                        int ageTicks = nowTicks - createdTicks;
-                        if (ageTicks > ThreatLetterTimeoutTicks)
-                        {
-                            // This is already older than our timeout; since we're scanning from newest
-                            // to oldest, all remaining threat letters will be even older.
-                            break;
-                        }
-                    }
+                    result.Add(snapshot);
+                    return;
                 }
-
-                string label;
-                string tooltip;
-                try
-                {
-                    label = a.ArchivedLabel ?? string.Empty;
-                    tooltip = a.ArchivedTooltip ?? string.Empty;
-                }
-                // RimAI.catch-boundary: ALLOWED_TOP_LEVEL_BOUNDARY — archive label adapters must not abort threat scan
-                catch (Exception ex)
-                {
-                    RimAiLog.WarningOnce(RimAiLogCategory.Events, "[RimAI.Events] archive label failed: " + ex, a.GetHashCode() ^ 7);
-                    label = string.Empty;
-                    tooltip = string.Empty;
-                }
-
-                var threat = EventsRaidMetadata.FromLetter(letter);
-                result.Add(new OngoingEventSnapshot
-                {
-                    Kind = letter.GetType().Name,
-                    SourceDefName = letter.def.defName,
-                    Label = label,
-                    Body = tooltip,
-                    QuestDescription = string.Empty,
-                    IsThreat = true,
-                    Faction = threat.Faction,
-                    ArrivalMethod = threat.ArrivalMethod,
-                    Motive = threat.Motive,
-                    Participants = threat.Participants,
-                    Deadline = threat.Deadline
-                });
-
-                break; // only one threat event
-
             }
-
         }
     }
 }

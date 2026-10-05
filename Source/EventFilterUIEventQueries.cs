@@ -222,10 +222,8 @@ namespace Ustas.RimAI.Events
         if (currentMap == null)
             return events;
 
-        bool isInDanger = currentMap.dangerWatcher?.DangerRating != StoryDanger.None;
         var ongoingEvents = OngoingEventsUtil.GetOngoingEventsNow(
             currentMap,
-            isInDanger,
             maxEvents: int.MaxValue,
             maxThreatScanBack: 50
         );

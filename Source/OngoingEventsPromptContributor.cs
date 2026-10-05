@@ -51,13 +51,8 @@ namespace Ustas.RimAI.Events
                     return;
 
                 Map map = initiator.Map;
-                bool isInDanger = EventsPromptInjectionPolicy.ShouldScanThreatLetters(
-                    map.IsPlayerHome,
-                    map.dangerWatcher == null || map.dangerWatcher.DangerRating == StoryDanger.None);
-
                 var ongoingEvents = OngoingEventsUtil.GetOngoingEventsNow(
                     map,
-                    isInDanger,
                     maxEvents: EventsInteriorDefaults.DefaultMaxOngoingEvents,
                     maxThreatScanBack: 30
                 );

@@ -23,6 +23,8 @@ namespace Ustas.RimAI.Events
                 record.Faction = StripSimpleTags(record.Faction);
                 record.ArrivalMethod = StripSimpleTags(record.ArrivalMethod);
                 record.Motive = StripSimpleTags(record.Motive);
+                record.Force = StripSimpleTags(record.Force);
+                record.Phase = StripSimpleTags(record.Phase);
                 record.Participants = StripSimpleTags(record.Participants);
                 record.Deadline = StripSimpleTags(record.Deadline);
                 return EventsActiveRegistryPolicy.ToPromptLine(record);

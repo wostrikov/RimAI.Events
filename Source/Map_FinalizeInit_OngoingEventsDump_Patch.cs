@@ -29,7 +29,6 @@ namespace Ustas.RimAI.Events
 
             var ongoing = OngoingEventsUtil.GetOngoingEventsNow(
                 __instance,
-                isInDanger: false,
                 maxEvents: EventsInteriorDefaults.DefaultMaxOngoingEvents,
                 maxThreatScanBack: 30
             );

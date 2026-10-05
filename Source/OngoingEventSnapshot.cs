@@ -31,6 +31,8 @@ namespace Ustas.RimAI.Events
         public string Faction;
         public string ArrivalMethod;
         public string Motive;
+        public string Force;
+        public string Phase;
         public string Participants;
         public string Deadline;
 
@@ -42,6 +44,8 @@ namespace Ustas.RimAI.Events
                 Faction = Faction ?? string.Empty,
                 ArrivalMethod = ArrivalMethod ?? string.Empty,
                 Motive = Motive ?? string.Empty,
+                Force = Force ?? string.Empty,
+                Phase = Phase ?? string.Empty,
                 Participants = Participants ?? string.Empty,
                 Deadline = Deadline ?? string.Empty
             };
