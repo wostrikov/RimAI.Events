@@ -17,6 +17,7 @@ namespace Ustas.RimAI.Events
     internal static void DoTypeBasedFilteringSection(Rect rect, EventFilterSettings settings)
     {
         EventFilterUIChrome.DrawSectionHeader(rect, "EventsMod_TypeBasedFiltering", "EventsMod_TypeBasedFiltering_Desc");
+        EventFilterUIChrome.DrawSectionSearch(rect, _typeSearch);
 
         float yPos = HEADER_HEIGHT + 25f;
 
@@ -27,9 +28,13 @@ namespace Ustas.RimAI.Events
         // Two-column layout
         var layout = new EventFilterUIChrome.TwoColumnLayout(rect, yPos);
 
-        var allEvents = EventFilterUIEventQueries.GetAvailableEventTypes(_showCurrentEventsOnly, settings);
-        var availableEvents = allEvents.Where(e => !settings.disabledEventDefNames.Contains(e.rootID)).ToList();
-        var disabledEvents = allEvents.Where(e => settings.disabledEventDefNames.Contains(e.rootID)).ToList();
+        // Threats are shown or hidden only as a category; they have no types to list here.
+        var allEvents = EventFilterUIEventQueries.GetAvailableEventTypes(_showCurrentEventsOnly, settings)
+            .Where(e => EventFilterSettings.SupportsTypeFiltering(e.category))
+            .Where(e => EventFilterUIChrome.MatchesSearch(_typeSearch, e, Subtitle(e)))
+            .ToList();
+        var availableEvents = allEvents.Where(e => !settings.IsTypeDisabled(e.category, e.rootID)).ToList();
+        var disabledEvents = allEvents.Where(e => settings.IsTypeDisabled(e.category, e.rootID)).ToList();
 
         // Draw columns
         DoEventTypeColumn(layout.LeftColumn, "EventsMod_AvailableTypes".Translate(), availableEvents, settings, ref _scrollPosAvailableTypes, false);
@@ -38,6 +43,9 @@ namespace Ustas.RimAI.Events
         // Draw arrow buttons
         DoTypeFilterButtons(layout.ButtonsArea, availableEvents, disabledEvents, settings);
     }
+
+    private static string Subtitle(FilterableEvent evt) =>
+        evt.category == EventCategory.Quest && _typeSubtitles.TryGetValue(evt.rootID, out var subtitle) ? subtitle : null;
 
     // Helper to draw radio buttons for event source selection
     internal static void DrawRadioButtons(Rect parentRect, float yOffset)
@@ -110,17 +118,11 @@ namespace Ustas.RimAI.Events
         var hiddenCategories = new List<EventCategory>();
         if (!settings.ShowQuestsEffective) hiddenCategories.Add(EventCategory.Quest);
         if (!settings.ShowMapConditionsEffective) hiddenCategories.Add(EventCategory.MapCondition);
-        if (!settings.ShowThreatsEffective) hiddenCategories.Add(EventCategory.Threat);
         if (!settings.ShowSitePartsEffective) hiddenCategories.Add(EventCategory.SitePart);
 
         float categoryIndicatorHeight = (isDisabled && hiddenCategories.Count > 0) ? hiddenCategories.Count * 30f : 0f;
 
-        var filteredEvents = events.Where(e =>
-            (e.category == EventCategory.Quest && settings.ShowQuestsEffective) ||
-            (e.category == EventCategory.MapCondition && settings.ShowMapConditionsEffective) ||
-            (e.category == EventCategory.Threat && settings.ShowThreatsEffective) ||
-            (e.category == EventCategory.SitePart && settings.ShowSitePartsEffective)
-        ).ToList();
+        var filteredEvents = events.Where(e => settings.IsCategoryShown(e.category)).ToList();
 
         var groupedEvents = filteredEvents.GroupBy(e => e.category).OrderBy(g => g.Key).ToList();
 
@@ -129,7 +131,7 @@ namespace Ustas.RimAI.Events
             float perGroup = 25f;
             foreach (var evt in g)
             {
-                bool hasSubtitle = evt.category == EventCategory.Quest || evt.category == EventCategory.Threat;
+                bool hasSubtitle = evt.category == EventCategory.Quest;
                 perGroup += hasSubtitle ? 41f : 25f; // 25 base + 16 subtitle
             }
             return perGroup;
@@ -153,16 +155,14 @@ namespace Ustas.RimAI.Events
 
         foreach (var group in groupedEvents)
         {
-            yOffset += EventFilterUIChrome.DrawCategoryHeader(viewRect.width, yOffset, group.Key.ToString());
+            yOffset += EventFilterUIChrome.DrawCategoryHeader(viewRect.width, yOffset, group.Key.Label());
 
             foreach (var evt in group)
             {
-                bool isSelected = isDisabled ? (_selectedDisabledType == evt.rootID) : (_selectedAvailableType == evt.rootID);
-                string subtitle = null;
-                if (evt.category == EventCategory.Quest || evt.category == EventCategory.Threat)
-                {
-                    _typeSubtitles.TryGetValue(evt.rootID, out subtitle);
-                }
+                bool isSelected = isDisabled
+                    ? (_selectedDisabledType == evt.rootID && _selectedDisabledCategory == evt.category)
+                    : (_selectedAvailableType == evt.rootID && _selectedAvailableCategory == evt.category);
+                string subtitle = Subtitle(evt);
 
                 yOffset += EventFilterUIChrome.DrawSelectableItem(
                     viewRect.width,
@@ -173,9 +173,15 @@ namespace Ustas.RimAI.Events
                     () =>
                     {
                         if (isDisabled)
+                        {
                             _selectedDisabledType = evt.rootID;
+                            _selectedDisabledCategory = evt.category;
+                        }
                         else
+                        {
                             _selectedAvailableType = evt.rootID;
+                            _selectedAvailableCategory = evt.category;
+                        }
                     });
             }
         }
@@ -192,7 +198,7 @@ namespace Ustas.RimAI.Events
 
         if (EventFilterUIChrome.DrawArrowButton(rightArrowRect, "→", canDisable))
         {
-            settings.disabledEventDefNames.Add(_selectedAvailableType);
+            settings.DisableType(_selectedAvailableCategory, _selectedAvailableType);
             _selectedAvailableType = null;
         }
 
@@ -201,7 +207,7 @@ namespace Ustas.RimAI.Events
 
         if (EventFilterUIChrome.DrawArrowButton(leftArrowRect, "←", canEnable))
         {
-            settings.disabledEventDefNames.Remove(_selectedDisabledType);
+            settings.EnableType(_selectedDisabledCategory, _selectedDisabledType);
             _selectedDisabledType = null;
         }
     }

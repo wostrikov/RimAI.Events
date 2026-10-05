@@ -64,6 +64,25 @@ namespace Ustas.RimAI.Events
             ButtonsArea = new Rect(parentRect.x + columnWidth + COLUMN_SPACING, parentRect.y + yOffset, BUTTON_WIDTH * 2, columnHeight);
         }
     }
+    /// <summary>A search box at the right end of a section's header line.</summary>
+    internal static void DrawSectionSearch(Rect sectionRect, QuickSearchWidget search)
+    {
+        const float width = 220f;
+        search.OnGUI(new Rect(sectionRect.xMax - width - 10f, sectionRect.y + 3f, width, QuickSearchWidget.WidgetHeight));
+    }
+
+    /// <summary>Whether an entry matches the section's search, by any name it is shown under.</summary>
+    internal static bool MatchesSearch(QuickSearchWidget search, FilterableEvent evt, string subtitle = null)
+    {
+        var filter = search.filter;
+        if (!filter.Active)
+            return true;
+        return filter.Matches(evt.displayName ?? string.Empty)
+            || filter.Matches(evt.rootID ?? string.Empty)
+            || (!evt.instanceName.NullOrEmpty() && filter.Matches(evt.instanceName))
+            || (!subtitle.NullOrEmpty() && filter.Matches(subtitle));
+    }
+
     internal static float DrawCategoryHeader(float width, float yPos, string category)
     {
         Rect categoryRect = new Rect(0f, yPos, width, 25f);
@@ -87,7 +106,7 @@ namespace Ustas.RimAI.Events
         using (new TextBlock(GameFont.Tiny))
         using (new ColorBlock(new Color(0.7f, 0.7f, 0.7f)))
         {
-            string label = $"All {category}s (hidden by category filter)";
+            string label = "EventsMod_CategoryHiddenByFilter".Translate(category.Label());
             Widgets.Label(labelRect, label);
         }
 

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using RimWorld;
 using Ustas.RimAI.Core.Events;
 using Verse;
 
 namespace Ustas.RimAI.Events
 {
-    // Wrapper class for per-colony disabled instance IDs. 
+    // Wrapper class for per-colony disabled instance IDs.
     // Used as dictionary value for colony-specific instance filtering.
     public class DisabledInstanceSet : IExposable
     {
@@ -31,20 +32,30 @@ namespace Ustas.RimAI.Events
     public class EventFilterSettings : ModSettings
     {
         // If true, Event+ will compress quest text using XML templates
-        // instead of always sending the full original description. 
+        // instead of always sending the full original description.
         public bool enableEventTextCompression = true;
 
-        // Stores event def names that are permanently filtered (type-based filtering).
-        // Key: event def name (e.g., "Hospitality_Refugee")
-        // Scope: Global (all colonies)
+        // Schema 1 kept every disabled type in one set, so a quest and a site part
+        // that happen to share a defName were one rule. Read once and migrated
+        // into the per-category sets below by TryMigrateLegacyTypeFilters.
         public HashSet<string> disabledEventDefNames = new HashSet<string>();
+
+        // Types hidden globally, across all saves, one set per category that
+        // supports type filtering (threats are shown or hidden only as a category).
+        public HashSet<string> disabledQuestDefNames = new HashSet<string>();
+        public HashSet<string> disabledMapConditionDefNames = new HashSet<string>();
+        public HashSet<string> disabledSitePartDefNames = new HashSet<string>();
+
+        // Schema 2 and later keep the per-category sets; a settings file without
+        // the field predates them.
+        public int filterSchemaVersion = EventFilterPolicy.CurrentFilterSchemaVersion;
 
         // Stores specific event instance IDs that are filtered per-colony (instance-based filtering).
         // Key:  colony ID (permadeathModeUniqueName)
         // Value: set of local instance IDs disabled for that colony
         public Dictionary<string, DisabledInstanceSet> disabledEventInstances = new Dictionary<string, DisabledInstanceSet>();
 
-        // Internal flag to track if XML blacklist migration has been completed. 
+        // Internal flag to track if XML blacklist migration has been completed.
         public bool questBlacklistMigrated = false;
 
         // Quick category filters for UI
@@ -76,6 +87,18 @@ namespace Ustas.RimAI.Events
         public bool ShowSitePartsEffective =>
             EventsEnhancedPromptDedupPolicy.ShowSitePartsEffective(showSiteParts, IsEnhancedPromptLockActive);
 
+        public bool IsCategoryShown(EventCategory category)
+        {
+            switch (category)
+            {
+                case EventCategory.Quest: return ShowQuestsEffective;
+                case EventCategory.MapCondition: return ShowMapConditionsEffective;
+                case EventCategory.Threat: return ShowThreatsEffective;
+                case EventCategory.SitePart: return ShowSitePartsEffective;
+                default: return false;
+            }
+        }
+
         // When enabled, only append events involving pawns in the conversation context.
         // Threats, map conditions, and site parts are always included.
         public bool EnableContextFiltering = false;
@@ -85,10 +108,7 @@ namespace Ustas.RimAI.Events
 
         public EventFilterSettings()
         {
-            if (disabledEventDefNames == null)
-                disabledEventDefNames = new HashSet<string>();
-            if (disabledEventInstances == null)
-                disabledEventInstances = new Dictionary<string, DisabledInstanceSet>();
+            EnsureCollections();
         }
 
         public override void ExposeData()
@@ -105,6 +125,31 @@ namespace Ustas.RimAI.Events
                 ref disabledEventDefNames,
                 EventScribeLabels.Settings.DisabledEventDefNames,
                 LookMode.Value
+            );
+
+            Scribe_Collections.Look(
+                ref disabledQuestDefNames,
+                EventScribeLabels.Settings.DisabledQuestDefNames,
+                LookMode.Value
+            );
+
+            Scribe_Collections.Look(
+                ref disabledMapConditionDefNames,
+                EventScribeLabels.Settings.DisabledMapConditionDefNames,
+                LookMode.Value
+            );
+
+            Scribe_Collections.Look(
+                ref disabledSitePartDefNames,
+                EventScribeLabels.Settings.DisabledSitePartDefNames,
+                LookMode.Value
+            );
+
+            // Default 1: a file written before the field existed is schema 1.
+            Scribe_Values.Look(
+                ref filterSchemaVersion,
+                EventScribeLabels.Settings.FilterSchemaVersion,
+                1
             );
 
             Scribe_Collections.Look(
@@ -162,19 +207,49 @@ namespace Ustas.RimAI.Events
                 false
             );
 
-            // Ensure collections are initialized after loading
-            if (disabledEventDefNames == null)
-                disabledEventDefNames = new HashSet<string>();
-            if (disabledEventInstances == null)
-                disabledEventInstances = new Dictionary<string, DisabledInstanceSet>();
+            EnsureCollections();
         }
 
-        // Checks if an event def name is disabled (type-based filtering).
-        public bool IsEventDefDisabled(string defName)
+        public static bool SupportsTypeFiltering(EventCategory category) =>
+            EventFilterPolicy.SupportsTypeFiltering(category.ToFilterCategory());
+
+        public static bool SupportsInstanceFiltering(EventCategory category) =>
+            EventFilterPolicy.SupportsInstanceFiltering(category.ToFilterCategory());
+
+        public bool IsTypeDisabled(EventCategory category, string defName)
         {
             if (string.IsNullOrEmpty(defName))
                 return false;
-            return disabledEventDefNames != null && disabledEventDefNames.Contains(defName);
+            return TypeRules(category)?.Contains(defName) ?? false;
+        }
+
+        public bool IsTypeDisabled(EventFilterCategory category, string defName)
+        {
+            switch (category)
+            {
+                case EventFilterCategory.Quest: return IsTypeDisabled(EventCategory.Quest, defName);
+                case EventFilterCategory.MapCondition: return IsTypeDisabled(EventCategory.MapCondition, defName);
+                case EventFilterCategory.SitePart: return IsTypeDisabled(EventCategory.SitePart, defName);
+                default: return false;
+            }
+        }
+
+        public bool DisableType(EventCategory category, string defName) =>
+            SupportsTypeFiltering(category) && !string.IsNullOrEmpty(defName) && TypeRules(category).Add(defName);
+
+        public bool EnableType(EventCategory category, string defName) =>
+            SupportsTypeFiltering(category) && !string.IsNullOrEmpty(defName) && TypeRules(category).Remove(defName);
+
+        public IEnumerable<string> DisabledTypes(EventCategory category) =>
+            (IEnumerable<string>)TypeRules(category) ?? new string[0];
+
+        public int ClearTypeFilters()
+        {
+            int count = disabledQuestDefNames.Count + disabledMapConditionDefNames.Count + disabledSitePartDefNames.Count;
+            disabledQuestDefNames.Clear();
+            disabledMapConditionDefNames.Clear();
+            disabledSitePartDefNames.Clear();
+            return count;
         }
 
         // Checks if a specific event instance is disabled for the given colony (instance-based filtering).
@@ -189,7 +264,7 @@ namespace Ustas.RimAI.Events
             return instanceSet.Contains(localInstanceId);
         }
 
-        // Gets or creates the DisabledInstanceSet for a given colony. 
+        // Gets or creates the DisabledInstanceSet for a given colony.
         public DisabledInstanceSet GetOrCreateInstanceSet(string colonyId)
         {
             if (string.IsNullOrEmpty(colonyId))
@@ -211,6 +286,58 @@ namespace Ustas.RimAI.Events
                 return null;
             disabledEventInstances.TryGetValue(colonyId, out var instanceSet);
             return instanceSet;
+        }
+
+        /// <summary>
+        /// Moves each name of the schema-1 list into the set of the one def kind
+        /// it names. A name that names no loaded def, or more than one kind, has no
+        /// category to go to and is dropped - so is "ThreatBig", which threat
+        /// tracking no longer filters by. Needs the def databases, so it runs from
+        /// BlacklistMigrationStartup.
+        /// </summary>
+        public bool TryMigrateLegacyTypeFilters()
+        {
+            EnsureCollections();
+            if (filterSchemaVersion >= EventFilterPolicy.CurrentFilterSchemaVersion)
+                return false;
+
+            foreach (string defName in new List<string>(disabledEventDefNames))
+            {
+                EventFilterCategory? category = EventFilterPolicy.ResolveLegacyCategory(
+                    DefDatabase<QuestScriptDef>.GetNamedSilentFail(defName) != null,
+                    DefDatabase<GameConditionDef>.GetNamedSilentFail(defName)?.displayOnUI ?? false,
+                    DefDatabase<SitePartDef>.GetNamedSilentFail(defName) != null);
+                if (category == EventFilterCategory.Quest)
+                    DisableType(EventCategory.Quest, defName);
+                else if (category == EventFilterCategory.MapCondition)
+                    DisableType(EventCategory.MapCondition, defName);
+                else if (category == EventFilterCategory.SitePart)
+                    DisableType(EventCategory.SitePart, defName);
+            }
+
+            disabledEventDefNames.Clear();
+            filterSchemaVersion = EventFilterPolicy.CurrentFilterSchemaVersion;
+            return true;
+        }
+
+        private HashSet<string> TypeRules(EventCategory category)
+        {
+            switch (category)
+            {
+                case EventCategory.Quest: return disabledQuestDefNames;
+                case EventCategory.MapCondition: return disabledMapConditionDefNames;
+                case EventCategory.SitePart: return disabledSitePartDefNames;
+                default: return null;
+            }
+        }
+
+        private void EnsureCollections()
+        {
+            disabledEventDefNames ??= new HashSet<string>();
+            disabledQuestDefNames ??= new HashSet<string>();
+            disabledMapConditionDefNames ??= new HashSet<string>();
+            disabledSitePartDefNames ??= new HashSet<string>();
+            disabledEventInstances ??= new Dictionary<string, DisabledInstanceSet>();
         }
     }
 }

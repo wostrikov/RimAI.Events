@@ -66,4 +66,6 @@ When disabled, RimAI.Events always sends the full original event text.</EventsMo
   <EventsMod_MandatoryLockToggle>Override conflict-prevention lock (Enhanced Prompt Auto Event Capture)</EventsMod_MandatoryLockToggle>
   <EventsMod_MandatoryLockToggle_Tooltip>RimAI.Events locks event category filters when Enhanced Prompt's auto event capture is active, to prevent conflicts between their tracking systems. Enable to override this lock and control filters manually.</EventsMod_MandatoryLockToggle_Tooltip>
   <EventsMod_MandatoryLockToggle_Desc>RimAI.Events enforces a mandatory category lock when Enhanced Prompt's auto event capture is detected, as both systems track events and may conflict. Only enable this if you want manual filter control despite the potential conflict.</EventsMod_MandatoryLockToggle_Desc>
+  <EventsMod_Category_Sites>World Sites</EventsMod_Category_Sites>
+  <EventsMod_CategoryHiddenByFilter>All {0} (hidden by category filter)</EventsMod_CategoryHiddenByFilter>
 </LanguageData>

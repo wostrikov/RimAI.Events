@@ -47,4 +47,6 @@
   <EventsMod_MandatoryLockToggle>Перевизначити блокування конфліктів (автоматичне захоплення подій Enhanced Prompt)</EventsMod_MandatoryLockToggle>
   <EventsMod_MandatoryLockToggle_Tooltip>Коли в Enhanced Prompt активне автоматичне захоплення подій, RimAI.Events блокує фільтри категорій, щоб системи відстеження не конфліктували. Увімкніть цей параметр, щоб зняти блокування й керувати фільтрами вручну.</EventsMod_MandatoryLockToggle_Tooltip>
   <EventsMod_MandatoryLockToggle_Desc>RimAI.Events обов’язково блокує категорії, якщо виявлено автоматичне захоплення подій Enhanced Prompt, оскільки обидві системи відстежують події й можуть конфліктувати. Увімкніть цей параметр лише тоді, коли свідомо хочете керувати фільтрами вручну попри можливий конфлікт.</EventsMod_MandatoryLockToggle_Desc>
+  <EventsMod_Category_Sites>Світові локації</EventsMod_Category_Sites>
+  <EventsMod_CategoryHiddenByFilter>{0}: усе приховано фільтром категорій</EventsMod_CategoryHiddenByFilter>
 </LanguageData>

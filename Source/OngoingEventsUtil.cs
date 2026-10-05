@@ -16,25 +16,7 @@ namespace Ustas.RimAI.Events
             if (settings == null)
                 return false;
 
-            EventFilterCategory? coreCategory = null;
-            if (category.HasValue)
-            {
-                switch (category.Value)
-                {
-                    case EventCategory.Quest:
-                        coreCategory = EventFilterCategory.Quest;
-                        break;
-                    case EventCategory.MapCondition:
-                        coreCategory = EventFilterCategory.MapCondition;
-                        break;
-                    case EventCategory.Threat:
-                        coreCategory = EventFilterCategory.Threat;
-                        break;
-                    case EventCategory.SitePart:
-                        coreCategory = EventFilterCategory.SitePart;
-                        break;
-                }
-            }
+            EventFilterCategory? coreCategory = category?.ToFilterCategory();
 
             string colonyId = null;
             if (!string.IsNullOrEmpty(instanceID))
@@ -51,7 +33,7 @@ namespace Ustas.RimAI.Events
                 settings.ShowMapConditionsEffective,
                 settings.ShowThreatsEffective,
                 settings.ShowSitePartsEffective,
-                settings.IsEventDefDisabled,
+                settings.IsTypeDisabled,
                 colonyId,
                 settings.IsEventInstanceDisabled);
         }

@@ -56,7 +56,7 @@ namespace Ustas.RimAI.Events
                     if (questDef != null)
                     {
                         // Quest def exists, migrate it
-                        settings.disabledEventDefNames.Add(questDefName);
+                        settings.DisableType(EventCategory.Quest, questDefName);
                         validatedDefs.Add(questDefName);
                     }
                     else

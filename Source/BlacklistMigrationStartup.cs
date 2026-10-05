@@ -13,8 +13,11 @@ namespace Ustas.RimAI.Events
                 return;
             }
 
-            // Now DefDatabase is fully populated
-            if (BlacklistMigrationHelper.TryMigrateBlacklist(EventsMod.Settings))
+            // Now DefDatabase is fully populated. Type filters first: the
+            // blacklist migration writes into the per-category sets.
+            bool changed = EventsMod.Settings?.TryMigrateLegacyTypeFilters() == true;
+            changed |= BlacklistMigrationHelper.TryMigrateBlacklist(EventsMod.Settings);
+            if (changed)
             {
                 EventsMod.Instance.WriteSettings();
             }

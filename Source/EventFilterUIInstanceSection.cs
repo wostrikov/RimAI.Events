@@ -17,6 +17,7 @@ namespace Ustas.RimAI.Events
     internal static void DoInstanceBasedFilteringSection(Rect rect, EventFilterSettings settings)
     {
         EventFilterUIChrome.DrawSectionHeader(rect, "EventsMod_InstanceBasedFiltering", "EventsMod_InstanceBasedFiltering_Desc");
+        EventFilterUIChrome.DrawSectionSearch(rect, _instanceSearch);
 
         float yPos = HEADER_HEIGHT + 30f;
 
@@ -30,18 +31,16 @@ namespace Ustas.RimAI.Events
         var instanceSet = settings.GetInstanceSet(colonyId);
 
         // Get current and hidden instances (filtered by current map)
-        var allInstances = EventFilterUIEventQueries.GetCurrentEventInstances(settings);
+        var allInstances = EventFilterUIEventQueries.GetCurrentEventInstances(settings)
+            .Where(e => EventFilterUIChrome.MatchesSearch(_instanceSearch, e))
+            .ToList();
 
         // Helper to check if category is disabled
-        Func<FilterableEvent, bool> isCategoryDisabled = e =>
-            (e.category == EventCategory.Quest && !settings.ShowQuestsEffective) ||
-            (e.category == EventCategory.MapCondition && !settings.ShowMapConditionsEffective) ||
-            (e.category == EventCategory.Threat && !settings.ShowThreatsEffective) ||
-            (e.category == EventCategory.SitePart && !settings.ShowSitePartsEffective);
+        Func<FilterableEvent, bool> isCategoryDisabled = e => !settings.IsCategoryShown(e.category);
 
         var currentInstances = allInstances.Where(e =>
             (instanceSet == null || !instanceSet.Contains(e.instanceID)) &&
-            !settings.disabledEventDefNames.Contains(e.rootID) &&
+            !settings.IsTypeDisabled(e.category, e.rootID) &&
             !isCategoryDisabled(e)
         ).ToList();
 
@@ -49,12 +48,12 @@ namespace Ustas.RimAI.Events
         var hiddenInstances = new List<FilterableEvent>();
         hiddenInstances.AddRange(allInstances.Where(e => instanceSet != null && instanceSet.Contains(e.instanceID)));
         hiddenInstances.AddRange(allInstances.Where(e =>
-            settings.disabledEventDefNames.Contains(e.rootID) &&
+            settings.IsTypeDisabled(e.category, e.rootID) &&
             (instanceSet == null || !instanceSet.Contains(e.instanceID))
         ));
         hiddenInstances.AddRange(allInstances.Where(e =>
             isCategoryDisabled(e) &&
-            !settings.disabledEventDefNames.Contains(e.rootID) &&
+            !settings.IsTypeDisabled(e.category, e.rootID) &&
             (instanceSet == null || !instanceSet.Contains(e.instanceID))
         ));
 
@@ -84,7 +83,7 @@ namespace Ustas.RimAI.Events
             foreach (var evt in group)
             {
                 contentHeight += 25f;
-                if (settings.disabledEventDefNames.Contains(evt.rootID))
+                if (settings.IsTypeDisabled(evt.category, evt.rootID))
                     contentHeight += 15f;
             }
         }
@@ -98,16 +97,12 @@ namespace Ustas.RimAI.Events
         float yOffset = 0f;
         foreach (var group in groupedEvents)
         {
-            yOffset += EventFilterUIChrome.DrawCategoryHeader(viewRect.width, yOffset, group.Key.ToString());
+            yOffset += EventFilterUIChrome.DrawCategoryHeader(viewRect.width, yOffset, group.Key.Label());
 
             foreach (var evt in group)
             {
-                bool isGloballyDisabled = settings.disabledEventDefNames.Contains(evt.rootID);
-                bool isCategoryDisabled =
-                    (evt.category == EventCategory.Quest && !settings.ShowQuestsEffective) ||
-                    (evt.category == EventCategory.MapCondition && !settings.ShowMapConditionsEffective) ||
-                    (evt.category == EventCategory.Threat && !settings.ShowThreatsEffective) ||
-                    (evt.category == EventCategory.SitePart && !settings.ShowSitePartsEffective);
+                bool isGloballyDisabled = settings.IsTypeDisabled(evt.category, evt.rootID);
+                bool isCategoryDisabled = !settings.IsCategoryShown(evt.category);
                 bool isDisabled = isGloballyDisabled || isCategoryDisabled;
                 bool isSelected = isHidden ? (_selectedHiddenInstance == evt.instanceID) : (_selectedCurrentInstance == evt.instanceID);
 
@@ -191,7 +186,7 @@ namespace Ustas.RimAI.Events
         {
             var evt = events[i];
             if (evt.instanceID == instanceID)
-                return !settings.disabledEventDefNames.Contains(evt.rootID);
+                return !settings.IsTypeDisabled(evt.category, evt.rootID);
         }
 
         return false;
@@ -211,7 +206,7 @@ namespace Ustas.RimAI.Events
         {
             var evt = events[i];
             if (evt.instanceID == instanceID)
-                return !settings.disabledEventDefNames.Contains(evt.rootID);
+                return !settings.IsTypeDisabled(evt.category, evt.rootID);
         }
 
         return false;

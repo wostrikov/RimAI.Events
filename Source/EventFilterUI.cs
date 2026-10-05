@@ -78,8 +78,7 @@ namespace Ustas.RimAI.Events
 
         if (Widgets.ButtonText(resetTypeButtonRect, resetTypeText))
         {
-            int count = settings.disabledEventDefNames.Count;
-            settings.disabledEventDefNames.Clear();
+            int count = settings.ClearTypeFilters();
 
             SoundDefOf.Click.PlayOneShotOnCamera(null);
             Messages.Message(

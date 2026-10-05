@@ -17,11 +17,15 @@ namespace Ustas.RimAI.Events
         internal static Vector2 _scrollPosCurrentInstances = Vector2.zero;
         internal static Vector2 _scrollPosHiddenInstances = Vector2.zero;
         internal static string _selectedAvailableType = null;
+        internal static EventCategory _selectedAvailableCategory;
         internal static string _selectedDisabledType = null;
+        internal static EventCategory _selectedDisabledCategory;
         internal static string _selectedCurrentInstance = null;
         internal static string _selectedHiddenInstance = null;
         internal static Vector2 _scrollPosOuter = Vector2.zero;
         internal static float _lastMeasuredTopSectionHeight = 250f;
         internal static readonly Dictionary<string, string> _typeSubtitles = new Dictionary<string, string>();
+        internal static readonly QuickSearchWidget _typeSearch = new QuickSearchWidget();
+        internal static readonly QuickSearchWidget _instanceSearch = new QuickSearchWidget();
     }
 }

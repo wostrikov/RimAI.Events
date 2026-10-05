@@ -27,7 +27,7 @@ namespace Ustas.RimAI.Events
 
             foreach (var inst in appendableEvents)
             {
-                if (!addedDefs.Add(inst.rootID))
+                if (!addedDefs.Add(inst.category + ":" + inst.rootID))
                     continue;
 
                 // Try to get proper label from def database based on category
@@ -49,11 +49,6 @@ namespace Ustas.RimAI.Events
                         if (siteDef != null && !siteDef.LabelCap.NullOrEmpty())
                             displayName = siteDef.LabelCap;
                         break;
-                    case EventCategory.Threat:
-                        var letterDef = DefDatabase<LetterDef>.GetNamedSilentFail(inst.rootID);
-                        if (letterDef != null && !letterDef.LabelCap.NullOrEmpty())
-                            displayName = letterDef.LabelCap;
-                        break;
                 }
 
                 events.Add(new FilterableEvent(
@@ -64,9 +59,8 @@ namespace Ustas.RimAI.Events
                     inst.sourceDefName
                 ));
 
-                // Capture subtitle for quests and threats
-                if ((inst.category == EventCategory.Quest || inst.category == EventCategory.Threat)
-                    && !inst.instanceName.NullOrEmpty())
+                // Capture subtitle for quests
+                if (inst.category == EventCategory.Quest && !inst.instanceName.NullOrEmpty())
                 {
                     _typeSubtitles[inst.rootID] = inst.instanceName;
                 }
@@ -74,62 +68,20 @@ namespace Ustas.RimAI.Events
 
             // Also include disabled types that are not currently active,
             // so they still appear in the disabled column
-            foreach (var disabledDefName in settings.disabledEventDefNames)
+            foreach (var category in new[] { EventCategory.Quest, EventCategory.MapCondition, EventCategory.SitePart })
             {
-                if (addedDefs.Contains(disabledDefName))
-                    continue;
-
-                // Try to find the def and determine its category
-                string displayName = disabledDefName;
-                EventCategory category = EventCategory.Quest; // Default fallback
-
-                var questDef = DefDatabase<QuestScriptDef>.GetNamedSilentFail(disabledDefName);
-                if (questDef != null)
+                foreach (var disabledDefName in settings.DisabledTypes(category))
                 {
-                    if (!questDef.LabelCap.NullOrEmpty())
-                        displayName = questDef.LabelCap;
-                    category = EventCategory.Quest;
+                    if (!addedDefs.Add(category + ":" + disabledDefName))
+                        continue;
+                    events.Add(new FilterableEvent(
+                        disabledDefName,
+                        TypeLabel(category, disabledDefName),
+                        null,
+                        category,
+                        disabledDefName
+                    ));
                 }
-                else
-                {
-                    var condDef = DefDatabase<GameConditionDef>.GetNamedSilentFail(disabledDefName);
-                    if (condDef != null)
-                    {
-                        if (!condDef.LabelCap.NullOrEmpty())
-                            displayName = condDef.LabelCap;
-                        category = EventCategory.MapCondition;
-                    }
-                    else
-                    {
-                        var siteDef = DefDatabase<SitePartDef>.GetNamedSilentFail(disabledDefName);
-                        if (siteDef != null)
-                        {
-                            if (!siteDef.LabelCap.NullOrEmpty())
-                                displayName = siteDef.LabelCap;
-                            category = EventCategory.SitePart;
-                        }
-                        else
-                        {
-                            var letterDef = DefDatabase<LetterDef>.GetNamedSilentFail(disabledDefName);
-                            if (letterDef != null)
-                            {
-                                if (!letterDef.LabelCap.NullOrEmpty())
-                                    displayName = letterDef.LabelCap;
-                                category = EventCategory.Threat;
-                            }
-                        }
-                    }
-                }
-
-                events.Add(new FilterableEvent(
-                    disabledDefName,
-                    displayName,
-                    null,
-                    category,
-                    disabledDefName
-                ));
-
-                addedDefs.Add(disabledDefName);
             }
         }
         else
@@ -188,25 +140,22 @@ namespace Ustas.RimAI.Events
                     }
                 }
             }
-
-            // Threat types: letters only (ThreatBig / ThreatSmall)
-            var threatLetters = new[] { LetterDefOf.ThreatBig, LetterDefOf.ThreatSmall };
-            foreach (var def in threatLetters)
-            {
-                if (def?.defName != null)
-                {
-                    events.Add(new FilterableEvent(
-                        def.defName,
-                        (def.LabelCap.NullOrEmpty() ? def.defName : (string)def.LabelCap),
-                        null,
-                        EventCategory.Threat,
-                        def.defName
-                    ));
-                }
-            }
         }
 
         return events;
+    }
+
+    // The def's label for a disabled type, or its defName when the modset no longer has it.
+    private static string TypeLabel(EventCategory category, string defName)
+    {
+        Def def = null;
+        switch (category)
+        {
+            case EventCategory.Quest: def = DefDatabase<QuestScriptDef>.GetNamedSilentFail(defName); break;
+            case EventCategory.MapCondition: def = DefDatabase<GameConditionDef>.GetNamedSilentFail(defName); break;
+            case EventCategory.SitePart: def = DefDatabase<SitePartDef>.GetNamedSilentFail(defName); break;
+        }
+        return def == null || def.LabelCap.NullOrEmpty() ? defName : (string)def.LabelCap;
     }
 
     // Gets all currently appendable events for type-based filtering. 
