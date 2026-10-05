@@ -53,3 +53,24 @@ guard refuses legacy filename).
 - Compression setting retained; compression body path still commented out
 - Donor mod id `rimtalkeventplus` retained for Prompt API registration
 - Communication `tests/` still has no real test methods
+
+## Since 7.5.11
+
+The inventory above is the 7.5.11 shape. On 2026-10-05 the donor's (Event+) later
+work was reviewed and reimplemented, which changed the product shape in three ways:
+
+- **Threats are tracked, not read from letters.** `Source/Threats/ThreatTrackerComponent`
+  follows every hostile lord from the incident that made it until the lord is
+  removed, and describes it from what the lord is doing (Core `ThreatPhasePolicy`,
+  `ThreatPromptPolicy`; registry fields `force` and `phase`). The newest threat
+  letter is used only when no tracked group owns it and it still points at a live
+  threat. The danger-rating gate and the 7500-tick letter window are gone.
+- **Harmony targets**: `Map.FinalizeInit`, `Quest.End`, plus
+  `Quest.Notify_SignalReceived` / `AddPart` / `RemovePart` (quest cache
+  invalidation) and `IncidentWorker.TryExecute`, `LordMaker.MakeNewLord`,
+  `LordManager.AddLord` / `RemoveLord`, `LetterStack.ReceiveLetter`,
+  `Pawn.Notify_BecameVisible` (threat capture). `validate_events_interior_sources.py`
+  measures the set.
+- **Type filters are per category** (quests, map conditions, site parts); threats
+  are shown or hidden only as a category. The schema-1 single list is migrated
+  once at startup (`EventFilterSettings.TryMigrateLegacyTypeFilters`).
