@@ -135,7 +135,9 @@ namespace Ustas.RimAI.Events
             {
                 if (result.Count >= maxEvents)
                     break;
-                if (part == null || part.def == null)
+                // A hidden part is one the player has not been told about (the
+                // ambush under a "peaceful" camp); naming it would spoil it.
+                if (part == null || part.def == null || part.hidden)
                     continue;
 
                 var def = part.def;
@@ -144,7 +146,11 @@ namespace Ustas.RimAI.Events
                 if (IsEventFiltered(def.defName, null, EventCategory.SitePart, EventsMod.Settings))
                     continue;
 
-                string label = def.LabelCap;
+                // The first part is the site itself, and the site's own label is
+                // the name the player sees on the world map.
+                string label = part == parts[0] ? (string)site.LabelCap : null;
+                if (label.NullOrEmpty())
+                    label = def.LabelCap;
                 if (label.NullOrEmpty())
                 {
                     label = def.label;

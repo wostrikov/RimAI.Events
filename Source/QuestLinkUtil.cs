@@ -247,7 +247,9 @@ namespace Ustas.RimAI.Events
                 return false;
 
             MapParent mapParent = map.info?.parent;
-            int mapTile = map.Tile;
+            // PlanetTile carries the layer: an orbit tile and a surface tile can share
+            // a number, so comparing the bare ints matched quests on the other layer.
+            PlanetTile mapTile = map.Tile;
 
             var parts = quest.PartsListForReading;
             var cache = GetCache();
@@ -283,8 +285,8 @@ namespace Ustas.RimAI.Events
                                 }
 
                                 // Check tile match
-                                int targetTile = target.Tile;
-                                if (targetTile >= 0 && targetTile == mapTile)
+                                PlanetTile targetTile = target.Tile;
+                                if (targetTile.Valid && targetTile == mapTile)
                                     return true;
                             }
                         }
